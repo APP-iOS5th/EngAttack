@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AF62BD452BE0DDF700A88EDE /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF62BD442BE0DDF700A88EDE /* SettingView.swift */; };
 		AFBC3A302BE0D5E500CE7542 /* EngAttackApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBC3A2F2BE0D5E500CE7542 /* EngAttackApp.swift */; };
 		AFBC3A322BE0D5E500CE7542 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBC3A312BE0D5E500CE7542 /* ContentView.swift */; };
 		AFBC3A342BE0D5E700CE7542 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFBC3A332BE0D5E700CE7542 /* Assets.xcassets */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AF62BD442BE0DDF700A88EDE /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		AFBC3A2C2BE0D5E500CE7542 /* EngAttack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EngAttack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFBC3A2F2BE0D5E500CE7542 /* EngAttackApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EngAttackApp.swift; sourceTree = "<group>"; };
 		AFBC3A312BE0D5E500CE7542 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -66,6 +68,7 @@
 				AFBC3A2F2BE0D5E500CE7542 /* EngAttackApp.swift */,
 				CD37DEFB2BE0D7E100F7CB39 /* BookmarksView.swift */,
 				AFBC3A312BE0D5E500CE7542 /* ContentView.swift */,
+				AF62BD442BE0DDF700A88EDE /* SettingView.swift */,
 				AFBC3A332BE0D5E700CE7542 /* Assets.xcassets */,
 				CD37DEFA2BE0D7E100F7CB39 /* ContentView.swift */,
 				CD37DEF82BE0D7E000F7CB39 /* ContentViewViewModel.swift */,
@@ -158,6 +161,7 @@
 				CD37DEFD2BE0D7E100F7CB39 /* EngAttackApp.swift in Sources */,
 				CD37DEFE2BE0D7E100F7CB39 /* ContentView.swift in Sources */,
 				AFBC3A322BE0D5E500CE7542 /* ContentView.swift in Sources */,
+				AF62BD452BE0DDF700A88EDE /* SettingView.swift in Sources */,
 				CD37DF032BE0D7E700F7CB39 /* WordManager.swift in Sources */,
 				CD37DF022BE0D7E700F7CB39 /* WordInfo.swift in Sources */,
 				AFBC3A302BE0D5E500CE7542 /* EngAttackApp.swift in Sources */,
