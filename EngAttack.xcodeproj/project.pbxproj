@@ -7,12 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AFBC3A302BE0D5E500CE7542 /* EngAttackApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBC3A2F2BE0D5E500CE7542 /* EngAttackApp.swift */; };
 		AFBC3A342BE0D5E700CE7542 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFBC3A332BE0D5E700CE7542 /* Assets.xcassets */; };
 		AFBC3A372BE0D5E700CE7542 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFBC3A362BE0D5E700CE7542 /* Preview Assets.xcassets */; };
+		BF36CBE42BE118E90089D070 /* EngAttackApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF36CBE32BE118E90089D070 /* EngAttackApp.swift */; };
 		BF820BDA2BE0F06800EF5BFE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF820BD92BE0F06800EF5BFE /* ContentView.swift */; };
 		CD37DEFC2BE0D7E100F7CB39 /* ContentViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD37DEF82BE0D7E000F7CB39 /* ContentViewViewModel.swift */; };
-		CD37DEFD2BE0D7E100F7CB39 /* EngAttackApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD37DEF92BE0D7E100F7CB39 /* EngAttackApp.swift */; };
 		CD37DEFF2BE0D7E100F7CB39 /* BookmarksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD37DEFB2BE0D7E100F7CB39 /* BookmarksView.swift */; };
 		CD37DF022BE0D7E700F7CB39 /* WordInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD37DF002BE0D7E700F7CB39 /* WordInfo.swift */; };
 		CD37DF032BE0D7E700F7CB39 /* WordManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD37DF012BE0D7E700F7CB39 /* WordManager.swift */; };
@@ -20,12 +19,11 @@
 
 /* Begin PBXFileReference section */
 		AFBC3A2C2BE0D5E500CE7542 /* EngAttack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EngAttack.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		AFBC3A2F2BE0D5E500CE7542 /* EngAttackApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EngAttackApp.swift; sourceTree = "<group>"; };
 		AFBC3A332BE0D5E700CE7542 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AFBC3A362BE0D5E700CE7542 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		BF36CBE32BE118E90089D070 /* EngAttackApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EngAttackApp.swift; path = ../../../.Trash/EngAttackApp.swift; sourceTree = "<group>"; };
 		BF820BD92BE0F06800EF5BFE /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContentView.swift; path = ../../ContentView.swift; sourceTree = "<group>"; };
 		CD37DEF82BE0D7E000F7CB39 /* ContentViewViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentViewViewModel.swift; sourceTree = "<group>"; };
-		CD37DEF92BE0D7E100F7CB39 /* EngAttackApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EngAttackApp.swift; sourceTree = "<group>"; };
 		CD37DEFB2BE0D7E100F7CB39 /* BookmarksView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookmarksView.swift; sourceTree = "<group>"; };
 		CD37DF002BE0D7E700F7CB39 /* WordInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordInfo.swift; sourceTree = "<group>"; };
 		CD37DF012BE0D7E700F7CB39 /* WordManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordManager.swift; sourceTree = "<group>"; };
@@ -61,12 +59,11 @@
 		AFBC3A2E2BE0D5E500CE7542 /* EngAttack */ = {
 			isa = PBXGroup;
 			children = (
-				AFBC3A2F2BE0D5E500CE7542 /* EngAttackApp.swift */,
 				CD37DEFB2BE0D7E100F7CB39 /* BookmarksView.swift */,
 				AFBC3A332BE0D5E700CE7542 /* Assets.xcassets */,
 				BF820BD92BE0F06800EF5BFE /* ContentView.swift */,
 				CD37DEF82BE0D7E000F7CB39 /* ContentViewViewModel.swift */,
-				CD37DEF92BE0D7E100F7CB39 /* EngAttackApp.swift */,
+				BF36CBE32BE118E90089D070 /* EngAttackApp.swift */,
 				CD37DF002BE0D7E700F7CB39 /* WordInfo.swift */,
 				CD37DF012BE0D7E700F7CB39 /* WordManager.swift */,
 				AFBC3A352BE0D5E700CE7542 /* Preview Content */,
@@ -152,11 +149,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CD37DEFD2BE0D7E100F7CB39 /* EngAttackApp.swift in Sources */,
+				BF36CBE42BE118E90089D070 /* EngAttackApp.swift in Sources */,
 				BF820BDA2BE0F06800EF5BFE /* ContentView.swift in Sources */,
 				CD37DF032BE0D7E700F7CB39 /* WordManager.swift in Sources */,
 				CD37DF022BE0D7E700F7CB39 /* WordInfo.swift in Sources */,
-				AFBC3A302BE0D5E500CE7542 /* EngAttackApp.swift in Sources */,
 				CD37DEFF2BE0D7E100F7CB39 /* BookmarksView.swift in Sources */,
 				CD37DEFC2BE0D7E100F7CB39 /* ContentViewViewModel.swift in Sources */,
 			);
