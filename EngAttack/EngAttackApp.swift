@@ -6,12 +6,14 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct EngAttackApp: App {
     var body: some Scene {
         WindowGroup {
             WordDictionaryView()
+                .modelContainer(for: TempModel.self)
         }
     }
 }
