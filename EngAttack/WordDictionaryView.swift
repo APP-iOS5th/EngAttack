@@ -30,9 +30,7 @@ struct WordDictionaryView: View {
         NavigationStack {
             VStack {
                 List {
-                    let wordList = viewModel.getWords()
-                    ForEach(0..<wordList.count, id: \.self) { index in
-                        let word = wordList[index]
+                    ForEach(viewModel.getWords(), id: \.0) { word in
                         let alreadExistWord: [TempModel] = storedWords.filter{ $0.word == "\(word.0)||separator||\(word.1)" }
                         HStack {
                             Text(word.0)
@@ -80,5 +78,5 @@ struct WordDictionaryView: View {
  TODO: 1. 영어 단어 검색, 사전에 있는 단어면 뜻과 같이 출력 ✅
        2. 출력된 단어 List에 북마크로 추가할 수 있는 버튼 ✅
        3. 버튼을 누르면 북마크에 추가 ✅
-       4. 이미 북마크에 있는 단어면 별도로 표시
+       4. 이미 북마크에 있는 단어면 별도로 표시 ✅
  */
