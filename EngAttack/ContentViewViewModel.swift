@@ -111,7 +111,12 @@ class ContentViewViewModel: ObservableObject {
 		}
 	  }
 	}
-	
+  }
+  // 타이머 종료
+  func stopTimer() {
+	gameTimer?.invalidate()
+	gameTimer = nil
+	timerIsActive = false
   }
   
   // 타이머 제한시간 만료, 타이머 재시작
