@@ -8,23 +8,15 @@
 import SwiftUI
 
 class WordDictionaryViewModel: ObservableObject {
-//    @Published private var findWord: String = ""
-    @Published private var words: [String] = ["word"]
+    @Published private var words: [(String, String)] = []
+    private let session = URLSession.shared
     
-    func getWords() -> [String] {
+    func getWords() -> [(String, String)] {
         return words
     }
     
     func searchString(searchWord: String) {
-        let session = URLSession.shared
-        var str = "https://iapi.glosbe.com/iapi3/similar/similarPhrasesMany?p="
-            str += searchWord
-            str += "&l1=en&l2=ko&removeDuplicates=true&searchCriteria="
-            str += "WORDLIST-ALPHABETICALLY-2-s%3BPREFIX-PRIORITY-2-s%3B"
-            str += "TRANSLITERATED-PRIORITY-2-s%3BFUZZY-PRIORITY-2-s%3B&"
-    //        str += "WORDLIST-ALPHABETICALLY-2-r%3BPREFIX-PRIORITY-2-r%3B"
-    //        str += "TRANSLITERATED-PRIORITY-2-r%3BFUZZY-PRIORITY-2-r&"
-            str += "env=ko"
+        let str = "https://suggest.dic.daum.net/language/v1/search.json?cate=eng&q=\(searchWord)"
         
         guard let url = URL(string: str) else { return }
         
@@ -48,18 +40,24 @@ class WordDictionaryViewModel: ObservableObject {
             }
             
             do {
-                if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
-                   let phrases = json["phrases"] as? [[String: Any]] {
-                    var wordList: [String] = []
-                    for phrase in phrases {
-                        if let word = phrase["phrase"] as? String {
-                            if word.starts(with: searchWord) && word.count > 2 && !word.contains(" ") {
-                                wordList.append(word)
+                guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
+                    print("Failed to parse JSON")
+                    return
+                }
+                
+                var wordList: [(String, String)] = []
+                if let items = json["items"] as? [String: Any], let eng = items["eng"] as? [[String: Any]] {
+                    for item in eng {
+                        if let key = item["key"] as? String, let itemText = item["item"] as? String {
+                            if key.starts(with: searchWord) && key.count > 1 {
+                                let splitItem = itemText.split(separator: "|")
+                                let value = String(splitItem[splitItem.count - 1])
+                                wordList.append((key.lowercased(), value))
                             }
                         }
                     }
-                    self.words = wordList
                 }
+                self.saveSearchResult(words: wordList)
             } catch {
                 print("error > \(error.localizedDescription)")
             }
@@ -67,7 +65,7 @@ class WordDictionaryViewModel: ObservableObject {
         task.resume()
     }
     
-    func saveSearchResult(words: [String]) {
+    func saveSearchResult(words: [(String, String)]) {
         DispatchQueue.main.async {
             self.words = words
         }
