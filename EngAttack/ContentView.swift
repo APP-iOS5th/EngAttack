@@ -41,7 +41,7 @@ struct ContentView: View {
 		Button(action: {
 		  viewModel.darkModeSwitch()
 		}, label: {
-		  Text(viewModel.isDarkMode ? "라이트모드" : "다크모드")
+		  Text(viewModel.isDarkMode ? "라이트모드" : "다크모드.")
 			.foregroundColor(viewModel.isDarkMode ? .black : .white)
 			.background(viewModel.isDarkMode ? Color.white : Color.black)
 		})
