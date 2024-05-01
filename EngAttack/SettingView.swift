@@ -9,7 +9,7 @@ import SwiftUI
 import AVKit
 
 class SoundSetting: ObservableObject {
-
+    
     static let instance = SoundSetting()
     
     var player: AVAudioPlayer?
@@ -43,10 +43,11 @@ struct SettingView: View {
     var body: some View {
         VStack {
             // Title
-            Text("마이페이지")
+            Text("설정")
                 .font(.system(size: 25))
                 .bold()
             Form {
+                // MARK: 마이페이지
                 Section(header: Text("마이페이지").font(.system(size: 18))) {
                     Button {
                         // TODO: 회원정보 수정 페이지 이동
@@ -57,19 +58,18 @@ struct SettingView: View {
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                             Text("닉네임이 들어가요~")
+                                .foregroundStyle(isDarkMode ? .white : .black)
                                 .padding(.leading, 5)
                                 .fontWeight(.semibold)
                                 .font(.system(size: 21))
                         }
-                        .foregroundStyle(.black)
-                        .frame(height: 80)
+                        .frame(height: 70)
                     }
                 }
                 // MARK: 환경 설정
                 Section(header: Text("환경설정").font(.system(size: 18))) {
                     Toggle(isOn: $isDarkMode) {
                         Text(isDarkMode ? "라이트모드" : "다크모드")
-                            .preferredColorScheme(isDarkMode ? .dark : .light)
                     }
                     DisclosureGroup("음향", isExpanded: $settingsSound) {
                         Toggle(isOn: $isEffect) {
@@ -99,8 +99,11 @@ struct SettingView: View {
                     Image(systemName: "square.fill")
                 }
             }
-            .font(.system(size: 20))
+            
         }
+        .preferredColorScheme(isDarkMode ? .dark : .light)
+        .font(.system(size: 20))
+        
     }
 }
 
