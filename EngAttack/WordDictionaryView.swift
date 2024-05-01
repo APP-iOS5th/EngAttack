@@ -31,7 +31,7 @@ struct WordDictionaryView: View {
             VStack {
                 List {
                     ForEach(viewModel.getWords(), id: \.0) { word in
-                        let alreadExistWord: [TempModel] = storedWords.filter{ $0.word == "\(word.0)||separator||\(word.1)" }
+                        let alreadExistWord: [TempModel] = storedWords.filter{ $0.word == "\(word.0)--\(word.1)" }
                         HStack {
                             Text(word.0)
                             Spacer()
@@ -41,7 +41,7 @@ struct WordDictionaryView: View {
                                 if alreadExistWord.count > 0 {
                                     modelContext.delete(alreadExistWord[0])
                                 } else {
-                                    let newWord: TempModel = TempModel(word: "\(word.0)||separator||\(word.1)")
+                                    let newWord: TempModel = TempModel(word: "\(word.0)--\(word.1)")
                                     modelContext.insert(newWord)
                                 }
                             } label: {
@@ -56,6 +56,17 @@ struct WordDictionaryView: View {
                 }
             }
             .navigationTitle("Word Dictionary")
+            .toolbar {
+                ToolbarItem(placement: .bottomBar) {
+                    Button("Test") {
+                        if storedWords.count > 0 {                        
+                            viewModel.recommendWordList(alphabet: "c", wordList: storedWords.map{ String($0.word.split(separator: "--")[0]) }) { wordList in
+                                print(wordList)
+                            }
+                        }
+                    }
+                }
+            }
         }
         .searchable(text: $searchString, prompt: "Search Word")
         .onSubmit(of: .search) {

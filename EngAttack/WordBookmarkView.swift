@@ -18,7 +18,7 @@ struct WordBookmarkView: View {
             VStack {
                 List {
                     ForEach(storedWords) { word in
-                        let fullText = word.word.split(separator: "||separator||")
+                        let fullText = word.word.split(separator: "-")
                         HStack {
                             Text(fullText[0])
                             Spacer()

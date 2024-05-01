@@ -6,8 +6,10 @@
 //
 
 import SwiftUI
+import SwiftData
 
 class WordDictionaryViewModel: ObservableObject {
+    
     @Published private var words: [(String, String)] = []
     private let session = URLSession.shared
     
@@ -16,6 +18,7 @@ class WordDictionaryViewModel: ObservableObject {
     }
     
     func searchString(searchWord: String) {
+        // https://dic.daum.net/index.do?dic=eng
         let str = "https://suggest.dic.daum.net/language/v1/search.json?cate=eng&q=\(searchWord)"
         
         guard let url = URL(string: str) else { return }
@@ -49,7 +52,7 @@ class WordDictionaryViewModel: ObservableObject {
                 if let items = json["items"] as? [String: Any], let eng = items["eng"] as? [[String: Any]] {
                     for item in eng {
                         if let key = item["key"] as? String, let itemText = item["item"] as? String {
-                            if key.starts(with: searchWord) && key.count > 1 {
+                            if key.starts(with: searchWord) && key.count > 2 && !key.contains("-") {
                                 let splitItem = itemText.split(separator: "|")
                                 let value = String(splitItem[splitItem.count - 1])
                                 wordList.append((key.lowercased(), value))
@@ -69,5 +72,61 @@ class WordDictionaryViewModel: ObservableObject {
         DispatchQueue.main.async {
             self.words = words
         }
+    }
+    
+    func recommendWordList(alphabet: String, wordList: [String], complete: @escaping () -> [(String, String)]) {
+        let exceptWordList: String = wordList.joined(separator: ", ")
+        let apiKey = "YourAPIKey"
+        let requestText = "\(alphabet)로 시작하는 5글자 이상의 영어단어 (\"- 단어 : 한글뜻\") 형태로 앞에 \(exceptWordList) 제외하고 2개정도 알려줘"
+        let endpoint = "https://api.openai.com/v1/chat/completions"
+        let requestData: [String: Any] = [
+            "model": "gpt-3.5-turbo",
+            "messages": [
+                ["role": "user", "content": requestText]
+            ]
+        ]
+        
+        let jsonData = try! JSONSerialization.data(withJSONObject: requestData)
+        var request = URLRequest(url: URL(string: endpoint)!)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
+        request.httpBody = jsonData
+        
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let error = error {
+                print("Error: \(error)")
+                return
+            }
+
+            guard let data = data else {
+                print("No data received")
+                return
+            }
+            
+            // Parse the JSON response
+            if let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
+               let choices = json["choices"] as? [[String: Any]],
+               let message = choices.first?["message"] as? [String: Any],
+               let content = message["content"] as? String {
+                // [["- control", " 조절하다, 통제하다"], ["- continue", " 계속하다, 이어나가다"]]
+                var result: [(String, String)] = []
+                content.split(separator: "\n").map{ $0.components(separatedBy: ":") }.forEach{ word in
+                    let engWord = word[0].trimmingCharacters(in: .whitespacesAndNewlines)
+                    let meaning = word[1].trimmingCharacters(in: .whitespacesAndNewlines)
+                    
+                    result.append((engWord, meaning))
+                }
+                complete()
+//                complete(content.split(separator: "\n").map{ word in
+//                    let splittedWord = word.split(separator: ":").map{ String($0) }
+//                    return (splittedWord[0], splittedWord[1])
+//                })
+            } else {
+                print("Failed to extract content from JSON")
+            }
+        }
+
+        task.resume()
     }
 }
