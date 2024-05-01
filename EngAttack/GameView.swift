@@ -11,6 +11,20 @@ struct GameView: View {
     var times = ["3s", "5s", "7s", "10s", "15s", "20s", "30s", "60s"]
     @State var selectedTime = ""
     
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
+    var backButton : some View {
+            Button{
+                self.presentationMode.wrappedValue.dismiss()
+            } label: {
+                HStack {
+                    Image(systemName: "house.fill")
+                        .aspectRatio(contentMode: .fit)
+                        .font(.system(size: 25))
+                }
+            }
+        }
+    
     var body: some View {
         VStack {
             
@@ -50,6 +64,8 @@ struct GameView: View {
             
             Spacer()
         }
+        .navigationBarBackButtonHidden(true)
+        .navigationBarItems(leading: backButton)
     }
 }
 
