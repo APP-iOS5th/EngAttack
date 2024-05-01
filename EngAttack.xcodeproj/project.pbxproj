@@ -10,7 +10,7 @@
 		AFBC3A342BE0D5E700CE7542 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFBC3A332BE0D5E700CE7542 /* Assets.xcassets */; };
 		AFBC3A372BE0D5E700CE7542 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFBC3A362BE0D5E700CE7542 /* Preview Assets.xcassets */; };
 		BF36CBE42BE118E90089D070 /* EngAttackApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF36CBE32BE118E90089D070 /* EngAttackApp.swift */; };
-		BF820BDA2BE0F06800EF5BFE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF820BD92BE0F06800EF5BFE /* ContentView.swift */; };
+		BF52FF2E2BE1C0C300208EBE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF52FF2D2BE1C0C300208EBE /* ContentView.swift */; };
 		CD37DEFC2BE0D7E100F7CB39 /* ContentViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD37DEF82BE0D7E000F7CB39 /* ContentViewViewModel.swift */; };
 		CD37DEFF2BE0D7E100F7CB39 /* BookmarksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD37DEFB2BE0D7E100F7CB39 /* BookmarksView.swift */; };
 		CD37DF022BE0D7E700F7CB39 /* WordInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD37DF002BE0D7E700F7CB39 /* WordInfo.swift */; };
@@ -22,7 +22,7 @@
 		AFBC3A332BE0D5E700CE7542 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AFBC3A362BE0D5E700CE7542 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		BF36CBE32BE118E90089D070 /* EngAttackApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EngAttackApp.swift; path = ../../../.Trash/EngAttackApp.swift; sourceTree = "<group>"; };
-		BF820BD92BE0F06800EF5BFE /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContentView.swift; path = ../../ContentView.swift; sourceTree = "<group>"; };
+		BF52FF2D2BE1C0C300208EBE /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = SOURCE_ROOT; };
 		CD37DEF82BE0D7E000F7CB39 /* ContentViewViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentViewViewModel.swift; sourceTree = "<group>"; };
 		CD37DEFB2BE0D7E100F7CB39 /* BookmarksView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookmarksView.swift; sourceTree = "<group>"; };
 		CD37DF002BE0D7E700F7CB39 /* WordInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordInfo.swift; sourceTree = "<group>"; };
@@ -61,7 +61,7 @@
 			children = (
 				CD37DEFB2BE0D7E100F7CB39 /* BookmarksView.swift */,
 				AFBC3A332BE0D5E700CE7542 /* Assets.xcassets */,
-				BF820BD92BE0F06800EF5BFE /* ContentView.swift */,
+				BF52FF2D2BE1C0C300208EBE /* ContentView.swift */,
 				CD37DEF82BE0D7E000F7CB39 /* ContentViewViewModel.swift */,
 				BF36CBE32BE118E90089D070 /* EngAttackApp.swift */,
 				CD37DF002BE0D7E700F7CB39 /* WordInfo.swift */,
@@ -150,8 +150,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF36CBE42BE118E90089D070 /* EngAttackApp.swift in Sources */,
-				BF820BDA2BE0F06800EF5BFE /* ContentView.swift in Sources */,
 				CD37DF032BE0D7E700F7CB39 /* WordManager.swift in Sources */,
+				BF52FF2E2BE1C0C300208EBE /* ContentView.swift in Sources */,
 				CD37DF022BE0D7E700F7CB39 /* WordInfo.swift in Sources */,
 				CD37DEFF2BE0D7E100F7CB39 /* BookmarksView.swift in Sources */,
 				CD37DEFC2BE0D7E100F7CB39 /* ContentViewViewModel.swift in Sources */,
