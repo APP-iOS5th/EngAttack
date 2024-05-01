@@ -11,7 +11,7 @@ import SwiftUI
 struct EngAttackApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            SettingView()
         }
     }
 }

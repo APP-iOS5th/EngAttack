@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AF62BD452BE0DDF700A88EDE /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF62BD442BE0DDF700A88EDE /* SettingView.swift */; };
+		AF9552DB2BE1D09F0019A124 /* correct.wav in Resources */ = {isa = PBXBuildFile; fileRef = AF9552D82BE1D09B0019A124 /* correct.wav */; };
+		AF9552DC2BE1D09F0019A124 /* error.wav in Resources */ = {isa = PBXBuildFile; fileRef = AF9552D92BE1D09B0019A124 /* error.wav */; };
+		AF9552DD2BE1D09F0019A124 /* background.wav in Resources */ = {isa = PBXBuildFile; fileRef = AF9552DA2BE1D09F0019A124 /* background.wav */; };
 		AFBC3A302BE0D5E500CE7542 /* EngAttackApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBC3A2F2BE0D5E500CE7542 /* EngAttackApp.swift */; };
 		AFBC3A322BE0D5E500CE7542 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBC3A312BE0D5E500CE7542 /* ContentView.swift */; };
 		AFBC3A342BE0D5E700CE7542 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFBC3A332BE0D5E700CE7542 /* Assets.xcassets */; };
@@ -20,6 +24,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AF62BD442BE0DDF700A88EDE /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		AF9552D82BE1D09B0019A124 /* correct.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = correct.wav; sourceTree = "<group>"; };
+		AF9552D92BE1D09B0019A124 /* error.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = error.wav; sourceTree = "<group>"; };
+		AF9552DA2BE1D09F0019A124 /* background.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = background.wav; sourceTree = "<group>"; };
 		AFBC3A2C2BE0D5E500CE7542 /* EngAttack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EngAttack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFBC3A2F2BE0D5E500CE7542 /* EngAttackApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EngAttackApp.swift; sourceTree = "<group>"; };
 		AFBC3A312BE0D5E500CE7542 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -44,6 +52,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AF9552D72BE1D08E0019A124 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				AF9552DA2BE1D09F0019A124 /* background.wav */,
+				AF9552D82BE1D09B0019A124 /* correct.wav */,
+				AF9552D92BE1D09B0019A124 /* error.wav */,
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
 		AFBC3A232BE0D5E400CE7542 = {
 			isa = PBXGroup;
 			children = (
@@ -66,7 +84,9 @@
 				AFBC3A2F2BE0D5E500CE7542 /* EngAttackApp.swift */,
 				CD37DEFB2BE0D7E100F7CB39 /* BookmarksView.swift */,
 				AFBC3A312BE0D5E500CE7542 /* ContentView.swift */,
+				AF62BD442BE0DDF700A88EDE /* SettingView.swift */,
 				AFBC3A332BE0D5E700CE7542 /* Assets.xcassets */,
+				AF9552D72BE1D08E0019A124 /* Sounds */,
 				CD37DEFA2BE0D7E100F7CB39 /* ContentView.swift */,
 				CD37DEF82BE0D7E000F7CB39 /* ContentViewViewModel.swift */,
 				CD37DEF92BE0D7E100F7CB39 /* EngAttackApp.swift */,
@@ -144,7 +164,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				AFBC3A372BE0D5E700CE7542 /* Preview Assets.xcassets in Resources */,
+				AF9552DD2BE1D09F0019A124 /* background.wav in Resources */,
 				AFBC3A342BE0D5E700CE7542 /* Assets.xcassets in Resources */,
+				AF9552DB2BE1D09F0019A124 /* correct.wav in Resources */,
+				AF9552DC2BE1D09F0019A124 /* error.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -158,6 +181,7 @@
 				CD37DEFD2BE0D7E100F7CB39 /* EngAttackApp.swift in Sources */,
 				CD37DEFE2BE0D7E100F7CB39 /* ContentView.swift in Sources */,
 				AFBC3A322BE0D5E500CE7542 /* ContentView.swift in Sources */,
+				AF62BD452BE0DDF700A88EDE /* SettingView.swift in Sources */,
 				CD37DF032BE0D7E700F7CB39 /* WordManager.swift in Sources */,
 				CD37DF022BE0D7E700F7CB39 /* WordInfo.swift in Sources */,
 				AFBC3A302BE0D5E500CE7542 /* EngAttackApp.swift in Sources */,
