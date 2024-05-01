@@ -12,7 +12,7 @@ struct ContentView: View {
   
   
   var body: some View {
-	NavigationView {
+	NavigationStack{
 	  VStack {
 		Text(viewModel.currentWord)
 		  .padding()

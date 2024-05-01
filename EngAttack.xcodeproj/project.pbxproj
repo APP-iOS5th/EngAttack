@@ -17,6 +17,9 @@
 		CD37DEFF2BE0D7E100F7CB39 /* BookmarksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD37DEFB2BE0D7E100F7CB39 /* BookmarksView.swift */; };
 		CD37DF022BE0D7E700F7CB39 /* WordInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD37DF002BE0D7E700F7CB39 /* WordInfo.swift */; };
 		CD37DF032BE0D7E700F7CB39 /* WordManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD37DF012BE0D7E700F7CB39 /* WordManager.swift */; };
+		F7F07C832BE0DE42009A75A9 /* InitialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7F07C822BE0DE42009A75A9 /* InitialView.swift */; };
+		F7F07C852BE0DF96009A75A9 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7F07C842BE0DF96009A75A9 /* GameView.swift */; };
+		F7F07C872BE0E12C009A75A9 /* DictionaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7F07C862BE0E12C009A75A9 /* DictionaryView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +34,9 @@
 		CD37DEFB2BE0D7E100F7CB39 /* BookmarksView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookmarksView.swift; sourceTree = "<group>"; };
 		CD37DF002BE0D7E700F7CB39 /* WordInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordInfo.swift; sourceTree = "<group>"; };
 		CD37DF012BE0D7E700F7CB39 /* WordManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordManager.swift; sourceTree = "<group>"; };
+		F7F07C822BE0DE42009A75A9 /* InitialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialView.swift; sourceTree = "<group>"; };
+		F7F07C842BE0DF96009A75A9 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
+		F7F07C862BE0E12C009A75A9 /* DictionaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +74,9 @@
 				AFBC3A312BE0D5E500CE7542 /* ContentView.swift */,
 				AFBC3A332BE0D5E700CE7542 /* Assets.xcassets */,
 				CD37DEFA2BE0D7E100F7CB39 /* ContentView.swift */,
+				F7F07C822BE0DE42009A75A9 /* InitialView.swift */,
+				F7F07C862BE0E12C009A75A9 /* DictionaryView.swift */,
+				F7F07C842BE0DF96009A75A9 /* GameView.swift */,
 				CD37DEF82BE0D7E000F7CB39 /* ContentViewViewModel.swift */,
 				CD37DEF92BE0D7E100F7CB39 /* EngAttackApp.swift */,
 				CD37DF002BE0D7E700F7CB39 /* WordInfo.swift */,
@@ -159,8 +168,11 @@
 				CD37DEFE2BE0D7E100F7CB39 /* ContentView.swift in Sources */,
 				AFBC3A322BE0D5E500CE7542 /* ContentView.swift in Sources */,
 				CD37DF032BE0D7E700F7CB39 /* WordManager.swift in Sources */,
+				F7F07C852BE0DF96009A75A9 /* GameView.swift in Sources */,
 				CD37DF022BE0D7E700F7CB39 /* WordInfo.swift in Sources */,
 				AFBC3A302BE0D5E500CE7542 /* EngAttackApp.swift in Sources */,
+				F7F07C832BE0DE42009A75A9 /* InitialView.swift in Sources */,
+				F7F07C872BE0E12C009A75A9 /* DictionaryView.swift in Sources */,
 				CD37DEFF2BE0D7E100F7CB39 /* BookmarksView.swift in Sources */,
 				CD37DEFC2BE0D7E100F7CB39 /* ContentViewViewModel.swift in Sources */,
 			);
