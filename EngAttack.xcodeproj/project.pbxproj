@@ -21,6 +21,9 @@
 		CD37DEFF2BE0D7E100F7CB39 /* BookmarksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD37DEFB2BE0D7E100F7CB39 /* BookmarksView.swift */; };
 		CD37DF022BE0D7E700F7CB39 /* WordInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD37DF002BE0D7E700F7CB39 /* WordInfo.swift */; };
 		CD37DF032BE0D7E700F7CB39 /* WordManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD37DF012BE0D7E700F7CB39 /* WordManager.swift */; };
+		CD5AD3932BE20857007703C9 /* WordBookmarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5AD3902BE20856007703C9 /* WordBookmarkView.swift */; };
+		CD5AD3942BE20857007703C9 /* WordDictionaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5AD3912BE20857007703C9 /* WordDictionaryView.swift */; };
+		CD5AD3952BE20857007703C9 /* WordDictionaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5AD3922BE20857007703C9 /* WordDictionaryViewModel.swift */; };
 		F7A23E562BE1DB7E00A044BD /* TabViewSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7A23E552BE1DB7E00A044BD /* TabViewSetting.swift */; };
 		F7A23E582BE1DE1200A044BD /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7A23E572BE1DE1200A044BD /* MainView.swift */; };
 		F7A23E5C2BE1DF8500A044BD /* SOYO Maple Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = F7A23E592BE1DF8500A044BD /* SOYO Maple Bold.otf */; };
@@ -46,6 +49,9 @@
 		CD37DEFB2BE0D7E100F7CB39 /* BookmarksView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookmarksView.swift; sourceTree = "<group>"; };
 		CD37DF002BE0D7E700F7CB39 /* WordInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordInfo.swift; sourceTree = "<group>"; };
 		CD37DF012BE0D7E700F7CB39 /* WordManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordManager.swift; sourceTree = "<group>"; };
+		CD5AD3902BE20856007703C9 /* WordBookmarkView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordBookmarkView.swift; sourceTree = "<group>"; };
+		CD5AD3912BE20857007703C9 /* WordDictionaryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordDictionaryView.swift; sourceTree = "<group>"; };
+		CD5AD3922BE20857007703C9 /* WordDictionaryViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordDictionaryViewModel.swift; sourceTree = "<group>"; };
 		F7A23E552BE1DB7E00A044BD /* TabViewSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewSetting.swift; sourceTree = "<group>"; };
 		F7A23E572BE1DE1200A044BD /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		F7A23E592BE1DF8500A044BD /* SOYO Maple Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SOYO Maple Bold.otf"; sourceTree = "<group>"; };
@@ -111,6 +117,9 @@
 				CD37DEF92BE0D7E100F7CB39 /* EngAttackApp.swift */,
 				CD37DF002BE0D7E700F7CB39 /* WordInfo.swift */,
 				CD37DF012BE0D7E700F7CB39 /* WordManager.swift */,
+				CD5AD3902BE20856007703C9 /* WordBookmarkView.swift */,
+				CD5AD3912BE20857007703C9 /* WordDictionaryView.swift */,
+				CD5AD3922BE20857007703C9 /* WordDictionaryViewModel.swift */,
 				F7A23E5B2BE1DF8500A044BD /* _소요단풍체 OTF */,
 				AFBC3A352BE0D5E700CE7542 /* Preview Content */,
 			);
@@ -216,6 +225,8 @@
 				AFBC3A322BE0D5E500CE7542 /* ContentView.swift in Sources */,
 				F7A23E562BE1DB7E00A044BD /* TabViewSetting.swift in Sources */,
 				AF62BD452BE0DDF700A88EDE /* SettingView.swift in Sources */,
+				CD5AD3952BE20857007703C9 /* WordDictionaryViewModel.swift in Sources */,
+				CD5AD3932BE20857007703C9 /* WordBookmarkView.swift in Sources */,
 				CD37DF032BE0D7E700F7CB39 /* WordManager.swift in Sources */,
 				F7F07C852BE0DF96009A75A9 /* GameView.swift in Sources */,
 				CD37DF022BE0D7E700F7CB39 /* WordInfo.swift in Sources */,
@@ -223,6 +234,7 @@
 				F7F07C872BE0E12C009A75A9 /* DictionaryView.swift in Sources */,
 				CD37DEFF2BE0D7E100F7CB39 /* BookmarksView.swift in Sources */,
 				CD37DEFC2BE0D7E100F7CB39 /* ContentViewViewModel.swift in Sources */,
+				CD5AD3942BE20857007703C9 /* WordDictionaryView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

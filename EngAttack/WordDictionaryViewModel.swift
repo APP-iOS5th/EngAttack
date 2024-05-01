@@ -74,10 +74,10 @@ class WordDictionaryViewModel: ObservableObject {
         }
     }
     
-    func recommendWordList(alphabet: String, wordList: [String], complete: @escaping () -> [(String, String)]) {
+    func recommendWordList(alphabet: String, wordList: [String], complete: @escaping (_ recommendList: [(String, String)]) -> Void) {
         let exceptWordList: String = wordList.joined(separator: ", ")
         let apiKey = "YourAPIKey"
-        let requestText = "\(alphabet)로 시작하는 5글자 이상의 영어단어 (\"- 단어 : 한글뜻\") 형태로 앞에 \(exceptWordList) 제외하고 2개정도 알려줘"
+        let requestText = "\(alphabet)로 시작하는 5글자 이상의 소문자 영어단어 (\"- 단어 : 한글뜻\") 형태로 앞에 \(exceptWordList) 제외하고 다양하게 5개정도 알려줘"
         let endpoint = "https://api.openai.com/v1/chat/completions"
         let requestData: [String: Any] = [
             "model": "gpt-3.5-turbo",
@@ -117,11 +117,8 @@ class WordDictionaryViewModel: ObservableObject {
                     
                     result.append((engWord, meaning))
                 }
-                complete()
-//                complete(content.split(separator: "\n").map{ word in
-//                    let splittedWord = word.split(separator: ":").map{ String($0) }
-//                    return (splittedWord[0], splittedWord[1])
-//                })
+                
+                complete(result)
             } else {
                 print("Failed to extract content from JSON")
             }

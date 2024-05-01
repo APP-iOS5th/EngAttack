@@ -59,8 +59,10 @@ struct WordDictionaryView: View {
             .toolbar {
                 ToolbarItem(placement: .bottomBar) {
                     Button("Test") {
-                        if storedWords.count > 0 {                        
-                            viewModel.recommendWordList(alphabet: "c", wordList: storedWords.map{ String($0.word.split(separator: "--")[0]) }) { wordList in
+                        if storedWords.count > 0 {
+                            let bookmarkEngWords: [String] = storedWords.map{ String($0.word.split(separator: "--")[0]) }
+                            
+                            viewModel.recommendWordList(alphabet: "c", wordList: bookmarkEngWords) { wordList in
                                 print(wordList)
                             }
                         }
