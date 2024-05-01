@@ -26,7 +26,6 @@
 		F7A23E5D2BE1DF8500A044BD /* SOYO Maple Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = F7A23E5A2BE1DF8500A044BD /* SOYO Maple Regular.otf */; };
 		F7F07C852BE0DF96009A75A9 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7F07C842BE0DF96009A75A9 /* GameView.swift */; };
 		F7F07C872BE0E12C009A75A9 /* DictionaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7F07C862BE0E12C009A75A9 /* DictionaryView.swift */; };
-		F7F07CA32BE1C8AA009A75A9 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F7F07CA22BE1C8AA009A75A9 /* Launch Screen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,7 +49,6 @@
 		F7A23E5A2BE1DF8500A044BD /* SOYO Maple Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SOYO Maple Regular.otf"; sourceTree = "<group>"; };
 		F7F07C842BE0DF96009A75A9 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		F7F07C862BE0E12C009A75A9 /* DictionaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryView.swift; sourceTree = "<group>"; };
-		F7F07CA22BE1C8AA009A75A9 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,18 +91,17 @@
 		AFBC3A2E2BE0D5E500CE7542 /* EngAttack */ = {
 			isa = PBXGroup;
 			children = (
-				CD37DEFB2BE0D7E100F7CB39 /* BookmarksView.swift */,
-				AF62BD442BE0DDF700A88EDE /* SettingView.swift */,
 				AFBC3A332BE0D5E700CE7542 /* Assets.xcassets */,
 				AF9552D72BE1D08E0019A124 /* Sounds */,
 				F7A23E552BE1DB7E00A044BD /* TabViewSetting.swift */,
 				F7A23E572BE1DE1200A044BD /* MainView.swift */,
-				F7F07CA22BE1C8AA009A75A9 /* Launch Screen.storyboard */,
 				F7F07C862BE0E12C009A75A9 /* DictionaryView.swift */,
 				F7F07C842BE0DF96009A75A9 /* GameView.swift */,
 				CD37DEF82BE0D7E000F7CB39 /* ContentViewViewModel.swift */,
 				BFD6A8DF2BE207E10009BFE2 /* ContentView.swift */,
 				BF755ADD2BE1D792007DD8AE /* Launch Screen.swift */,
+				CD37DEFB2BE0D7E100F7CB39 /* BookmarksView.swift */,
+				AF62BD442BE0DDF700A88EDE /* SettingView.swift */,
 				BF36CBE32BE118E90089D070 /* EngAttackApp.swift */,
 				CD37DF002BE0D7E700F7CB39 /* WordInfo.swift */,
 				CD37DF012BE0D7E700F7CB39 /* WordManager.swift */,
@@ -191,7 +188,6 @@
 			files = (
 				F7A23E5D2BE1DF8500A044BD /* SOYO Maple Regular.otf in Resources */,
 				F7A23E5C2BE1DF8500A044BD /* SOYO Maple Bold.otf in Resources */,
-				F7F07CA32BE1C8AA009A75A9 /* Launch Screen.storyboard in Resources */,
 				AFBC3A372BE0D5E700CE7542 /* Preview Assets.xcassets in Resources */,
 				AF9552DD2BE1D09F0019A124 /* background.wav in Resources */,
 				AFBC3A342BE0D5E700CE7542 /* Assets.xcassets in Resources */,
@@ -362,7 +358,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -394,7 +390,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
