@@ -8,6 +8,7 @@
 
 import Foundation
 
+// 게임 시작 단어
 class WordManager {
   let starterWords = ["apple", "banana", "cherry", "date", "elderberry"]
   
