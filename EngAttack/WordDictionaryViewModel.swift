@@ -104,12 +104,10 @@ class WordDictionaryViewModel: ObservableObject {
                 return
             }
             
-            // Parse the JSON response
             if let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
                let choices = json["choices"] as? [[String: Any]],
                let message = choices.first?["message"] as? [String: Any],
                let content = message["content"] as? String {
-                // [["- control", " 조절하다, 통제하다"], ["- continue", " 계속하다, 이어나가다"]]
                 var result: [(String, String)] = []
                 content.split(separator: "\n").map{ $0.components(separatedBy: ":") }.forEach{ word in
                     let engWord = word[0].trimmingCharacters(in: .whitespacesAndNewlines)
