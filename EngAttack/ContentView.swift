@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
 	@ObservedObject var viewModel = ContentViewViewModel()
+	@ObservedObject var setting = SoundSetting()
 	
 	var body: some View {
 		
@@ -21,6 +22,7 @@ struct ContentView: View {
 							viewModel.isLoading.toggle()
 						})
 					}
+				
 			} else if !viewModel.gameStarted {
 				NavigationStack {
 					VStack {
@@ -31,11 +33,17 @@ struct ContentView: View {
 						})
 					}
 					.navigationTitle("끝말잇기 게임")
+					.toolbar {
+						ToolbarItem(placement: .topBarTrailing) {
+							NavigationLink(destination: SettingView()) {
+								Image(systemName: "gearshape.fill")
+							}
+						}
+					}
 				}
 			} else {
 				NavigationView {
 					VStack {
-						
 						Text("남은 시간: \(String(format: "%.1f", viewModel.timeRemaining))초")
 							.font(.title)
 							.padding()
@@ -93,6 +101,7 @@ struct ContentView: View {
 					}
 				}
 			}
+				
 		}
 	}
 }
