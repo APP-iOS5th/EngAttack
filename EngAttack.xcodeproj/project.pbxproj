@@ -20,6 +20,9 @@
 		BFD6A8E22BE209E10009BFE2 /* EngAttackApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF36CBE32BE118E90089D070 /* EngAttackApp.swift */; };
 		CD37DEFC2BE0D7E100F7CB39 /* ContentViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD37DEF82BE0D7E000F7CB39 /* ContentViewViewModel.swift */; };
 		CD37DEFF2BE0D7E100F7CB39 /* BookmarksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD37DEFB2BE0D7E100F7CB39 /* BookmarksView.swift */; };
+		CDA4363C2BE28E9B0047E2C0 /* WordDictionaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA436392BE28E9B0047E2C0 /* WordDictionaryView.swift */; };
+		CDA4363D2BE28E9B0047E2C0 /* WordBookmarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA4363A2BE28E9B0047E2C0 /* WordBookmarkView.swift */; };
+		CDA4363E2BE28E9B0047E2C0 /* WordDictionaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA4363B2BE28E9B0047E2C0 /* WordDictionaryViewModel.swift */; };
 		F7A23E562BE1DB7E00A044BD /* TabViewSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7A23E552BE1DB7E00A044BD /* TabViewSetting.swift */; };
 		F7A23E582BE1DE1200A044BD /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7A23E572BE1DE1200A044BD /* MainView.swift */; };
 		F7A23E5C2BE1DF8500A044BD /* SOYO Maple Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = F7A23E592BE1DF8500A044BD /* SOYO Maple Bold.otf */; };
@@ -44,6 +47,9 @@
 		CD37DEFB2BE0D7E100F7CB39 /* BookmarksView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookmarksView.swift; sourceTree = "<group>"; };
 		CD37DF002BE0D7E700F7CB39 /* WordInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordInfo.swift; sourceTree = "<group>"; };
 		CD37DF012BE0D7E700F7CB39 /* WordManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordManager.swift; sourceTree = "<group>"; };
+		CDA436392BE28E9B0047E2C0 /* WordDictionaryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordDictionaryView.swift; sourceTree = "<group>"; };
+		CDA4363A2BE28E9B0047E2C0 /* WordBookmarkView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordBookmarkView.swift; sourceTree = "<group>"; };
+		CDA4363B2BE28E9B0047E2C0 /* WordDictionaryViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordDictionaryViewModel.swift; sourceTree = "<group>"; };
 		F7A23E552BE1DB7E00A044BD /* TabViewSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewSetting.swift; sourceTree = "<group>"; };
 		F7A23E572BE1DE1200A044BD /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		F7A23E592BE1DF8500A044BD /* SOYO Maple Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SOYO Maple Bold.otf"; sourceTree = "<group>"; };
@@ -108,6 +114,9 @@
 				BF36CBE32BE118E90089D070 /* EngAttackApp.swift */,
 				CD37DF002BE0D7E700F7CB39 /* WordInfo.swift */,
 				CD37DF012BE0D7E700F7CB39 /* WordManager.swift */,
+				CDA4363A2BE28E9B0047E2C0 /* WordBookmarkView.swift */,
+				CDA436392BE28E9B0047E2C0 /* WordDictionaryView.swift */,
+				CDA4363B2BE28E9B0047E2C0 /* WordDictionaryViewModel.swift */,
 				F7A23E5B2BE1DF8500A044BD /* _소요단풍체 OTF */,
 				AFBC3A352BE0D5E700CE7542 /* Preview Content */,
 			);
@@ -211,9 +220,12 @@
 				AF05DFF32BE28C7D005625E0 /* WordInfo.swift in Sources */,
 				AF05DFF42BE28C7D005625E0 /* WordManager.swift in Sources */,
 				BFD6A8E12BE209CF0009BFE2 /* Launch Screen.swift in Sources */,
+				CDA4363E2BE28E9B0047E2C0 /* WordDictionaryViewModel.swift in Sources */,
 				BFD6A8E02BE207E10009BFE2 /* ContentView.swift in Sources */,
 				BFD6A8E22BE209E10009BFE2 /* EngAttackApp.swift in Sources */,
+				CDA4363D2BE28E9B0047E2C0 /* WordBookmarkView.swift in Sources */,
 				F7A23E582BE1DE1200A044BD /* MainView.swift in Sources */,
+				CDA4363C2BE28E9B0047E2C0 /* WordDictionaryView.swift in Sources */,
 				F7A23E562BE1DB7E00A044BD /* TabViewSetting.swift in Sources */,
 				F7F07C852BE0DF96009A75A9 /* GameView.swift in Sources */,
 				F7F07C872BE0E12C009A75A9 /* DictionaryView.swift in Sources */,
