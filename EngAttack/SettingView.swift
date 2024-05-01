@@ -9,8 +9,7 @@ import SwiftUI
 import AVKit
 
 class SoundSetting: ObservableObject {
-    
-    // 싱글톤
+
     static let instance = SoundSetting()
     
     var player: AVAudioPlayer?
@@ -22,7 +21,7 @@ class SoundSetting: ObservableObject {
     }
     
     func playSound(sound: SoundOption, volume: Float) {
-        guard let url = Bundle.main.url(forResource: sound.rawValue, withExtension: "mp3") else { return }
+        guard let url = Bundle.main.url(forResource: sound.rawValue, withExtension: "wav") else { return }
         
         do {
             player = try AVAudioPlayer(contentsOf: url)
@@ -37,52 +36,70 @@ class SoundSetting: ObservableObject {
 struct SettingView: View {
     @State var isDarkMode = false
     @State var isEffect = false
-    @State var volume = 0.0
     @State var settingsSound = false
+    @State var backVolume = 0.0
+    let effectVol = 0.3
     
     var body: some View {
         VStack {
-            Text("설정")
-                .font(.largeTitle)
+            // Title
+            Text("마이페이지")
+                .font(.system(size: 25))
                 .bold()
-            List {
-                Toggle(isOn: $isDarkMode) {
-                    Text(isDarkMode ? "라이트모드" : "다크모드")
-                        .preferredColorScheme(isDarkMode ? .dark : .light)
-                    
-                }
-                DisclosureGroup("음향", isExpanded: $settingsSound) {
-                    Toggle(isOn: $isEffect) {
-                        Text(isEffect ? "효과음 OFF" : "효과음 ON")
-                        
+            Form {
+                Section(header: Text("마이페이지").font(.system(size: 18))) {
+                    Button {
+                        // TODO: 회원정보 수정 페이지 이동
+                        print("mypage view")
+                    } label: {
+                        HStack {
+                            Image(systemName: "person.circle")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                            Text("닉네임이 들어가요~")
+                                .padding(.leading, 5)
+                                .fontWeight(.semibold)
+                                .font(.system(size: 21))
+                        }
+                        .foregroundStyle(.black)
+                        .frame(height: 80)
                     }
-                    HStack {
-                        Text("배경음")
-                            .padding(.trailing)
-                        Spacer()
-                        Slider(value: $volume, in: 0...100, step: 1)
-                            .onChange(of: volume) {
-                                SoundSetting.instance.playSound(sound: .background, volume: Float(volume) * 0.05)
-                            }
+                }
+                // MARK: 환경 설정
+                Section(header: Text("환경설정").font(.system(size: 18))) {
+                    Toggle(isOn: $isDarkMode) {
+                        Text(isDarkMode ? "라이트모드" : "다크모드")
+                            .preferredColorScheme(isDarkMode ? .dark : .light)
+                    }
+                    DisclosureGroup("음향", isExpanded: $settingsSound) {
+                        Toggle(isOn: $isEffect) {
+                            Text(isEffect ? "효과음 OFF" : "효과음 ON")
+                        }
+                        HStack {
+                            Text("배경음")
+                                .padding(.trailing)
+                            Spacer()
+                            Slider(value: $backVolume, in: 0...100, step: 1)
+                                .onChange(of: backVolume) {
+                                    SoundSetting.instance.playSound(sound: .background, volume: Float(backVolume) * 0.1)
+                                }
+                        }
                     }
                 }
                 // TODO: test용 버튼 삭제 필요
                 Button {
-                    print(isEffect)
-                    isEffect ? SoundSetting.instance.playSound(sound: .background, volume: Float(volume)) : SoundSetting.instance.playSound(sound: .background, volume: Float(volume))
+                    SoundSetting.instance.playSound(sound: .correct, volume: isEffect ? Float(effectVol) : 0)
                 } label: {
                     Image(systemName: "circle.fill")
                 }
                 
                 Button {
-                    //some action 2
+                    SoundSetting.instance.playSound(sound: .error, volume: isEffect ? Float(effectVol) : 0)
                 } label: {
                     Image(systemName: "square.fill")
                 }
-                
             }
             .font(.system(size: 20))
-            .bold()
         }
     }
 }
