@@ -45,8 +45,8 @@ struct GameView: View {
                     .fontWeight(.bold)
                     .foregroundStyle(.green)
                 Picker("Choose time", selection: $selectedTime) {
-                    ForEach(times, id: \.self) {
-                        Text("\($0)s").tag($0)
+                    ForEach(times, id: \.self) { time in
+                        Text(String(format: "%.0f", Double(time)) + "s").tag(time)
                     }
                 }
                 .frame(width: 250, height: 100)
@@ -55,7 +55,8 @@ struct GameView: View {
                 .cornerRadius(15)
                 .padding()
                 
-                Text("You choose \(selectedTime)s")
+                Text("You chose \(Int(selectedTime))s")
+                    .font(.custom("SOYO Maple Bold", size: 15))
                 
                 Spacer()
                 
