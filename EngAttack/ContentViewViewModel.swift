@@ -93,11 +93,15 @@ class ContentViewViewModel: ObservableObject {
 		startTimer()
 	}
 	
+    func gameDuration(selectedTime: Double) {
+            timeRemaining = selectedTime
+    }
+    
 	
 	// 타이머 기능
 	func startTimer() {
+        
 		timerIsActive = true
-		timeRemaining = 10.0
 		
 		gameTimer?.invalidate() // 기존 타이머가 있다면 취소
 		gameTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [weak self] _ in

@@ -18,18 +18,21 @@ extension ContentView {
 				Image(systemName: "gamecontroller")
 					.resizable()
 					.aspectRatio(contentMode: .fit)
-					.frame(width: 100)
+					.frame(width: 150)
 					.foregroundStyle(.gameController)
 					.offset(y:-100)
 				Text("EngAttack")
+                    .font(.custom("SOYO Maple Bold", size: 60))
+                    .foregroundStyle(.brown)
 					.font(.largeTitle)
 					.bold()
+                    .padding(.bottom, 30)
 			}
 		}
 	}
 }
 
 
-#Preview {
-	ContentView().launchScreenView
-}
+//#Preview {
+//	ContentView().launchScreenView
+//}

@@ -7,10 +7,11 @@
 
 import SwiftUI
 
+
 struct GameView: View {
     @State var isGameViewPresented = false
-    var times = ["3s", "5s", "7s", "10s", "15s", "20s", "30s", "60s"]
-    @State var selectedTime = ""
+    var times: [Double] = [3, 5, 7, 10, 15, 20, 30, 60]
+    @State var selectedTime: Double = 3
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
@@ -45,7 +46,7 @@ struct GameView: View {
                     .foregroundStyle(.green)
                 Picker("Choose time", selection: $selectedTime) {
                     ForEach(times, id: \.self) {
-                        Text($0)
+                        Text("\($0)s").tag($0)
                     }
                 }
                 .frame(width: 250, height: 100)
@@ -53,6 +54,8 @@ struct GameView: View {
                 .background(.yellow)
                 .cornerRadius(15)
                 .padding()
+                
+                Text("You choose \(selectedTime)s")
                 
                 Spacer()
                 
@@ -63,7 +66,7 @@ struct GameView: View {
                     Image(systemName: "arrowshape.right.fill")
                 }
                 .navigationDestination(isPresented: $isGameViewPresented) {
-                    ContentView()
+                    ContentView(timeRemaining: $selectedTime)
                 }
                 .font(.system(size: 30))
                 

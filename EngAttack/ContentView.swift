@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
 	@EnvironmentObject var viewModel: ContentViewViewModel
+    @Binding var timeRemaining: Double
 	
 	var body: some View {
 		Group {
@@ -83,20 +84,23 @@ struct ContentView: View {
 					}
 					.onAppear {
 						viewModel.pickRandomWord()
-						viewModel.startTimer()
+                        viewModel.timeRemaining = timeRemaining
+                        viewModel.startTimer()
 					}
 					.onDisappear {
 						viewModel.stopTimer()
 					}
 				}
-			}
+            }
+                
 		}
 		// 다크모드전환상태 유지
 		.preferredColorScheme(viewModel.isDarkMode ? .dark : .light)
+        
 	}
 }
 
 #Preview {
-	ContentView()
+    ContentView(timeRemaining: .constant(30))
 		.environmentObject(ContentViewViewModel())
 }

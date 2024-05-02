@@ -50,6 +50,9 @@ struct TabViewSetting: View {
     }
 }
 
+
+
 #Preview {
     TabViewSetting()
+        .environmentObject(ContentViewViewModel())
 }
