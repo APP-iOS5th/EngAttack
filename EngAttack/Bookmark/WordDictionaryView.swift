@@ -58,6 +58,7 @@ struct WordDictionaryView: View {
                 }
             }
             .navigationTitle("Word Dictionary")
+            
             .toolbar {
                 ToolbarItem(placement: .bottomBar) {
                     Button("Test") {
