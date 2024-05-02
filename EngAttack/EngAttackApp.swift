@@ -9,13 +9,10 @@ import SwiftUI
 
 @main
 struct EngAttackApp: App {
-	
-	var viewModel = ContentViewViewModel()
-	
-	var body: some Scene {
-		WindowGroup {
-			ContentView()
-				.environmentObject(viewModel)
-		}
-	}
+
+    var body: some Scene {
+        WindowGroup {
+            TabViewSetting()
+        }
+    }
 }
