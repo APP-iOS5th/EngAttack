@@ -10,7 +10,7 @@ import SwiftUI
 extension ContentView {
 	var launchScreenView: some View {
 		ZStack(alignment: .center) {
-			LinearGradient(gradient: Gradient(colors: [Color("FirstColor"), Color("SubPrimaryColor")]),
+			LinearGradient(gradient: Gradient(colors: [Color("FirstColor"), Color(.white)]),
 						   startPoint: .top, endPoint: .bottom)
 			.edgesIgnoringSafeArea(.all)
 			
