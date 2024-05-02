@@ -25,7 +25,7 @@ struct TabViewSetting: View {
                     Image(systemName: "character.book.closed.fill")
                     Text("Dict")
                 }
-            SettingView()
+            Text("My page")
                 .tabItem {
                     Image(systemName: "person.crop.circle.fill")
                     Text("MY")
