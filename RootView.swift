@@ -16,9 +16,7 @@ struct RootView: View {
     var body: some View {
         VStack {
             if viewModel.Signstate == .signedIn {
-                TabViewSetting()
-                    .environmentObject(ContentViewViewModel())
-                    .modelContainer(for: TempModel.self)
+                HomeView()
             } else {
                 SignInView()
             }
