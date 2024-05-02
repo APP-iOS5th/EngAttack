@@ -17,7 +17,11 @@ class ContentViewViewModel: ObservableObject {
 	@Published var showAlert = false
 	@Published var usedWords = Set<String>()
 	@Published var bookmarkedWords = Set<String>()
-    @Published var isDarkMode = false
+    @Published var isDarkMode: Bool {
+        didSet {
+            UserDefaults.standard.set(isDarkMode, forKey: "darkModeKey")
+        }
+    }
 	@Published var timeRemaining = 10.0
 	@Published var timerIsActive = false
 	@Published var isLoading: Bool = true
@@ -30,7 +34,8 @@ class ContentViewViewModel: ObservableObject {
 	
 	
 	init() {
-		pickRandomWord()
+        self.isDarkMode = UserDefaults.standard.bool(forKey: "darkModeKey")
+        pickRandomWord()
 	}
 	
 	func pickRandomWord() {
@@ -94,11 +99,15 @@ class ContentViewViewModel: ObservableObject {
 		startTimer()
 	}
 	
+    func gameDuration(selectedTime: Double) {
+            timeRemaining = selectedTime
+    }
+    
 	
 	// 타이머 기능
 	func startTimer() {
+        
 		timerIsActive = true
-		timeRemaining = 10.0
 		
 		gameTimer?.invalidate() // 기존 타이머가 있다면 취소
 		gameTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [weak self] _ in
