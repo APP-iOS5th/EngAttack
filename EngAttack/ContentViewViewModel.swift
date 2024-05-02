@@ -17,7 +17,11 @@ class ContentViewViewModel: ObservableObject {
 	@Published var showAlert = false
 	@Published var usedWords = Set<String>()
 	@Published var bookmarkedWords = Set<String>()
-	@Published var isDarkMode = false
+    @Published var isDarkMode: Bool {
+        didSet {
+            UserDefaults.standard.set(isDarkMode, forKey: "darkModeKey")
+        }
+    }
 	@Published var timeRemaining = 10.0
 	@Published var timerIsActive = false
 	@Published var isLoading: Bool = true
@@ -30,7 +34,8 @@ class ContentViewViewModel: ObservableObject {
 	
 	
 	init() {
-		pickRandomWord()
+        self.isDarkMode = UserDefaults.standard.bool(forKey: "darkModeKey")
+        pickRandomWord()
 	}
 	
 	func pickRandomWord() {
