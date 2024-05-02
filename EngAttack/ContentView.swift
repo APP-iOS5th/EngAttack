@@ -45,17 +45,21 @@ struct ContentView: View {
 				}
 				.padding()
 				
-				// 게임 종료시 알림창
-				.alert(isPresented: $viewModel.showAlert) {
-					Alert(title: Text("Game Over"),
-						  message: Text("당신의 점수는 \(viewModel.score)점 입니다."),
-						  primaryButton: .default(Text("다시하기"), action: {
-						viewModel.resetGame()
-					}),
-						  secondaryButton: .destructive(Text("그만하기"), action: {
-						viewModel.resetGame()
-						viewModel.stopTimer()
-					}))
+				 //게임 종료시 알림창
+					.alert(isPresented: $viewModel.showAlert) {
+						Alert(title: Text(viewModel.alertTitle),
+							  message: Text("당신의 점수는 \(viewModel.score)점 입니다."),
+							  primaryButton: .default(Text("다시하기"), action: {
+							viewModel.resetGame()
+							viewModel.userInput = ""
+						}),
+							  secondaryButton: .destructive(Text("그만하기"), action: {
+							viewModel.resetGame()
+							viewModel.stopTimer()
+							viewModel.userInput = ""
+						}))
+						
+					}
 				}
 			}
 			.onAppear {
@@ -69,8 +73,6 @@ struct ContentView: View {
 		}
 	}
 	
-	
-}
 
 
 #Preview {
