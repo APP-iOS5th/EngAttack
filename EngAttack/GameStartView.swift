@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct GameView: View {
+struct GameStartView: View {
     @State var isGameViewPresented = false
     var times = ["3s", "5s", "7s", "10s", "15s", "20s", "30s", "60s"]
     @State var selectedTime = ""
@@ -77,5 +77,6 @@ struct GameView: View {
 }
 
 #Preview {
-    GameView()
+	GameStartView()
+		.environmentObject(ContentViewViewModel())
 }

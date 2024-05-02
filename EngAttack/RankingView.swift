@@ -8,7 +8,7 @@
 import SwiftUI
 
 
-struct MainView: View {
+struct RankingView: View {
     var body: some View {
         VStack {
             Text("EngAttack")
@@ -31,5 +31,5 @@ struct MainView: View {
 }
 
 #Preview {
-    MainView()
+	RankingView()
 }
