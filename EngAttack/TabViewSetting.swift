@@ -8,28 +8,41 @@
 import SwiftUI
 
 struct TabViewSetting: View {
+    @State private var selection: String = "끝말잇기"
+    
     var body: some View {
-        TabView {
-            MainView()
+        TabView(selection: $selection) {
+            
+            WordBookmarkView()
                 .tabItem {
-                    Image (systemName: "chart.bar.xaxis.ascending")
-                    Text("Main")
+                    Image(systemName: "bookmark.fill")
+                    Text("북마크")
                 }
+                .tag("북마크")
+            WordDictionaryView()
+                .tabItem {
+                    Image(systemName: "character.book.closed.fill")
+                    Text("사전")
+                }
+                .tag("사전")
             GameView()
                 .tabItem {
                     Image(systemName: "gamecontroller")
-                    Text("Game")
+                    Text("끝말잇기")
                 }
-            Text("Dictionary page")
+                .tag("끝말잇기")
+            MainView()
                 .tabItem {
-                    Image(systemName: "character.book.closed.fill")
-                    Text("Dict")
+                    Image (systemName: "chart.bar.xaxis.ascending")
+                    Text("랭킹")
                 }
-            Text("My page")
+                .tag("랭킹")
+            SettingView()
                 .tabItem {
                     Image(systemName: "person.crop.circle.fill")
-                    Text("MY")
+                    Text("마이페이지")
                 }
+                .tag("마이페이지")
         }
     }
 }

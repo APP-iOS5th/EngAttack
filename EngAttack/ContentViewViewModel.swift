@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+
 class ContentViewViewModel: ObservableObject {
 	let starterWords = ["apple", "banana", "cherry", "date", "elderberry"]
 	@Published var currentWord = ""
@@ -91,10 +92,7 @@ class ContentViewViewModel: ObservableObject {
 		self.userInput = "" // 입력 초기화
 		startTimer()
 	}
-	// 다크모드 전환
-	func darkModeSwitch() {
-		isDarkMode.toggle()
-	}
+	
 	
 	// 타이머 기능
 	func startTimer() {
