@@ -24,10 +24,10 @@
 		CDA4363D2BE28E9B0047E2C0 /* WordBookmarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA4363A2BE28E9B0047E2C0 /* WordBookmarkView.swift */; };
 		CDA4363E2BE28E9B0047E2C0 /* WordDictionaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA4363B2BE28E9B0047E2C0 /* WordDictionaryViewModel.swift */; };
 		F7A23E562BE1DB7E00A044BD /* TabViewSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7A23E552BE1DB7E00A044BD /* TabViewSetting.swift */; };
-		F7A23E582BE1DE1200A044BD /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7A23E572BE1DE1200A044BD /* MainView.swift */; };
+		F7A23E582BE1DE1200A044BD /* RankingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7A23E572BE1DE1200A044BD /* RankingView.swift */; };
 		F7A23E5C2BE1DF8500A044BD /* SOYO Maple Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = F7A23E592BE1DF8500A044BD /* SOYO Maple Bold.otf */; };
 		F7A23E5D2BE1DF8500A044BD /* SOYO Maple Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = F7A23E5A2BE1DF8500A044BD /* SOYO Maple Regular.otf */; };
-		F7F07C852BE0DF96009A75A9 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7F07C842BE0DF96009A75A9 /* GameView.swift */; };
+		F7F07C852BE0DF96009A75A9 /* GameStartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7F07C842BE0DF96009A75A9 /* GameStartView.swift */; };
 		F7F07C872BE0E12C009A75A9 /* DictionaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7F07C862BE0E12C009A75A9 /* DictionaryView.swift */; };
 /* End PBXBuildFile section */
 
@@ -50,10 +50,10 @@
 		CDA4363A2BE28E9B0047E2C0 /* WordBookmarkView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordBookmarkView.swift; sourceTree = "<group>"; };
 		CDA4363B2BE28E9B0047E2C0 /* WordDictionaryViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordDictionaryViewModel.swift; sourceTree = "<group>"; };
 		F7A23E552BE1DB7E00A044BD /* TabViewSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewSetting.swift; sourceTree = "<group>"; };
-		F7A23E572BE1DE1200A044BD /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		F7A23E572BE1DE1200A044BD /* RankingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingView.swift; sourceTree = "<group>"; };
 		F7A23E592BE1DF8500A044BD /* SOYO Maple Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SOYO Maple Bold.otf"; sourceTree = "<group>"; };
 		F7A23E5A2BE1DF8500A044BD /* SOYO Maple Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SOYO Maple Regular.otf"; sourceTree = "<group>"; };
-		F7F07C842BE0DF96009A75A9 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
+		F7F07C842BE0DF96009A75A9 /* GameStartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStartView.swift; sourceTree = "<group>"; };
 		F7F07C862BE0E12C009A75A9 /* DictionaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -100,20 +100,16 @@
 				AFBC3A332BE0D5E700CE7542 /* Assets.xcassets */,
 				AF9552D72BE1D08E0019A124 /* Sounds */,
 				F7A23E552BE1DB7E00A044BD /* TabViewSetting.swift */,
-				F7A23E572BE1DE1200A044BD /* MainView.swift */,
-				F7F07C862BE0E12C009A75A9 /* DictionaryView.swift */,
-				F7F07C842BE0DF96009A75A9 /* GameView.swift */,
+				F7A23E572BE1DE1200A044BD /* RankingView.swift */,
+				F7F07C842BE0DF96009A75A9 /* GameStartView.swift */,
 				CD37DEF82BE0D7E000F7CB39 /* ContentViewViewModel.swift */,
 				BFD6A8DF2BE207E10009BFE2 /* ContentView.swift */,
 				BF755ADD2BE1D792007DD8AE /* Launch Screen.swift */,
-				CD37DEFB2BE0D7E100F7CB39 /* BookmarksView.swift */,
 				AF62BD442BE0DDF700A88EDE /* SettingView.swift */,
 				BF36CBE32BE118E90089D070 /* EngAttackApp.swift */,
-				CD37DF002BE0D7E700F7CB39 /* WordInfo.swift */,
-				CD37DF012BE0D7E700F7CB39 /* WordManager.swift */,
-				CDA4363A2BE28E9B0047E2C0 /* WordBookmarkView.swift */,
-				CDA436392BE28E9B0047E2C0 /* WordDictionaryView.swift */,
-				CDA4363B2BE28E9B0047E2C0 /* WordDictionaryViewModel.swift */,
+				BF0C51612BE325D700A10946 /* Dictionary */,
+				BF0C51602BE325A600A10946 /* Bookmark */,
+				BF0C51622BE32E2500A10946 /* WordInfo */,
 				F7A23E5B2BE1DF8500A044BD /* _소요단풍체 OTF */,
 				AFBC3A352BE0D5E700CE7542 /* Preview Content */,
 			);
@@ -126,6 +122,34 @@
 				AFBC3A362BE0D5E700CE7542 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		BF0C51602BE325A600A10946 /* Bookmark */ = {
+			isa = PBXGroup;
+			children = (
+				CDA4363A2BE28E9B0047E2C0 /* WordBookmarkView.swift */,
+				CD37DEFB2BE0D7E100F7CB39 /* BookmarksView.swift */,
+			);
+			path = Bookmark;
+			sourceTree = "<group>";
+		};
+		BF0C51612BE325D700A10946 /* Dictionary */ = {
+			isa = PBXGroup;
+			children = (
+				F7F07C862BE0E12C009A75A9 /* DictionaryView.swift */,
+				CDA436392BE28E9B0047E2C0 /* WordDictionaryView.swift */,
+				CDA4363B2BE28E9B0047E2C0 /* WordDictionaryViewModel.swift */,
+			);
+			path = Dictionary;
+			sourceTree = "<group>";
+		};
+		BF0C51622BE32E2500A10946 /* WordInfo */ = {
+			isa = PBXGroup;
+			children = (
+				CD37DF002BE0D7E700F7CB39 /* WordInfo.swift */,
+				CD37DF012BE0D7E700F7CB39 /* WordManager.swift */,
+			);
+			path = WordInfo;
 			sourceTree = "<group>";
 		};
 		F7A23E5B2BE1DF8500A044BD /* _소요단풍체 OTF */ = {
@@ -220,10 +244,10 @@
 				BFD6A8E02BE207E10009BFE2 /* ContentView.swift in Sources */,
 				BFD6A8E22BE209E10009BFE2 /* EngAttackApp.swift in Sources */,
 				CDA4363D2BE28E9B0047E2C0 /* WordBookmarkView.swift in Sources */,
-				F7A23E582BE1DE1200A044BD /* MainView.swift in Sources */,
+				F7A23E582BE1DE1200A044BD /* RankingView.swift in Sources */,
 				CDA4363C2BE28E9B0047E2C0 /* WordDictionaryView.swift in Sources */,
 				F7A23E562BE1DB7E00A044BD /* TabViewSetting.swift in Sources */,
-				F7F07C852BE0DF96009A75A9 /* GameView.swift in Sources */,
+				F7F07C852BE0DF96009A75A9 /* GameStartView.swift in Sources */,
 				F7F07C872BE0E12C009A75A9 /* DictionaryView.swift in Sources */,
 				CD37DEFF2BE0D7E100F7CB39 /* BookmarksView.swift in Sources */,
 				CD37DEFC2BE0D7E100F7CB39 /* ContentViewViewModel.swift in Sources */,

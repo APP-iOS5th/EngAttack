@@ -12,7 +12,8 @@ struct EngAttackApp: App {
 
     var body: some Scene {
         WindowGroup {
-            TabViewSetting()
+		   TabViewSetting()
+			   .environmentObject(ContentViewViewModel())
         }
     }
 }
