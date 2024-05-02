@@ -8,7 +8,7 @@
 import SwiftUI
 
 
-struct GameView: View {
+struct GameStartView: View {
     @State var isGameViewPresented = false
     var times: [Double] = [3, 5, 7, 10, 15, 20, 30, 60]
     @State var selectedTime: Double = 3

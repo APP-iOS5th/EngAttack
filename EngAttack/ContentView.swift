@@ -55,6 +55,7 @@ struct ContentView: View {
 			}
 			.onAppear {
 				viewModel.pickRandomWord()
+                viewModel.timeRemaining = timeRemaining
 				viewModel.startTimer()
 			}
 			.onDisappear {
