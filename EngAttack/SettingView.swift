@@ -109,4 +109,5 @@ struct SettingView: View {
 
 #Preview {
 	SettingView()
+		.environmentObject(ContentViewViewModel())
 }

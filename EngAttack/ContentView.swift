@@ -98,4 +98,5 @@ struct ContentView: View {
 
 #Preview {
 	ContentView()
+		.environmentObject(ContentViewViewModel())
 }
