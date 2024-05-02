@@ -66,7 +66,7 @@ struct TabViewSetting: View {
 					Text("랭킹")
 				}
 				.tag("랭킹")
-			SettingView()
+            SettingView()
 				.tabItem {
 					Image(systemName: "person.crop.circle.fill")
 					Text("마이페이지")

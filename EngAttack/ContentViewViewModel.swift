@@ -17,7 +17,7 @@ class ContentViewViewModel: ObservableObject {
 	@Published var showAlert = false
 	@Published var usedWords = Set<String>()
 	@Published var bookmarkedWords = Set<String>()
-	@Published var isDarkMode = false
+    @Published var isDarkMode = false
 	@Published var timeRemaining = 10.0
 	@Published var timerIsActive = false
 	@Published var isLoading: Bool = true
@@ -80,6 +80,7 @@ class ContentViewViewModel: ObservableObject {
 					self.currentWord = word
 					self.score += 1
 					self.userInput = ""
+                    
 				}
 			} else {
 				DispatchQueue.main.async {
