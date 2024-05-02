@@ -7,31 +7,32 @@
 
 import SwiftUI
 
-
-struct LaunchScreenView: View {
-    var body: some View {
-	   ZStack(alignment: .center) {
-		  LinearGradient(gradient: Gradient(colors: [Color("FirstColor"), Color(.white)]),
-					  startPoint: .top, endPoint: .bottom)
-		  .edgesIgnoringSafeArea(.all)
-		  
-		  VStack() {
-			 Image(systemName: "gamecontroller")
-				.resizable()
-				.aspectRatio(contentMode: .fit)
-				.frame(width: 100)
-				.foregroundStyle(.gameController)
-				.offset(y:-100)
-			 Text("EngAttack")
-				.font(.largeTitle)
-				.bold()
-		  }
-	   }
-    }
+extension ContentView {
+	var launchScreenView: some View {
+		ZStack(alignment: .center) {
+			LinearGradient(gradient: Gradient(colors: [Color("FirstColor"), Color(.white)]),
+						   startPoint: .top, endPoint: .bottom)
+			.edgesIgnoringSafeArea(.all)
+			
+			VStack(){
+				Image(systemName: "gamecontroller")
+					.resizable()
+					.aspectRatio(contentMode: .fit)
+					.frame(width: 150)
+					.foregroundStyle(.gameController)
+					.offset(y:-100)
+				Text("EngAttack")
+                    .font(.custom("SOYO Maple Bold", size: 60))
+                    .foregroundStyle(.brown)
+					.font(.largeTitle)
+					.bold()
+                    .padding(.bottom, 30)
+			}
+		}
+	}
 }
 
 
-
-#Preview {
-	LaunchScreenView()
-}
+//#Preview {
+//	ContentView().launchScreenView
+//}

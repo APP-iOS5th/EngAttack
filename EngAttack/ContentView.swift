@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
 	@EnvironmentObject var viewModel: ContentViewViewModel
+    @Binding var timeRemaining: Double
 	
 	var body: some View {
 		NavigationStack {
@@ -54,6 +55,7 @@ struct ContentView: View {
 			}
 			.onAppear {
 				viewModel.pickRandomWord()
+                viewModel.timeRemaining = timeRemaining
 				viewModel.startTimer()
 			}
 			.onDisappear {
@@ -65,6 +67,6 @@ struct ContentView: View {
 
 
 #Preview {
-	ContentView()
+    ContentView(timeRemaining: .constant(30))
 		.environmentObject(ContentViewViewModel())
 }

@@ -15,7 +15,7 @@ struct TabViewSetting: View {
 	var body: some View {
 		VStack {
 			if viewModel.isLoading {
-				LaunchScreenView()
+                ContentView(timeRemaining: .constant(30)).launchScreenView
 					.onAppear {
 						DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
 							withAnimation {
