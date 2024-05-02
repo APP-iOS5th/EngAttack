@@ -10,6 +10,7 @@ import SwiftData
 
 struct TabViewSetting: View {
 	@EnvironmentObject var viewModel: ContentViewViewModel
+    
 	@State private var selection: String = "끝말잇기"
 	
 	var body: some View {
@@ -68,6 +69,7 @@ struct TabViewSetting: View {
 				}
 				.tag("랭킹")
             SettingView()
+            
 				.tabItem {
 					Image(systemName: "person.crop.circle.fill")
 					Text("마이페이지")
@@ -81,4 +83,5 @@ struct TabViewSetting: View {
 #Preview {
 	TabViewSetting()
 		.environmentObject(ContentViewViewModel())
+        .environmentObject(SettingViewModel())
 }

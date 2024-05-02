@@ -1,5 +1,5 @@
 //
-//  SoundSetting.swift
+//  SettingViewModel.swift
 //  EngAttack
 //
 //  Created by JIHYE SEOK on 5/2/24.
@@ -8,10 +8,13 @@
 import SwiftUI
 import AVKit
 
-class SoundSetting_: ObservableObject {
-    
+class SettingViewModel: ObservableObject {
     @Published var isEffect: Bool = false
     @Published var backVol: Float = 0.0
+}
+
+
+class SoundSetting: ObservableObject {
     
     var currentVolume: Float = 0.0
     
@@ -25,7 +28,7 @@ class SoundSetting_: ObservableObject {
         case background
     }
     
-    func playSound(sound: SoundOption/*, volume: Float*/) {
+    func playSound(sound: SoundOption) {
         guard let url = Bundle.main.url(forResource: sound.rawValue, withExtension: "wav") else { return }
         
         do {

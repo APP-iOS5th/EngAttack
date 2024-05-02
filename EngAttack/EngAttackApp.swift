@@ -14,6 +14,7 @@ struct EngAttackApp: App {
         WindowGroup {
 		   TabViewSetting()
 			   .environmentObject(ContentViewViewModel())
+               .environmentObject(SettingViewModel())
         }
     }
 }
