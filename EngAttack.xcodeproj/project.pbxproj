@@ -24,6 +24,17 @@
 		CDA4363C2BE28E9B0047E2C0 /* WordDictionaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA436392BE28E9B0047E2C0 /* WordDictionaryView.swift */; };
 		CDA4363D2BE28E9B0047E2C0 /* WordBookmarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA4363A2BE28E9B0047E2C0 /* WordBookmarkView.swift */; };
 		CDA4363E2BE28E9B0047E2C0 /* WordDictionaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA4363B2BE28E9B0047E2C0 /* WordDictionaryViewModel.swift */; };
+		CDC208722BE3AE6D00105E63 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = CDC208712BE3AE6D00105E63 /* FirebaseAuth */; };
+		CDC208742BE3AE9600105E63 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = CDC208732BE3AE9600105E63 /* FirebaseFirestore */; };
+		CDC208762BE3AE9600105E63 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CDC208752BE3AE9600105E63 /* FirebaseFirestoreSwift */; };
+		CDC208812BE3AFA200105E63 /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC2087B2BE3AFA200105E63 /* AuthenticationManager.swift */; };
+		CDC208822BE3AFA200105E63 /* Field.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC2087C2BE3AFA200105E63 /* Field.swift */; };
+		CDC208832BE3AFA200105E63 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC2087D2BE3AFA200105E63 /* SignInView.swift */; };
+		CDC208842BE3AFA200105E63 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC2087E2BE3AFA200105E63 /* SignUpView.swift */; };
+		CDC208852BE3AFA200105E63 /* SignViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC2087F2BE3AFA200105E63 /* SignViewModel.swift */; };
+		CDC208872BE3AFC500105E63 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC208862BE3AFC500105E63 /* RootView.swift */; };
+		CDC208892BE3B3D000105E63 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDC208882BE3B3D000105E63 /* GoogleService-Info.plist */; };
+		CDC2088B2BE3BEB800105E63 /* CountDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC2088A2BE3BEB800105E63 /* CountDownView.swift */; };
 		F7A23E562BE1DB7E00A044BD /* TabViewSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7A23E552BE1DB7E00A044BD /* TabViewSetting.swift */; };
 		F7A23E582BE1DE1200A044BD /* RankingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7A23E572BE1DE1200A044BD /* RankingView.swift */; };
 		F7A23E5C2BE1DF8500A044BD /* SOYO Maple Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = F7A23E592BE1DF8500A044BD /* SOYO Maple Bold.otf */; };
@@ -51,6 +62,14 @@
 		CDA436392BE28E9B0047E2C0 /* WordDictionaryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordDictionaryView.swift; sourceTree = "<group>"; };
 		CDA4363A2BE28E9B0047E2C0 /* WordBookmarkView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordBookmarkView.swift; sourceTree = "<group>"; };
 		CDA4363B2BE28E9B0047E2C0 /* WordDictionaryViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordDictionaryViewModel.swift; sourceTree = "<group>"; };
+		CDC2087B2BE3AFA200105E63 /* AuthenticationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
+		CDC2087C2BE3AFA200105E63 /* Field.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Field.swift; sourceTree = "<group>"; };
+		CDC2087D2BE3AFA200105E63 /* SignInView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
+		CDC2087E2BE3AFA200105E63 /* SignUpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		CDC2087F2BE3AFA200105E63 /* SignViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignViewModel.swift; sourceTree = "<group>"; };
+		CDC208862BE3AFC500105E63 /* RootView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		CDC208882BE3B3D000105E63 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		CDC2088A2BE3BEB800105E63 /* CountDownView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CountDownView.swift; path = "../../EngAttack 2/EngAttack/CountDownView.swift"; sourceTree = "<group>"; };
 		F7A23E552BE1DB7E00A044BD /* TabViewSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewSetting.swift; sourceTree = "<group>"; };
 		F7A23E572BE1DE1200A044BD /* RankingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingView.swift; sourceTree = "<group>"; };
 		F7A23E592BE1DF8500A044BD /* SOYO Maple Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SOYO Maple Bold.otf"; sourceTree = "<group>"; };
@@ -105,11 +124,14 @@
 				F7A23E572BE1DE1200A044BD /* RankingView.swift */,
 				F7F07C842BE0DF96009A75A9 /* GameStartView.swift */,
 				CD37DEF82BE0D7E000F7CB39 /* ContentViewViewModel.swift */,
+				CDC2088A2BE3BEB800105E63 /* CountDownView.swift */,
 				BFD6A8DF2BE207E10009BFE2 /* ContentView.swift */,
+				CDC208862BE3AFC500105E63 /* RootView.swift */,
 				BF755ADD2BE1D792007DD8AE /* Launch Screen.swift */,
 				BF36CBE32BE118E90089D070 /* EngAttackApp.swift */,
 				AF62BD442BE0DDF700A88EDE /* SettingView.swift */,
 				AFB5BF0A2BE3D7A80005932D /* SettingViewModel.swift */,
+				CDC208802BE3AFA200105E63 /* Sign */,
 				BF0C51612BE325D700A10946 /* Dictionary */,
 				BF0C51602BE325A600A10946 /* Bookmark */,
 				BF0C51622BE32E2500A10946 /* WordInfo */,
@@ -153,6 +175,18 @@
 				CD37DF012BE0D7E700F7CB39 /* WordManager.swift */,
 			);
 			path = WordInfo;
+			sourceTree = "<group>";
+		};
+		CDC208802BE3AFA200105E63 /* Sign */ = {
+			isa = PBXGroup;
+			children = (
+				CDC2087B2BE3AFA200105E63 /* AuthenticationManager.swift */,
+				CDC2087C2BE3AFA200105E63 /* Field.swift */,
+				CDC2087D2BE3AFA200105E63 /* SignInView.swift */,
+				CDC2087E2BE3AFA200105E63 /* SignUpView.swift */,
+				CDC2087F2BE3AFA200105E63 /* SignViewModel.swift */,
+			);
+			path = Sign;
 			sourceTree = "<group>";
 		};
 		F7A23E5B2BE1DF8500A044BD /* _소요단풍체 OTF */ = {
@@ -242,15 +276,22 @@
 				AF05DFF22BE28C7D005625E0 /* SettingView.swift in Sources */,
 				AF05DFF32BE28C7D005625E0 /* WordInfo.swift in Sources */,
 				AF05DFF42BE28C7D005625E0 /* WordManager.swift in Sources */,
+				CDC208812BE3AFA200105E63 /* AuthenticationManager.swift in Sources */,
 				BFD6A8E12BE209CF0009BFE2 /* Launch Screen.swift in Sources */,
 				CDA4363E2BE28E9B0047E2C0 /* WordDictionaryViewModel.swift in Sources */,
 				AFB5BF0B2BE3D7A80005932D /* SettingViewModel.swift in Sources */,
 				BFD6A8E02BE207E10009BFE2 /* ContentView.swift in Sources */,
+				CDC208872BE3AFC500105E63 /* RootView.swift in Sources */,
+				CDC208852BE3AFA200105E63 /* SignViewModel.swift in Sources */,
 				BFD6A8E22BE209E10009BFE2 /* EngAttackApp.swift in Sources */,
+				CDC2088B2BE3BEB800105E63 /* CountDownView.swift in Sources */,
+				CDC208822BE3AFA200105E63 /* Field.swift in Sources */,
 				CDA4363D2BE28E9B0047E2C0 /* WordBookmarkView.swift in Sources */,
 				F7A23E582BE1DE1200A044BD /* RankingView.swift in Sources */,
 				CDA4363C2BE28E9B0047E2C0 /* WordDictionaryView.swift in Sources */,
 				F7A23E562BE1DB7E00A044BD /* TabViewSetting.swift in Sources */,
+				CDC208832BE3AFA200105E63 /* SignInView.swift in Sources */,
+				CDC208842BE3AFA200105E63 /* SignUpView.swift in Sources */,
 				F7F07C852BE0DF96009A75A9 /* GameStartView.swift in Sources */,
 				F7F07C872BE0E12C009A75A9 /* DictionaryView.swift in Sources */,
 				CD37DEFF2BE0D7E100F7CB39 /* BookmarksView.swift in Sources */,
