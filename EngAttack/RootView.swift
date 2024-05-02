@@ -21,6 +21,7 @@ struct RootView: View {
                     .modelContainer(for: TempModel.self)
             } else {
                 SignInView()
+                    .environmentObject(ContentViewViewModel())
             }
         }
         .onAppear {
