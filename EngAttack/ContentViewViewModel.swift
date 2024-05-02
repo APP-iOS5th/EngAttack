@@ -38,7 +38,7 @@ class ContentViewViewModel: ObservableObject {
 	
 	init() {
         self.isDarkMode = UserDefaults.standard.bool(forKey: "darkModeKey")
-        pickRandomWord()
+		pickRandomWord()
 	}
 	
 	func pickRandomWord() {
