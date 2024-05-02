@@ -20,13 +20,12 @@ struct WordBookmarkView: View {
             VStack {
                 List {
                     ForEach(0..<bookMarkList.count, id: \.self) { index in
+                        let word = bookMarkList[index]
                         HStack {
-                            let word = bookMarkList[index]
                             Text(word.2 ? word.0 : word.1)
-                            Spacer()
-                            Button(word.2 ? "뜻 보기" : "단어 보기") {
-                                bookMarkList[index].2.toggle()
-                            }
+                        }
+                        .onTapGesture {
+                            bookMarkList[index].2.toggle()
                         }
                     }
                     .onDelete(perform: { indexSet in

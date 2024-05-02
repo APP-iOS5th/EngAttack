@@ -36,8 +36,7 @@ struct TabViewSetting: View {
 				mainTabView
 			}
 		}
-        .preferredColorScheme(viewModel.isDarkMode ? .dark : .light)
-    }
+	}
 	
 	var mainTabView: some View {
 		TabView(selection: $selection) {

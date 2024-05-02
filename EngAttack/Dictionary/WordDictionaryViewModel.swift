@@ -18,7 +18,6 @@ class WordDictionaryViewModel: ObservableObject {
     }
     
     // TODO: url Request 중복 부분 합치기
-    /*
     func isExistWord(word: String) -> Bool {
         let semaphore = DispatchSemaphore(value: 0)
         var isExist: Bool = false
@@ -77,7 +76,6 @@ class WordDictionaryViewModel: ObservableObject {
         semaphore.wait()
         return isExist
     }
-    */
     
     func searchString(searchWord: String) {
         // https://dic.daum.net/index.do?dic=eng
@@ -88,19 +86,19 @@ class WordDictionaryViewModel: ObservableObject {
         let task = session.dataTask(with: url) { (data, response, error) in
             guard error == nil else {
                 print("error 발생 >> \(error!.localizedDescription)")
-                self.saveSearchResult(words: [])
+                self.words = []
                 return
             }
             
             guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
                 print("Network에러 발생")
-                self.saveSearchResult(words: [])
+                self.words = []
                 return
             }
             
             guard let data = data else {
                 print("결과 없음!")
-                self.saveSearchResult(words: [])
+                self.words = []
                 return
             }
             
@@ -139,7 +137,7 @@ class WordDictionaryViewModel: ObservableObject {
     func recommendWordList(alphabet: String, wordList: [String], complete: @escaping (_ recommendList: [(String, String)]) -> Void) {
         let exceptWordList: String = wordList.joined(separator: ", ")
         let apiKey = "YourAPIKey"
-        let requestText = "\(alphabet.lowercased())로 시작하는 5글자 이상의 소문자 영어단어 (\"단어:한글뜻\") 형태로 앞에 \(exceptWordList) 제외하고 무작위로 5개정도 알려줘"
+        let requestText = "\(alphabet.lowercased())로 시작하는 5글자 이상의 소문자 영어단어 (\"단어:한글뜻\") 형태로 앞에 \(exceptWordList) 제외하고 다양하게 5개정도 알려줘"
         let endpoint = "https://api.openai.com/v1/chat/completions"
         let requestData: [String: Any] = [
             "model": "gpt-3.5-turbo",
@@ -175,11 +173,12 @@ class WordDictionaryViewModel: ObservableObject {
                let content = message["content"] as? String {
                 var result: [(String, String)] = []
                 content.split(separator: "\n").map{ $0.components(separatedBy: ":") }.forEach{ word in
-                    let engWord = word[0].trimmingCharacters(in: .whitespacesAndNewlines).dropFirst(2).replacingOccurrences(of: " ", with: "")
+                    let engWord = word[0].trimmingCharacters(in: .whitespacesAndNewlines)
                     let meaning = word[1].trimmingCharacters(in: .whitespacesAndNewlines)
                     
-                    result.append((String(engWord), meaning))
+                    result.append((engWord, meaning))
                 }
+                
                 complete(result)
             } else {
                 print("Failed to extract content from JSON")
@@ -189,8 +188,3 @@ class WordDictionaryViewModel: ObservableObject {
         task.resume()
     }
 }
-
-/*
- MARK: - TODO
-    1. URLRequest -> async/await으로 고쳐보기
- */

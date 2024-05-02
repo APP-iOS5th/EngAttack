@@ -18,7 +18,7 @@ struct ContentView: View {
 					.font(.title)
 					.padding()
 				
-                ProgressView(value: max(0, min(viewModel.timeRemaining, 60.0)), total: timeRemaining)
+				ProgressView(value: max(0, min(viewModel.timeRemaining, 10.0)), total: 10.0)
 					.padding()
 				
 				Text(viewModel.currentWord)
