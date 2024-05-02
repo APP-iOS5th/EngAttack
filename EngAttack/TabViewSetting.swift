@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct TabViewSetting: View {
 	@EnvironmentObject var viewModel: ContentViewViewModel
@@ -45,12 +46,14 @@ struct TabViewSetting: View {
 					Text("북마크")
 				}
 				.tag("북마크")
+				.modelContainer(for: TempModel.self)
 			WordDictionaryView()
 				.tabItem {
 					Image(systemName: "character.book.closed.fill")
 					Text("사전")
 				}
 				.tag("사전")
+				.modelContainer(for: TempModel.self)
 			GameStartView()
 				.tabItem {
 					Image(systemName: "gamecontroller")
