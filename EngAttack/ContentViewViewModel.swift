@@ -27,6 +27,8 @@ class ContentViewViewModel: ObservableObject {
 	@Published var isLoading: Bool = true
 	@Published var gameStarted = false
 	@Published var countdown: Int = 3
+	@Published var timerEnded = false
+	
 	var countdownTimer: Timer?
 	var gameTimer: Timer?
 	let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
@@ -41,6 +43,7 @@ class ContentViewViewModel: ObservableObject {
 	func pickRandomWord() {
 		self.currentWord = wordManager.pickRandomWord()
 	}
+	
 	
 	func submitButton() {
 		let word = userInput.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
@@ -95,19 +98,18 @@ class ContentViewViewModel: ObservableObject {
 		}
 		
 		self.userInput = "" // 입력 초기화
+		gameTimer?.invalidate()
 		startTimer()
 	}
 	
-    func gameDuration(selectedTime: Double) {
-            timeRemaining = selectedTime
-    }
+	func gameDuration(selectedTime: Double) {
+			timeRemaining = selectedTime
+	}
     
 	
 	// 타이머 기능
 	func startTimer() {
-        
 		timerIsActive = true
-		
 		gameTimer?.invalidate() // 기존 타이머가 있다면 취소
 		gameTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [weak self] _ in
 			DispatchQueue.main.async {
@@ -132,10 +134,11 @@ class ContentViewViewModel: ObservableObject {
 	// 타이머 제한시간 만료, 타이머 재시작
 	func timerExpired() {
 		DispatchQueue.main.async {
-			self.alertTitle = "제한 시간 초과"
+			self.timerEnded = true 
 			self.showAlert = true
 			// 타이머를 정지합니다.
 			self.timerIsActive = false
+			self.userInput = "" // 입력 초기화
 		}
 	}
 	
@@ -148,7 +151,6 @@ class ContentViewViewModel: ObservableObject {
 				self.resetGame()
 			}),
 			secondaryButton: .cancel(Text("그만하기"), action: {
-				
 			})
 		)
 	}
@@ -187,21 +189,6 @@ class ContentViewViewModel: ObservableObject {
 	func startGame() {
 		self.resetGame()
 		gameStarted = true
-		startCountdown()
-	}
-	
-	// 게임 시작 카운트
-	func startCountdown() {
-		countdown = 3
-		countdownTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
-			if self.countdown > 0 {
-				self.countdown -= 1
-			} else {
-				timer.invalidate()
-				self.startTimer()
-				self.pickRandomWord()
-			}
-		}
 	}
 	
 	// 게임 종료
