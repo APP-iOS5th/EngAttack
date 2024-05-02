@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct TabViewSetting: View {
     @State private var selection: String = "끝말잇기"
@@ -19,12 +20,14 @@ struct TabViewSetting: View {
                     Text("북마크")
                 }
                 .tag("북마크")
+                .modelContainer(for: TempModel.self)
             WordDictionaryView()
                 .tabItem {
                     Image(systemName: "character.book.closed.fill")
                     Text("사전")
                 }
                 .tag("사전")
+                .modelContainer(for: TempModel.self)
             GameView()
                 .tabItem {
                     Image(systemName: "gamecontroller")
