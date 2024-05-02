@@ -59,19 +59,20 @@ struct WordDictionaryView: View {
             }
             .navigationTitle("Word Dictionary")
             
-//            .toolbar {
-//                ToolbarItem(placement: .bottomBar) {
-//                    Button("Test") {
+            .toolbar {
+                ToolbarItem(placement: .bottomBar) {
+                    Button("Test") {
+                        print(viewModel.isExistWord(word: "kille"))
 //                        if storedWords.count > 0 {
 //                            let bookmarkEngWords: [String] = storedWords.map{ String($0.word.split(separator: "--")[0]) }
 //                            
-//                            viewModel.recommendWordList(alphabet: "c", wordList: bookmarkEngWords) { wordList in
+//                            viewModel.recommendWordList(alphabet: "w", wordList: bookmarkEngWords) { wordList in
 //                                print(wordList)
 //                            }
 //                        }
-//                    }
-//                }
-//            }
+                    }
+                }
+            }
         }
         .searchable(text: $searchString, prompt: "Search Word")
         .onSubmit(of: .search) {

@@ -18,12 +18,18 @@ class WordDictionaryViewModel: ObservableObject {
     }
     
     // TODO: url Request 중복 부분 합치기
-    func isExistWord(word: String, _ result: @escaping (Bool) -> Void) {
+    func isExistWord(word: String) -> Bool {
+        let semaphore = DispatchSemaphore(value: 0)
+        var isExist: Bool = false
+        
         let str = "https://suggest.dic.daum.net/language/v1/search.json?cate=eng&q=\(word)"
         
-        guard let url = URL(string: str) else { return }
+        guard let url = URL(string: str) else { return false }
         
         let task = session.dataTask(with: url) { (data, response, error) in
+            defer {
+                semaphore.signal()
+            }
             guard error == nil else {
                 print("error 발생 >> \(error!.localizedDescription)")
                 self.words = []
@@ -56,16 +62,19 @@ class WordDictionaryViewModel: ObservableObject {
                                 let splitItem = itemText.split(separator: "|")
                                 let value = String(splitItem[splitItem.count - 1])
                                 wordList.append((key.lowercased(), value))
+                                break
                             }
                         }
                     }
                 }
-                result(wordList.count > 0)
+                isExist = wordList.count > 0
             } catch {
                 print("error > \(error.localizedDescription)")
             }
         }
         task.resume()
+        semaphore.wait()
+        return isExist
     }
     
     func searchString(searchWord: String) {
@@ -127,8 +136,8 @@ class WordDictionaryViewModel: ObservableObject {
     
     func recommendWordList(alphabet: String, wordList: [String], complete: @escaping (_ recommendList: [(String, String)]) -> Void) {
         let exceptWordList: String = wordList.joined(separator: ", ")
-        let apiKey = "YourAPIKey"
-        let requestText = "\(alphabet)로 시작하는 5글자 이상의 소문자 영어단어 (\"- 단어:한글뜻\") 형태로 앞에 \(exceptWordList) 제외하고 다양하게 5개정도 알려줘"
+        let apiKey = "sk-proj-p8HHJZef7IUiTH5UNBMLT3BlbkFJ7ju9St5BfKbmg9Q5UUgg"
+        let requestText = "\(alphabet.lowercased())로 시작하는 5글자 이상의 소문자 영어단어 (\"단어:한글뜻\") 형태로 앞에 \(exceptWordList) 제외하고 다양하게 5개정도 알려줘"
         let endpoint = "https://api.openai.com/v1/chat/completions"
         let requestData: [String: Any] = [
             "model": "gpt-3.5-turbo",

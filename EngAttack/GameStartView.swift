@@ -81,5 +81,6 @@ struct GameView: View {
 }
 
 #Preview {
-    GameView()
+	GameStartView()
+		.environmentObject(ContentViewViewModel())
 }
