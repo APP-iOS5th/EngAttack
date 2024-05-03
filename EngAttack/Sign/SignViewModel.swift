@@ -20,7 +20,7 @@ import FirebaseAuth
 @MainActor
 final class SignViewModel : ObservableObject {
     @AppStorage("uid") var uid = ""
-    @Published var name = ""
+   @AppStorage("name") var name = ""
     @Published var email = ""
     @Published var password = ""
     @Published var Signstate :SignInState = .signedOut

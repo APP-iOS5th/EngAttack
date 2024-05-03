@@ -16,12 +16,11 @@ import FirebaseFirestoreSwift
 struct ContentView: View {
 	@EnvironmentObject var viewModel: ContentViewViewModel
 	@EnvironmentObject var setViewModel: SettingViewModel
+    @EnvironmentObject var viewModels: SignViewModel
 	
 	@Binding var timeRemaining: Double
 	let effectVol = 0.3
 	
-   
-    
 	var body: some View {
 		NavigationStack {
 			VStack {
@@ -101,7 +100,7 @@ extension ContentView {
     func addRank(name: String, score: Int) {
         let db = Firestore.firestore()
         guard let userID = Auth.auth().currentUser?.uid else { return }
-        let rank = Rank(name: "비어있음", score: viewModel.score)
+        let rank = Rank(name: viewModels.name, score: viewModel.score)
                 db.collection("Rank").document(userID).updateData(["List": FieldValue.arrayUnion([rank.addRank])])
     }
 }

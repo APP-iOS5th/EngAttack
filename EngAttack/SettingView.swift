@@ -34,7 +34,7 @@ struct SettingView: View {
                             Image(systemName: "person.circle")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
-                            Text(signViewModel.uid)
+                            Text(signViewModel.name)
                                 .foregroundStyle(viewModel.isDarkMode ? .white : .black)
                                 .padding(.leading, 5)
                                 .fontWeight(.semibold)

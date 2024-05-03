@@ -6,9 +6,14 @@
 //
 
 import SwiftUI
-
+import Firebase
+import FirebaseAuth
+import FirebaseFirestore
+import FirebaseFirestoreSwift
 
 struct RankingView: View {
+   
+    
     var body: some View {
         VStack {
             Text("EngAttack")
@@ -30,6 +35,13 @@ struct RankingView: View {
     }
 }
 
-#Preview {
-	RankingView()
-}
+
+//extension RankingView {
+//    func loadRank() {
+//        db.collection("Rank").document
+//    }
+//}
+
+//#Preview {
+//	RankingView()
+//}
