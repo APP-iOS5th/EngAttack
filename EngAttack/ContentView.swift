@@ -11,18 +11,7 @@ import FirebaseAuth
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
-struct Rank: Codable, Hashable {
-    var name: String
-    var score: Int
- 
-    
-    var addRank: [String:Any] {
-        return [
-            "name": self.name,
-            "score" : self.score
-        ]
-    }
-}
+
 
 struct ContentView: View {
 	@EnvironmentObject var viewModel: ContentViewViewModel
@@ -31,18 +20,7 @@ struct ContentView: View {
 	@Binding var timeRemaining: Double
 	let effectVol = 0.3
 	
-    func addRank(name: String, score: Int) {
-        let db = Firestore.firestore()
-        guard let userID = Auth.auth().currentUser?.uid else { return }
-        let rank = Rank(name: "비어있음", score: viewModel.score)
-        Task {
-            do {
-                db.collection("Rank").document(userID).updateData(["List": FieldValue.arrayUnion([rank.addRank])])
-            } catch let error {
-                print("\(error)")
-            }
-        }
-    }
+   
     
 	var body: some View {
 		NavigationStack {
@@ -116,4 +94,20 @@ struct ContentView: View {
 	ContentView(timeRemaining: .constant(5))
 		.environmentObject(ContentViewViewModel())
 		.environmentObject(SettingViewModel())
+}
+
+
+extension ContentView {
+    func addRank(name: String, score: Int) {
+        let db = Firestore.firestore()
+        guard let userID = Auth.auth().currentUser?.uid else { return }
+        let rank = Rank(name: "비어있음", score: viewModel.score)
+        Task {
+            do {
+                db.collection("Rank").document(userID).updateData(["List": FieldValue.arrayUnion([rank.addRank])])
+            } catch let error {
+                print("\(error)")
+            }
+        }
+    }
 }

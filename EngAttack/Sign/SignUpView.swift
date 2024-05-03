@@ -135,9 +135,10 @@ struct SignUpView: View {
         }
         
     }
-    
-    
-    
+}
+
+
+extension SignUpView {
     //아이디 형식검사
     func isValidEmail(email: String) -> Bool {
         let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}"
@@ -165,5 +166,4 @@ struct SignUpView: View {
         }
         return result
     }
-    
 }
