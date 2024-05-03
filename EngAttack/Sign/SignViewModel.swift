@@ -26,10 +26,7 @@ final class SignViewModel : ObservableObject {
     @Published var Signstate :SignInState = .signedOut
     @Published var currentUser: Firebase.User?
     
-    enum SignInState {
-        case signedIn
-        case signedOut
-    }
+  
     
     init() {
         currentUser = Auth.auth().currentUser
@@ -42,12 +39,12 @@ final class SignViewModel : ObservableObject {
     
     func signUp() async throws {
         try await AuthenticationManager.shared.createUser(email: email, password: password)
+        
     }
     
     func signOut() throws {
-        try AuthenticationManager.shared.signOut()
+        try  AuthenticationManager.shared.signOut()
         currentUser = nil
-        print("로그아웃 완료")
     }
     
    

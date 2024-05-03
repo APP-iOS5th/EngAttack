@@ -7,7 +7,6 @@
 
 
 import SwiftUI
-
 import FirebaseCore
 import FirebaseAuth
 
@@ -22,12 +21,13 @@ struct RootView: View {
                     .modelContainer(for: TempModel.self)
             } else {
                 SignInView()
-                    .environmentObject(ContentViewViewModel())
+                   .environmentObject(ContentViewViewModel())
             }
         }
         .onAppear {
             if viewModel.currentUser != nil  {
                 viewModel.Signstate = .signedIn
+                print("테스트")
             }
         }
     }

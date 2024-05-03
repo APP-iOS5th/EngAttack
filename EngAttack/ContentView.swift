@@ -17,7 +17,6 @@ import SwiftData
 struct ContentView: View {
 	@EnvironmentObject var viewModel: ContentViewViewModel
 	@EnvironmentObject var setViewModel: SettingViewModel
-
     @EnvironmentObject var viewModels: SignViewModel
 
     @State private var isShowRecommendWordList: Bool = false
@@ -78,7 +77,6 @@ struct ContentView: View {
 					Alert(title: Text(viewModel.alertTitle),
 						  message: Text("당신의 점수는 \(viewModel.score)점 입니다."),
 						  primaryButton: .default(Text("다시하기"), action: {
-                        addRank(name: "테스트", score: viewModel.score)
 						viewModel.resetGame()
 						viewModel.userInput = ""
 					}),
@@ -97,6 +95,7 @@ struct ContentView: View {
                 SoundSetting.instance.playSound(sound: .background)
 			}
 			.onDisappear {
+                addRank(viewModels.name, viewModel.score)
 				viewModel.stopTimer()
                 SoundSetting.instance.stopMusic()
 			}
@@ -127,7 +126,7 @@ struct DarkBlueShadowProgressViewStyle: ProgressViewStyle {
 
 
 extension ContentView {
-    func addRank(name: String, score: Int) {
+    func addRank(_: String, _ : Int) {
         let db = Firestore.firestore()
         guard let userID = Auth.auth().currentUser?.uid else { return }
         let rank = Rank(name: viewModels.name, score: viewModel.score)

@@ -81,7 +81,7 @@ struct SignInView: View {
             .disabled( !checkEmailForm(email:email) )
             .buttonStyle(.borderedProminent)
             .padding()
-            NavigationLink(destination: SignUpView()){
+            NavigationLink(destination: SignUpView(viewModels: SignViewModel())){
                 Text("회원 가입")
             }
         }.navigationBarBackButtonHidden(true)

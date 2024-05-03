@@ -10,7 +10,6 @@ import SwiftData
 
 struct TabViewSetting: View {
 	@EnvironmentObject var viewModel: ContentViewViewModel
-    
 	@State private var selection: String = "끝말잇기"
 	
 	var body: some View {
