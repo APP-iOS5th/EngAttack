@@ -10,7 +10,8 @@ import FirebaseFirestore
 import FirebaseAuth
 
 struct SignUpView: View {
-    @EnvironmentObject  var viewModels : SignViewModel
+    @StateObject  var viewModels : SignViewModel
+
     @State private var  name = ""
     @State private var  email = ""
     @State private var  password = ""
@@ -131,7 +132,7 @@ struct SignUpView: View {
             }
                 .padding()
         }.navigationBarBackButtonHidden(true)
-        NavigationLink(destination: SignInView(), isActive: $SignIn){
+        NavigationLink(destination: SignInView(signViewModel: viewModels), isActive: $SignIn){
             EmptyView()
         }
         
