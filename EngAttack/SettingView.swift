@@ -23,7 +23,6 @@ struct SettingView: View {
             Text("설정")
                 .font(.system(size: 25))
                 .bold()
-            Text("\(setViewModel.backVol)")
             Form {
                 // MARK: 마이페이지
                 Section(header: Text("마이페이지").font(.system(size: 18))) {
