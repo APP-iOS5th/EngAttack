@@ -11,7 +11,7 @@ import FirebaseAuth
 
 struct SignUpView: View {
     @StateObject  var viewModels : SignViewModel
-    
+    @EnvironmentObject var contentViewModel: ContentViewViewModel
     @State private var  name = ""
     @State private var  email = ""
     @State private var  password = ""
@@ -19,7 +19,7 @@ struct SignUpView: View {
     @State private var isValidPasswords: Bool = false
     @State private var emailCheck: Bool = false
     @State private var isError: Bool = false
-    @State private var SignIn = false
+    @Binding  var isSignUpActive : Bool
     @State private var messageString: String = ""
     @FocusState private var focusedField: Field?
     
@@ -29,37 +29,37 @@ struct SignUpView: View {
             Form {
                 Section(header: Text("이름")
                     .font(.system(size: 15))
-                    .foregroundStyle(.black)
+                    .foregroundStyle(contentViewModel.isDarkMode ? .white : .black)
                     .bold()) {
                         TextField("", text: $name)
                             .keyboardType(.emailAddress)
                             .font(.system(size: 17))
                             .textInputAutocapitalization(.never)
-                            .foregroundStyle(.black)
+                            .foregroundStyle(contentViewModel.isDarkMode ? .white : .black)
                             .focused($focusedField, equals: .name)
                             .onSubmit { focusedField = .id }
                     }
                 
                 Section(header: Text("이메일")
                     .font(.system(size: 15))
-                    .foregroundStyle(.black)
+                    .foregroundStyle(contentViewModel.isDarkMode ? .white : .black)
                     .bold()) {
                         TextField("", text: $email)
                             .keyboardType(.emailAddress)
                             .font(.system(size: 17))
                             .textInputAutocapitalization(.never)
-                            .foregroundStyle(.black)
+                            .foregroundStyle(contentViewModel.isDarkMode ? .white : .black)
                             .focused($focusedField, equals: .id)
                             .onSubmit { focusedField = .password }
                     }
                 
                 Section(header: Text("비밀번호")
                     .font(.system(size: 15))
-                    .foregroundStyle(.black)
+                    .foregroundStyle(contentViewModel.isDarkMode ? .white : .black)
                     .bold()) {
                         SecureField("", text: $password)
                             .font(.system(size: 17))
-                            .foregroundStyle(.black)
+                            .foregroundStyle(contentViewModel.isDarkMode ? .white : .black)
                             .focused($focusedField, equals: .password)
                             .onSubmit { focusedField = nil }
                     }
@@ -77,7 +77,7 @@ struct SignUpView: View {
                                 try await db.collection("USER").document(userID).setData(["email": viewModels.email, "name": viewModels.name])
                                 try await db.collection("BookMark").document(userID).setData(["List": FieldValue.arrayUnion([["word":"", "description" : ""]])])
                                 try await db.collection("Rank").document(userID).setData(["List": FieldValue.arrayUnion([["name":viewModels.name, "score": 0]])])
-                                SignIn.toggle()
+                                isSignUpActive.toggle()
                                 return
                             } catch {
                                 isValidEmails = isValidEmail(email: email)
@@ -107,10 +107,12 @@ struct SignUpView: View {
                     } label: {
                         Text("회원 가입")
                             .frame(width: 100, height: 35)
+                            
                     }
                     .alert(isPresented: $isError) {
                         Alert(title: Text("경고"), message: Text(messageString), dismissButton: .default(Text("확인")))
                     }
+                    .disabled( !isValidEmail(email: email) )
                     .padding(.horizontal, 100)
                     .buttonStyle(.borderedProminent)
                 }
@@ -119,9 +121,7 @@ struct SignUpView: View {
             .navigationTitle("회원가입")
             .navigationBarTitleDisplayMode(.inline)
             
-            NavigationLink(destination: SignInView(signViewModel: viewModels), isActive: $SignIn) {
-                EmptyView()
-            }
+
         }
     }
 }
