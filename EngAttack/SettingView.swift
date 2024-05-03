@@ -12,7 +12,7 @@ import FirebaseAuth
 struct SettingView: View {
     @EnvironmentObject var viewModel: ContentViewViewModel
     @EnvironmentObject var setViewModel: SettingViewModel
-    @EnvironmentObject var signViewModel : SignViewModel
+    @StateObject var signViewModel : SignViewModel = SignViewModel()
     @State var settingsSound = false
     //@State var backVolume = 0.0
     let effectVol = 0.3
@@ -93,5 +93,4 @@ struct SettingView: View {
     SettingView()
         .environmentObject(ContentViewViewModel())
         .environmentObject(SettingViewModel())
-        .environmentObject(SignViewModel())
 }

@@ -15,6 +15,7 @@ struct GameStartView: View {
 	@State var selectedTime: Double = 3
 	
 	@Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @StateObject var signViewModel: SignViewModel = SignViewModel()
 	
 	var body: some View {
 		NavigationStack {
@@ -65,7 +66,7 @@ struct GameStartView: View {
 					CountDownView(isPresented: $isCountDownPresented)
 				}
 				.fullScreenCover(isPresented: $isGameViewPresented) { // 게임 화면 표시
-					ContentView(timeRemaining: $selectedTime)
+                    ContentView(viewModels: signViewModel, timeRemaining: $selectedTime)
 				}
 			}
 			.onChange(of: isCountDownPresented) { newValue, _ in
