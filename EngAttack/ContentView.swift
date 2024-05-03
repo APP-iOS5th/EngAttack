@@ -10,12 +10,14 @@ import FirebaseCore
 import FirebaseAuth
 import FirebaseFirestore
 import FirebaseFirestoreSwift
+import SwiftData
 
 
 
 struct ContentView: View {
 	@EnvironmentObject var viewModel: ContentViewViewModel
 	@EnvironmentObject var setViewModel: SettingViewModel
+    @State private var isShowRecommendWordList: Bool = false
 	
 	@Binding var timeRemaining: Double
 	let effectVol = 0.3
@@ -62,14 +64,14 @@ struct ContentView: View {
 					.stroke(Color.lightgray, lineWidth: 3)
 				)
 				.padding()
-			}
-			.frame(maxHeight:.infinity, alignment: .top)
-			
-			Button("북마크하기") {
-				viewModel.bookmarkCurrentWord()
-			}
-			.padding()
-			
+				
+				Text("Score: \(viewModel.score)")
+				
+                NavigationLink(destination: WordBookmarkView().modelContainer(for: TempModel.self)) {
+					Text("북마크 보기")
+				}
+				.padding()
+				
 				.alert(isPresented: $viewModel.showAlert) {
 					Alert(title: Text(viewModel.alertTitle),
 						  message: Text("당신의 점수는 \(viewModel.score)점 입니다."),
@@ -78,23 +80,28 @@ struct ContentView: View {
 						viewModel.resetGame()
 						viewModel.userInput = ""
 					}),
-						  secondaryButton: .destructive(Text("그만하기"), action: {
-                        addRank(name: "테스트", score: viewModel.score)
-						viewModel.resetGame()
-						viewModel.stopTimer()
-						viewModel.userInput = ""
+						 secondaryButton: .destructive(Text("추천 단어 보기"), action: {
+//						viewModel.resetGame()
+//						viewModel.stopTimer()
+//						viewModel.userInput = ""
+                        isShowRecommendWordList = true
 					}))
 				}
-		}
-		.onAppear {
-			viewModel.pickRandomWord()
-			viewModel.timeRemaining = timeRemaining
-			viewModel.startTimer()
-            SoundSetting.instance.playSound(sound: .background)
-		}
-		.onDisappear {
-			viewModel.stopTimer()
-            SoundSetting.instance.stopMusic()
+			}
+			.onAppear {
+				viewModel.pickRandomWord()
+				viewModel.timeRemaining = timeRemaining
+				viewModel.startTimer()
+                SoundSetting.instance.playSound(sound: .background)
+			}
+			.onDisappear {
+				viewModel.stopTimer()
+                SoundSetting.instance.stopMusic()
+			}
+            .sheet(isPresented: $isShowRecommendWordList, content: {
+                DictionaryView(lastWord: String(viewModel.currentWord.last!))
+                    .modelContainer(for: TempModel.self)
+            })
 		}
 	}
 }

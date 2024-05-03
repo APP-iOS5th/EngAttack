@@ -22,12 +22,13 @@ class ContentViewViewModel: ObservableObject {
 			UserDefaults.standard.set(isDarkMode, forKey: "darkModeKey")
 		}
 	}
-	@Published var timeRemaining = 10.0
+	@Published var timeRemaining = 1.0
 	@Published var timerIsActive = false
 	@Published var isLoading: Bool = true
 	@Published var gameStarted = false
 	@Published var countdown: Int = 3
 	@Published var isCorrect: Bool = false
+    @Published var recommendWordList: [(String, String)] = []
 	var countdownTimer: Timer?
 	var gameTimer: Timer?
 	let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
