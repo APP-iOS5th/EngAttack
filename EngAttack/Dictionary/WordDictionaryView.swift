@@ -39,7 +39,6 @@ struct WordDictionaryView: View {
                 List {
                     ForEach(viewModel.getWords(), id: \.0) { word in
                         let temp: String = "\(word.0)--\(word.1)"
-                        let result = temp.components(separatedBy: "--")
                         let bookmarkedWords: [TempModel] = storedWords.filter{ $0.word == "\(word.0)--\(word.1)" }
                         HStack {
                             Text(word.0)
