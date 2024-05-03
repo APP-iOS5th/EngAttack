@@ -27,7 +27,8 @@ struct ContentView: View {
 				Text(viewModel.currentWord)
 					.padding()
 				
-				TextField("Enter next word", text: $viewModel.userInput, onCommit: { viewModel.submitButton()
+				TextField("단어 입력하기", text: $viewModel.userInput, onCommit: { viewModel.submitButton()
+					viewModel.timeRemaining = timeRemaining
 					if viewModel.isCorrect {
 						// correct sound
 						SoundSetting.instance.setVolume(setViewModel.isEffect ? Float(effectVol) : 0)
@@ -40,49 +41,47 @@ struct ContentView: View {
 					}
 				})
 				.textFieldStyle(RoundedBorderTextFieldStyle())
+				.background()
 				.padding()
-				
-				Button("북마크하기") {
-					viewModel.bookmarkCurrentWord()
-				}
-				.padding()
-				
-				Text("Score: \(viewModel.score)")
-				
-				NavigationLink(destination: BookmarksView(viewModel: viewModel)) {
-					Text("북마크 보기")
-				}
-				.padding()
-				
+			}
+			
+			Button("북마크하기") {
+				viewModel.bookmarkCurrentWord()
+			}
+			.padding()
+			
+			Text("Score: \(viewModel.score)")
+			
+			
 				.alert(isPresented: $viewModel.showAlert) {
 					Alert(title: Text(viewModel.alertTitle),
-						 message: Text("당신의 점수는 \(viewModel.score)점 입니다."),
-						 primaryButton: .default(Text("다시하기"), action: {
+						  message: Text("당신의 점수는 \(viewModel.score)점 입니다."),
+						  primaryButton: .default(Text("다시하기"), action: {
 						viewModel.resetGame()
 						viewModel.userInput = ""
 					}),
-						 secondaryButton: .destructive(Text("그만하기"), action: {
+						  secondaryButton: .destructive(Text("그만하기"), action: {
 						viewModel.resetGame()
 						viewModel.stopTimer()
 						viewModel.userInput = ""
 					}))
 				}
-			}
-			.onAppear {
-				viewModel.pickRandomWord()
-				viewModel.timeRemaining = timeRemaining
-				viewModel.startTimer()
-			}
-			.onDisappear {
-				viewModel.stopTimer()
-			}
+		}
+		.onAppear {
+			viewModel.pickRandomWord()
+			viewModel.timeRemaining = timeRemaining
+			viewModel.startTimer()
+		}
+		.onDisappear {
+			viewModel.stopTimer()
 		}
 	}
 }
 
 
+
 #Preview {
 	ContentView(timeRemaining: .constant(5))
 		.environmentObject(ContentViewViewModel())
-        .environmentObject(SettingViewModel())
+		.environmentObject(SettingViewModel())
 }
