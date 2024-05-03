@@ -67,9 +67,12 @@ struct SettingView: View {
                     Button {
                         Task {
                             do{
-                                try signViewModel.signOut()
+                                try await signViewModel.signOut()
                                 signViewModel.Signstate = .signedOut
+                                print(signViewModel.Signstate)
                                 return
+                            } catch let error {
+                                print(error)
                             }
                         }
                     } label: {

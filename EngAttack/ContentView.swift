@@ -18,7 +18,7 @@ struct ContentView: View {
 	@EnvironmentObject var viewModel: ContentViewViewModel
 	@EnvironmentObject var setViewModel: SettingViewModel
 
-    @StateObject var viewModels: SignViewModel = SignViewModel()
+    @StateObject var viewModels: SignViewModel = SignViewModel(
 
     @State private var isShowRecommendWordList: Bool = false
 
@@ -98,6 +98,7 @@ struct ContentView: View {
                 SoundSetting.instance.playSound(sound: .background)
 			}
 			.onDisappear {
+                addRank(viewModels.name, viewModel.score)
 				viewModel.stopTimer()
                 SoundSetting.instance.stopMusic()
 			}
@@ -137,7 +138,7 @@ struct DarkBlueShadowProgressViewStyle: ProgressViewStyle {
 
 
 extension ContentView {
-    func addRank(name: String, score: Int) {
+    func addRank(_: String, _ : Int) {
         let db = Firestore.firestore()
         guard let userID = Auth.auth().currentUser?.uid else { return }
         let rank = Rank(name: viewModels.name, score: viewModel.score)

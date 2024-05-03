@@ -7,7 +7,6 @@
 
 
 import SwiftUI
-
 import FirebaseCore
 import FirebaseAuth
 
@@ -28,6 +27,7 @@ struct RootView: View {
         .onAppear {
             if viewModel.currentUser != nil  {
                 viewModel.Signstate = .signedIn
+                print("테스트")
             }
         }
     }
