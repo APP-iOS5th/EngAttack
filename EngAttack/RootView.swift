@@ -18,6 +18,7 @@ struct RootView: View {
             if viewModel.Signstate == .signedIn {
                 TabViewSetting()
                     .environmentObject(ContentViewViewModel())
+                    .environmentObject(SettingViewModel())
                     .modelContainer(for: TempModel.self)
             } else {
                 SignInView()
