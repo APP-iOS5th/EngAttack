@@ -77,6 +77,7 @@ struct ContentView: View {
 			}
 			.onDisappear {
 				viewModel.stopTimer()
+                SoundSetting.instance.stopMusic()
 			}
 		}
 	}
