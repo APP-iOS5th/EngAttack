@@ -9,8 +9,8 @@ import Foundation
 
 
 enum Field {
-case name
-case id
-case password
+    case name
+    case id
+    case password
 }
 

@@ -37,6 +37,8 @@
 		CDC2088B2BE3BEB800105E63 /* CountDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC2088A2BE3BEB800105E63 /* CountDownView.swift */; };
 		D8BE45462BE4903900C9BD40 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D8BE45452BE4903900C9BD40 /* GoogleService-Info.plist */; };
 		D8BE45482BE4904000C9BD40 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D8BE45472BE4904000C9BD40 /* GoogleService-Info.plist */; };
+		D8BE454C2BE496FD00C9BD40 /* BookMark.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8BE454B2BE496FD00C9BD40 /* BookMark.swift */; };
+		D8BE45512BE4977600C9BD40 /* Rank.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8BE45502BE4977600C9BD40 /* Rank.swift */; };
 		F7A23E562BE1DB7E00A044BD /* TabViewSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7A23E552BE1DB7E00A044BD /* TabViewSetting.swift */; };
 		F7A23E582BE1DE1200A044BD /* RankingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7A23E572BE1DE1200A044BD /* RankingView.swift */; };
 		F7A23E5C2BE1DF8500A044BD /* SOYO Maple Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = F7A23E592BE1DF8500A044BD /* SOYO Maple Bold.otf */; };
@@ -76,6 +78,8 @@
 		D8BE45472BE4904000C9BD40 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D8BE45492BE4904300C9BD40 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D8BE454A2BE4904500C9BD40 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D8BE454B2BE496FD00C9BD40 /* BookMark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMark.swift; sourceTree = "<group>"; };
+		D8BE45502BE4977600C9BD40 /* Rank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rank.swift; sourceTree = "<group>"; };
 		F7A23E552BE1DB7E00A044BD /* TabViewSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewSetting.swift; sourceTree = "<group>"; };
 		F7A23E572BE1DE1200A044BD /* RankingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingView.swift; sourceTree = "<group>"; };
 		F7A23E592BE1DF8500A044BD /* SOYO Maple Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SOYO Maple Bold.otf"; sourceTree = "<group>"; };
@@ -134,7 +138,6 @@
 				AFB5BF152BE474010005932D /* GoogleService-Info.plist */,
 				AF9552D72BE1D08E0019A124 /* Sounds */,
 				F7A23E552BE1DB7E00A044BD /* TabViewSetting.swift */,
-				F7A23E572BE1DE1200A044BD /* RankingView.swift */,
 				D8BE45472BE4904000C9BD40 /* GoogleService-Info.plist */,
 				F7F07C842BE0DF96009A75A9 /* GameStartView.swift */,
 				CD37DEF82BE0D7E000F7CB39 /* ContentViewViewModel.swift */,
@@ -145,6 +148,7 @@
 				BF36CBE32BE118E90089D070 /* EngAttackApp.swift */,
 				AF62BD442BE0DDF700A88EDE /* SettingView.swift */,
 				AFB5BF0A2BE3D7A80005932D /* SettingViewModel.swift */,
+				D8BE454F2BE4976400C9BD40 /* Rank */,
 				CDC208802BE3AFA200105E63 /* Sign */,
 				BF0C51612BE325D700A10946 /* Dictionary */,
 				BF0C51602BE325A600A10946 /* Bookmark */,
@@ -168,6 +172,7 @@
 			children = (
 				CDA4363A2BE28E9B0047E2C0 /* WordBookmarkView.swift */,
 				CD37DEFB2BE0D7E100F7CB39 /* BookmarksView.swift */,
+				D8BE454B2BE496FD00C9BD40 /* BookMark.swift */,
 			);
 			path = Bookmark;
 			sourceTree = "<group>";
@@ -201,6 +206,15 @@
 				CDC2087F2BE3AFA200105E63 /* SignViewModel.swift */,
 			);
 			path = Sign;
+			sourceTree = "<group>";
+		};
+		D8BE454F2BE4976400C9BD40 /* Rank */ = {
+			isa = PBXGroup;
+			children = (
+				F7A23E572BE1DE1200A044BD /* RankingView.swift */,
+				D8BE45502BE4977600C9BD40 /* Rank.swift */,
+			);
+			path = Rank;
 			sourceTree = "<group>";
 		};
 		F7A23E5B2BE1DF8500A044BD /* _소요단풍체 OTF */ = {
@@ -306,11 +320,13 @@
 				BFD6A8E02BE207E10009BFE2 /* ContentView.swift in Sources */,
 				CDC208872BE3AFC500105E63 /* RootView.swift in Sources */,
 				CDC208852BE3AFA200105E63 /* SignViewModel.swift in Sources */,
+				D8BE45512BE4977600C9BD40 /* Rank.swift in Sources */,
 				BFD6A8E22BE209E10009BFE2 /* EngAttackApp.swift in Sources */,
 				CDC2088B2BE3BEB800105E63 /* CountDownView.swift in Sources */,
 				CDC208822BE3AFA200105E63 /* Field.swift in Sources */,
 				CDA4363D2BE28E9B0047E2C0 /* WordBookmarkView.swift in Sources */,
 				F7A23E582BE1DE1200A044BD /* RankingView.swift in Sources */,
+				D8BE454C2BE496FD00C9BD40 /* BookMark.swift in Sources */,
 				CDA4363C2BE28E9B0047E2C0 /* WordDictionaryView.swift in Sources */,
 				F7A23E562BE1DB7E00A044BD /* TabViewSetting.swift in Sources */,
 				CDC208832BE3AFA200105E63 /* SignInView.swift in Sources */,
