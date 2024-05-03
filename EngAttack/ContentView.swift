@@ -17,6 +17,7 @@ struct ContentView: View {
 	var body: some View {
 		NavigationStack {
 			VStack {
+                Text("\(setViewModel.backVol)")
 				Text("남은 시간: \(String(format: "%.1f", viewModel.timeRemaining))초")
 					.font(.title)
 					.padding()
@@ -70,6 +71,7 @@ struct ContentView: View {
 				viewModel.pickRandomWord()
                 viewModel.timeRemaining = timeRemaining
 				viewModel.startTimer()
+                SoundSetting.instance.playSound(sound: .background)
 			}
 			.onDisappear {
 				viewModel.stopTimer()

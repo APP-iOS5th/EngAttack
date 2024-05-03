@@ -13,7 +13,7 @@ struct SettingView: View {
     @EnvironmentObject var setViewModel: SettingViewModel
     
     @State var settingsSound = false
-    @State var backVolume = 0.0
+    //@State var backVolume = 0.0
     let effectVol = 0.3
     
     var body: some View {
@@ -22,6 +22,7 @@ struct SettingView: View {
             Text("설정")
                 .font(.system(size: 25))
                 .bold()
+            Text("\(setViewModel.backVol)")
             Form {
                 // MARK: 마이페이지
                 Section(header: Text("마이페이지").font(.system(size: 18))) {
@@ -55,9 +56,9 @@ struct SettingView: View {
                             Text("배경음")
                                 .padding(.trailing)
                             Spacer()
-                            Slider(value: $backVolume, in: 0...100, step: 1)
-                                .onChange(of: backVolume) {
-                                    SoundSetting.instance.playSound(sound: .background/*, volume: Float(backVolume) * 0.1*/)
+                            Slider(value: $setViewModel.backVol, in: 0...100, step: 1)
+                                .onChange(of: setViewModel.backVol) {
+                                    SoundSetting.instance.setVolume(Float(setViewModel.backVol) * 0.1)
                                 }
                         }
                     }
