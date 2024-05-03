@@ -32,6 +32,7 @@ struct WordDictionaryView: View {
     @StateObject private var viewModel: WordDictionaryViewModel = WordDictionaryViewModel()
     @State private var searchString: String = ""
     
+    private let bookMarkViewModel = WorkBookmarkViewModel()
     
     var body: some View {
         NavigationStack {
@@ -50,10 +51,10 @@ struct WordDictionaryView: View {
                             Spacer()
                             Button {
                                 if bookmarkedWords.count > 0 {
-                                    deleteBookMark(word: result[0], description: result[1])
+                                    bookMarkViewModel.deleteBookMark(word: result[0], description: result[1])
                                     modelContext.delete(bookmarkedWords[0])
                                 } else {
-                                    addBookmark(word: result[0], description: result[1])
+                                    bookMarkViewModel.addBookmark(word: result[0], description: result[1])
                                     modelContext.insert(TempModel(word: "\(word.0)--\(word.1)"))
                                 }
                             } label: {
@@ -87,27 +88,6 @@ struct WordDictionaryView: View {
 #Preview {
     WordDictionaryView()
         .modelContainer(for: TempModel.self)
-}
-
-
-extension WordDictionaryView {
-    func addBookmark(word : String ,description :String) {
-        let db = Firestore.firestore()
-        let bookmark = BookMark(word: word, description: description)
-        guard let userID = Auth.auth().currentUser?.uid else { return }
-        db.collection("BookMark").document(userID).updateData(["List": FieldValue.arrayUnion([bookmark.addBookMarkNumber])])
-        
-    }
-    
-    func deleteBookMark(word: String, description: String) {
-        let db = Firestore.firestore()
-        let bookMark = BookMark(word: word, description: description)
-        guard let userID = Auth.auth().currentUser?.uid else { return }
-        db.collection("BookMark").document(userID).updateData([
-            "List" : FieldValue.arrayRemove([bookMark.deleteBookMarkNumber])])
-        
-        
-    }
 }
 /*
  MARK: - TODO

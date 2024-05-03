@@ -113,7 +113,7 @@ class WordDictionaryViewModel: ObservableObject {
                let content = message["content"] as? String {
                 var result: [(String, String)] = []
                 content.split(separator: "\n").map{ $0.components(separatedBy: ":") }.forEach{ word in
-                    let engWord = word[0].trimmingCharacters(in: .whitespacesAndNewlines).dropFirst(2).replacingOccurrences(of: " ", with: "")
+                    let engWord = word[0].trimmingCharacters(in: .whitespacesAndNewlines).dropFirst(result.count >= 9 ? 3 : 2).replacingOccurrences(of: " ", with: "")
                     let meaning = word[1].trimmingCharacters(in: .whitespacesAndNewlines)
                     
                     result.append((String(engWord), meaning))

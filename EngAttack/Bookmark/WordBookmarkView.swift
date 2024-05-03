@@ -18,6 +18,7 @@ struct WordBookmarkView: View {
     @Environment(\.modelContext) var modelContext
     
     @State var firebaseWords: [(String, String, Bool)] = []
+    private let bookMarkViewModel = WorkBookmarkViewModel()
     
     var body: some View {
         NavigationStack {
@@ -37,7 +38,7 @@ struct WordBookmarkView: View {
                         guard let index = indexSet.first else { return }
                         guard let storedIndex = storedWords.map({ $0.word.components(separatedBy: "--")[0] }).firstIndex(of: firebaseWords[index].0) else { return }
                         modelContext.delete(storedWords[storedIndex])
-                        deleteBookMark(word: firebaseWords[index].0, description: firebaseWords[index].1)
+                        bookMarkViewModel.deleteBookMark(word: firebaseWords[index].0, description: firebaseWords[index].1)
                     })
                 }
             }
@@ -74,15 +75,6 @@ struct WordBookmarkView: View {
         .onDisappear {
             firebaseWords = []
         }
-    }
-    
-    func deleteBookMark(word: String, description: String) {
-        let db = Firestore.firestore()
-        let bookMark = BookMark(word: word, description: description)
-        guard let userID = Auth.auth().currentUser?.uid else { return }
-        db.collection("BookMark").document(userID).updateData(
-            ["List" : FieldValue.arrayRemove([bookMark.deleteBookMarkNumber])]
-        )
     }
 }
 
