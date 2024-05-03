@@ -7,11 +7,12 @@
 
 import SwiftUI
 import AVKit
+import FirebaseAuth
 
 struct SettingView: View {
     @EnvironmentObject var viewModel: ContentViewViewModel
     @EnvironmentObject var setViewModel: SettingViewModel
-    
+    @EnvironmentObject var signViewModel : SignViewModel
     @State var settingsSound = false
     //@State var backVolume = 0.0
     let effectVol = 0.3
@@ -34,7 +35,7 @@ struct SettingView: View {
                             Image(systemName: "person.circle")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
-                            Text("닉네임이 들어가요~")
+                            Text(signViewModel.uid)
                                 .foregroundStyle(viewModel.isDarkMode ? .white : .black)
                                 .padding(.leading, 5)
                                 .fontWeight(.semibold)
@@ -61,6 +62,25 @@ struct SettingView: View {
                                     SoundSetting.instance.setVolume(Float(setViewModel.backVol) * 0.1)
                                 }
                         }
+                    }
+                }
+                Section {
+                    Button {
+                        Task {
+                            do{
+                                try signViewModel.signOut()
+                                signViewModel.Signstate = .signedOut
+                                return
+                            }
+                        }
+                    } label: {
+                        HStack {
+                            Text("로그아웃")
+                                .foregroundStyle(.red)
+                                .padding(.leading, 5)
+                                .font(.system(size: 21))
+                        }
+                        .frame(height: 25)
                     }
                 }
             }
