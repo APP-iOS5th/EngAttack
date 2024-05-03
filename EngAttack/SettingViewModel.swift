@@ -20,7 +20,7 @@ class SoundSetting: ObservableObject {
     
     static let instance = SoundSetting()
     
-    var player: AVAudioPlayer?
+    var players: [AVAudioPlayer] = []
     
     enum SoundOption: String {
         case correct
@@ -32,15 +32,22 @@ class SoundSetting: ObservableObject {
         guard let url = Bundle.main.url(forResource: sound.rawValue, withExtension: "wav") else { return }
         
         do {
-            player = try AVAudioPlayer(contentsOf: url)
-            player?.volume = currentVolume
-            player?.play()
+            let player = try AVAudioPlayer(contentsOf: url)
+            player.volume = currentVolume
+            player.play()
+            players.append(player)
         } catch let error {
             print("재생하는데 오류가 발생했습니다. \(error.localizedDescription)")
         }
     }
     
+    func stopMusic() {
+        players.forEach { $0.stop() }
+        players.removeAll()
+    }
+    
     func setVolume(_ volume: Float) {
         currentVolume = volume
+        players.forEach { $0.volume = volume }
     }
 }

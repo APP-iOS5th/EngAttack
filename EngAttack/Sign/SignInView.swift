@@ -10,6 +10,7 @@ import FirebaseAuth
 
 
 struct SignInView: View {
+    @EnvironmentObject var contentViewModel: ContentViewViewModel
     @EnvironmentObject  var viewModel : SignViewModel
     @EnvironmentObject var setViewModel: SettingViewModel
     @State private var correctLogin = false
@@ -84,6 +85,8 @@ struct SignInView: View {
                 Text("회원 가입")
             }
         }.navigationBarBackButtonHidden(true)
+        .preferredColorScheme(contentViewModel.isDarkMode ? .dark : .light)
+        
         NavigationLink(destination: TabViewSetting()
             .environmentObject(SettingViewModel())
             .environmentObject(ContentViewViewModel())
@@ -94,10 +97,16 @@ struct SignInView: View {
 
     }
     
+   
+    
+  
+}
+
+extension SignInView {
+    
     private func checkEmailForm(email: String) -> Bool {
         let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}"
         return NSPredicate(format: "SELF MATCHES %@", emailRegex).evaluate(with: email)
     }
     
-  
 }

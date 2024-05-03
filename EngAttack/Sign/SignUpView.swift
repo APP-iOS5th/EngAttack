@@ -11,6 +11,7 @@ import FirebaseAuth
 
 struct SignUpView: View {
     @EnvironmentObject  var viewModels : SignViewModel
+    @State private var  name = ""
     @State private var  email = ""
     @State private var  password = ""
     @State private var isValidEmails: Bool = false
@@ -26,6 +27,23 @@ struct SignUpView: View {
         VStack {
             NavigationStack {
                 VStack(spacing: 28) {
+                    VStack(alignment: .leading, spacing: 11) {
+                        Text("이름")
+                            .font(.system(size: 13, weight: .light))
+                            .foregroundStyle(.secondary)
+                            .frame(height: 15, alignment: .leading)
+                        TextField("", text: $name)
+                            .keyboardType(.emailAddress)
+                            .font(.system(size: 17, weight: .thin))
+                            .textInputAutocapitalization(.never)
+                            .foregroundStyle(.primary)
+                            .frame(height: 44)
+                            .padding(.horizontal, 12)
+                            .background(Color.white)
+                            .cornerRadius(4.0)
+                            .focused($focusedField, equals: .name)
+                            .onSubmit { focusedField = .id }
+                    }
                     VStack(alignment: .leading, spacing: 11) {
                         Text("이메일")
                             .font(.system(size: 13, weight: .light))
@@ -68,7 +86,9 @@ struct SignUpView: View {
                                     try await viewModels.signUp()
                                     let db = Firestore.firestore()
                                     guard let userID = Auth.auth().currentUser?.uid else { return }
-                                    try await db.collection("USER").document(userID).setData(["email": viewModels.email, "name": "비어있음"])
+                                    try await db.collection("USER").document(userID).setData(["email": viewModels.email, "name": viewModels.name])
+                                    try await db.collection("BookMark").document(userID).setData(["List": FieldValue.arrayUnion([["word":"", "description" : ""]])])
+                                    try await db.collection("Rank").document(userID).setData(["List": FieldValue.arrayUnion([["name":name, "score": 0]])])
                                     SignIn.toggle()
                                     return
                                 } catch {
@@ -76,7 +96,7 @@ struct SignUpView: View {
                                     isValidPasswords = isValidPassword(pwd: password)
                                     emailCheck = emailCheck(email: email)
                                     
-                                    if !isValidEmails || !isValidPasswords || !emailCheck {
+                                    if !isValidEmails || !isValidPasswords || !emailCheck || name.isEmpty {
                                         isError = true
                                         if !isValidEmails && isValidPasswords {
                                             messageString = "이메일 형식을 확인해주세요"
@@ -89,6 +109,9 @@ struct SignUpView: View {
                                         }
                                         else if !emailCheck {
                                             messageString = "이미가입된 이메일입니다."
+                                        }
+                                        else {
+                                            messageString = "이름을 확인해주세요."
                                         }
                                     }
                                 }
@@ -112,9 +135,10 @@ struct SignUpView: View {
         }
         
     }
-    
-    
-    
+}
+
+
+extension SignUpView {
     //아이디 형식검사
     func isValidEmail(email: String) -> Bool {
         let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}"
@@ -142,5 +166,4 @@ struct SignUpView: View {
         }
         return result
     }
-    
 }
