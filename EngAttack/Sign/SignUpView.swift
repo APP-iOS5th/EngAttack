@@ -10,7 +10,8 @@ import FirebaseFirestore
 import FirebaseAuth
 
 struct SignUpView: View {
-    @StateObject  var viewModels = SignViewModel()
+    @StateObject  var viewModels : SignViewModel
+
     @State private var  name = ""
     @State private var  email = ""
     @State private var  password = ""

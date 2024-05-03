@@ -9,6 +9,8 @@ import SwiftUI
 import SwiftData
 
 struct TabViewSetting: View {
+
+	@EnvironmentObject var viewModel: ContentViewViewModel
     @StateObject var signViewModel: SignViewModel = SignViewModel()
 	@State private var selection: String = "끝말잇기"
 	
