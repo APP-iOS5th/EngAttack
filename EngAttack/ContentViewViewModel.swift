@@ -181,18 +181,18 @@ class ContentViewViewModel: ObservableObject {
 		UserDefaults.standard.set(Array(bookmarkedWords), forKey: "BookmarkedWords")
 	}
 	// 북마크 불러오기
-	func loadBookmarks() {
-		if let savedWords = UserDefaults.standard.array(forKey: "BookmarkedWords") as? [String] {
-			bookmarkedWords = Set(savedWords)
-			if bookmarkedWords.isEmpty {
-				self.alertTitle = "북마크가 없습니다."
-				self.showAlert = true
-			} else {
-				self.alertTitle = "북마크가 없습니다"
-				self.showAlert = true
-			}
-		}
-	}
+//	func loadBookmarks() {
+//		if let savedWords = UserDefaults.standard.array(forKey: "BookmarkedWords") as? [String] {
+//			bookmarkedWords = Set(savedWords)
+//			if bookmarkedWords.isEmpty {
+//				self.alertTitle = "북마크가 없습니다."
+//				self.showAlert = true
+//			} else {
+//				self.alertTitle = "북마크가 없습니다"
+//				self.showAlert = true
+//			}
+//		}
+//	}
 	// 게임 초기화
 	func resetGame() {
 		stopTimer()
