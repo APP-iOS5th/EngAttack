@@ -13,6 +13,10 @@
 		AF9552DB2BE1D09F0019A124 /* correct.wav in Resources */ = {isa = PBXBuildFile; fileRef = AF9552D82BE1D09B0019A124 /* correct.wav */; };
 		AF9552DC2BE1D09F0019A124 /* error.wav in Resources */ = {isa = PBXBuildFile; fileRef = AF9552D92BE1D09B0019A124 /* error.wav */; };
 		AF9552DD2BE1D09F0019A124 /* background.wav in Resources */ = {isa = PBXBuildFile; fileRef = AF9552DA2BE1D09F0019A124 /* background.wav */; };
+		AFB5BF0B2BE3D7A80005932D /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB5BF0A2BE3D7A80005932D /* SettingViewModel.swift */; };
+		AFB5BF0E2BE3DC530005932D /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = AFB5BF0D2BE3DC530005932D /* FirebaseFirestore */; };
+		AFB5BF102BE3DC530005932D /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = AFB5BF0F2BE3DC530005932D /* FirebaseFirestoreSwift */; };
+		AFB5BF122BE3DCCD0005932D /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = AFB5BF112BE3DCCD0005932D /* FirebaseAuth */; };
 		AFBC3A342BE0D5E700CE7542 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFBC3A332BE0D5E700CE7542 /* Assets.xcassets */; };
 		AFBC3A372BE0D5E700CE7542 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFBC3A362BE0D5E700CE7542 /* Preview Assets.xcassets */; };
 		BFD6A8E02BE207E10009BFE2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD6A8DF2BE207E10009BFE2 /* ContentView.swift */; };
@@ -47,6 +51,7 @@
 		AF9552D82BE1D09B0019A124 /* correct.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = correct.wav; sourceTree = "<group>"; };
 		AF9552D92BE1D09B0019A124 /* error.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = error.wav; sourceTree = "<group>"; };
 		AF9552DA2BE1D09F0019A124 /* background.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = background.wav; sourceTree = "<group>"; };
+		AFB5BF0A2BE3D7A80005932D /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		AFBC3A2C2BE0D5E500CE7542 /* EngAttack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EngAttack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFBC3A332BE0D5E700CE7542 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AFBC3A362BE0D5E700CE7542 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
