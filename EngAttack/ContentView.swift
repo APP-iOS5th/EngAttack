@@ -45,18 +45,20 @@ struct ContentView: View {
 					.bold()
 					.padding()
 				
-				TextField("Enter the word", text: $viewModel.userInput, onCommit: { viewModel.submitButton()
-					viewModel.timeRemaining = timeRemaining
-					if viewModel.isCorrect {
-						// correct sound
-						SoundSetting.instance.setVolume(setViewModel.isEffect ? Float(effectVol) : 0)
-						SoundSetting.instance.playSound(sound: .correct)
-					}
-					else {
-						// fail sound
-						SoundSetting.instance.setVolume(setViewModel.isEffect ? Float(effectVol) : 0)
-						SoundSetting.instance.playSound(sound: .error)
-					}
+				TextField("Enter the word", text: $viewModel.userInput, onCommit: { 
+                    viewModel.timeRemaining = timeRemaining
+                    viewModel.submitButton { result in
+                        if result {
+                            // correct sound
+                            SoundSetting.instance.setVolume(setViewModel.isEffect ? Float(effectVol) : 0)
+                            SoundSetting.instance.playSound(sound: .correct)
+                        }
+                        else {
+                            // fail sound
+                            SoundSetting.instance.setVolume(setViewModel.isEffect ? Float(effectVol) : 0)
+                            SoundSetting.instance.playSound(sound: .error)
+                        }
+                    }
 				})
 				.textFieldStyle(RoundedBorderTextFieldStyle())
 				.shadow(radius: 4.0, x: 1.0, y: 2.0)
@@ -66,8 +68,6 @@ struct ContentView: View {
 				)
 				.padding()
 				
-				Text("Score: \(viewModel.score)")
-				
                 NavigationLink(destination: WordBookmarkView().modelContainer(for: TempModel.self)) {
 					Text("북마크 보기")
 				}
@@ -76,7 +76,8 @@ struct ContentView: View {
 				.alert(isPresented: $viewModel.showAlert) {
 					Alert(title: Text(viewModel.alertTitle),
 						  message: Text("당신의 점수는 \(viewModel.score)점 입니다."),
-						  primaryButton: .default(Text("다시하기"), action: {
+						  primaryButton: .default(Text("그만하기"), action: {
+                        addRank(name: "테스트", score: viewModel.score)
 						viewModel.resetGame()
 						viewModel.userInput = ""
 					}),
@@ -103,6 +104,15 @@ struct ContentView: View {
                 DictionaryView(lastWord: String(viewModel.currentWord.last!))
                     .modelContainer(for: TempModel.self)
             })
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button {
+                        
+                    } label: {
+                        Text("< 뒤로")
+                    }
+                }
+            }
 		}
 	}
 }
