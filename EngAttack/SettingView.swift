@@ -34,6 +34,7 @@ class SoundSetting: ObservableObject {
 }
 
 struct SettingView: View {
+    @EnvironmentObject var viewModels : SignViewModel
 	@EnvironmentObject var viewModel: ContentViewViewModel
 	@State var isEffect = false
 	@State var settingsSound = false
@@ -86,6 +87,18 @@ struct SettingView: View {
 						}
 					}
 				}
+                
+                Button {
+                    Task {
+                        do{
+                            try viewModels.signOut()
+                            viewModels.Signstate = .signedOut
+                            return
+                        }
+                    }
+                } label: {
+                    Text("로그아웃")
+                }
 				// TODO: test용 버튼 삭제 필요
 				Button {
 					SoundSetting.instance.playSound(sound: .correct, volume: isEffect ? Float(effectVol) : 0)
