@@ -9,8 +9,10 @@ import SwiftUI
 
 struct ContentView: View {
 	@EnvironmentObject var viewModel: ContentViewViewModel
-	@Binding var timeRemaining: Double
-	
+    @EnvironmentObject var setViewModel: SettingViewModel
+    
+    @Binding var timeRemaining: Double
+    let effectVol = 0.3
 	
 	var body: some View {
 		NavigationStack {
@@ -27,9 +29,19 @@ struct ContentView: View {
 				
 				// 입력창
 				TextField("Enter next word", text: $viewModel.userInput, onCommit: { viewModel.submitButton()
-					viewModel.timeRemaining = timeRemaining})
-					.textFieldStyle(RoundedBorderTextFieldStyle())
-					.padding()
+                    if viewModel.isCorrect {
+                        // correct sound
+                        SoundSetting.instance.setVolume(setViewModel.isEffect ? Float(effectVol) : 0)
+                        SoundSetting.instance.playSound(sound: .correct)
+                    }
+                    else {
+                        // fail sound
+                        SoundSetting.instance.setVolume(setViewModel.isEffect ? Float(effectVol) : 0)
+                        SoundSetting.instance.playSound(sound: .error)
+                    }
+				})
+				.textFieldStyle(RoundedBorderTextFieldStyle())
+				.padding()
 				
 				// 북마크 버튼
 				Button("북마크하기") {
@@ -78,4 +90,5 @@ struct ContentView: View {
 #Preview {
 	ContentView(timeRemaining: .constant(5))
 		.environmentObject(ContentViewViewModel())
+        .environmentObject(SettingViewModel())
 }

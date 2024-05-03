@@ -10,14 +10,14 @@ import SwiftUI
 
 
 class ContentViewViewModel: ObservableObject {
-	let starterWords = ["apple", "banana", "cherry", "date", "elderberry"]
-	@Published var currentWord = ""
-	@Published var userInput = ""
-	@Published var score = 0
-	@Published var alertTitle = ""
-	@Published var showAlert = false
-	@Published var usedWords = Set<String>()
-	@Published var bookmarkedWords = Set<String>()
+    let starterWords = ["apple", "banana", "cherry", "date", "elderberry"]
+    @Published var currentWord = ""
+    @Published var userInput = ""
+    @Published var score = 0
+    @Published var alertTitle = ""
+    @Published var showAlert = false
+    @Published var usedWords = Set<String>()
+    @Published var bookmarkedWords = Set<String>()
     @Published var isDarkMode: Bool {
         didSet {
             UserDefaults.standard.set(isDarkMode, forKey: "darkModeKey")
