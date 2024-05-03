@@ -22,15 +22,17 @@ extension ContentView {
 					.foregroundStyle(.gameController)
 					.offset(y:-100)
 				Text("EngAttack")
-                    .font(.custom("SOYO Maple Bold", size: 60))
-                    .foregroundStyle(.brown)
+					.font(.custom("SOYO Maple Bold", size: 60))
+					.foregroundStyle(.brown)
 					.font(.largeTitle)
 					.bold()
-                    .padding(.bottom, 30)
+					.padding(.bottom, 30)
 			}
 		}
+		.environment(\.colorScheme, .light)
 	}
 }
+
 
 
 //#Preview {
