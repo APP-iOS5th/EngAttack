@@ -57,7 +57,7 @@ class ContentViewViewModel: ObservableObject {
 			
 			return
 		}
-		
+        
 		// 입력한 단어가 이전에 사용된 단어인 경우,
 		guard !usedWords.contains(word) else {
 			gameTimer?.invalidate()
