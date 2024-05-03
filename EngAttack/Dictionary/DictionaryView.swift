@@ -19,16 +19,23 @@ struct DictionaryView: View {
     @State var tempWord: [String] = []
     
     var body: some View {
-        List {
-            ForEach(recommendWordList, id: \.self.0) { word in
-                HStack {
-                    Text("\(word.0) - \(word.1)")
-                    Spacer()
-                    Button(tempWord.contains("\(word.0)--\(word.1)") ? "저장 완료" : "북마크 저장") {
-                        modelContext.insert(TempModel(word: "\(word.0)--\(word.1)"))
-                        self.tempWord.append("\(word.0)--\(word.1)")
+        VStack {
+            if recommendWordList.count > 0 {
+                List {
+                    ForEach(recommendWordList, id: \.self.0) { word in
+                        HStack {
+                            Text("\(word.0) - \(word.1)")
+                            Spacer()
+                            Button(tempWord.contains("\(word.0)--\(word.1)") ? "저장 완료" : "북마크 저장") {
+                                modelContext.insert(TempModel(word: "\(word.0)--\(word.1)"))
+                                self.tempWord.append("\(word.0)--\(word.1)")
+                            }
+                        }
                     }
                 }
+            } else {
+                ProgressView()
+                    .font(.largeTitle)
             }
         }
         .onAppear {
