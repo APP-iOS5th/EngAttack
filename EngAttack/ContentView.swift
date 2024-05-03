@@ -17,9 +17,7 @@ import SwiftData
 struct ContentView: View {
 	@EnvironmentObject var viewModel: ContentViewViewModel
 	@EnvironmentObject var setViewModel: SettingViewModel
-
     @StateObject var viewModels: SignViewModel = SignViewModel()
-
     @State private var isShowRecommendWordList: Bool = false
 
 	
