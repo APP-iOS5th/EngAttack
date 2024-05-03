@@ -10,6 +10,8 @@ import SwiftData
 
 struct TabViewSetting: View {
 	@EnvironmentObject var viewModel: ContentViewViewModel
+    @StateObject var signViewModel: SignViewModel = SignViewModel()
+    
 	@State private var selection: String = "끝말잇기"
 	
 	var body: some View {
@@ -55,7 +57,7 @@ struct TabViewSetting: View {
 				}
 				.tag("사전")
 				.modelContainer(for: TempModel.self)
-			GameStartView()
+			GameStartView(signViewModel: signViewModel)
 				.tabItem {
 					Image(systemName: "gamecontroller")
 					Text("끝말잇기")
@@ -67,14 +69,13 @@ struct TabViewSetting: View {
 					Text("랭킹")
 				}
 				.tag("랭킹")
-            SettingView()
+            SettingView(signViewModel: signViewModel)
             
 				.tabItem {
 					Image(systemName: "person.crop.circle.fill")
 					Text("마이페이지")
 				}
 				.tag("마이페이지")
-                .environmentObject(SignViewModel())
 		}
 	}
 }

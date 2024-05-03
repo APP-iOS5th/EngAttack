@@ -26,6 +26,6 @@ struct EngAttackApp: App {
     var body: some Scene {
         WindowGroup {
             RootView()
-        }.environmentObject(SignViewModel())
+        }
     }
 }
