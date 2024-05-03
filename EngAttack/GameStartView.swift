@@ -57,29 +57,29 @@ struct GameStartView: View {
 					Button("Start Game") {
 						isCountDownPresented = true // 사용자가 게임 시작 버튼을 눌렀을 때
 					}
-					.font(.system(size: 50))
-					
-					.padding(.bottom, 100)
-					.fullScreenCover(isPresented: $isCountDownPresented) { // 카운트다운 화면 표시
-						CountDownView(isPresented: $isCountDownPresented)
-					}
-					.fullScreenCover(isPresented: $isGameViewPresented) { // 게임 화면 표시
-						ContentView(timeRemaining: $selectedTime)
-					}
 				}
-				.onChange(of: isCountDownPresented) { newValue, _ in
-					if !newValue {
-						isGameViewPresented = true // 게임 화면으로 전환
-					}
+				.font(.system(size: 50))
+				
+				.padding(.bottom, 100)
+				.fullScreenCover(isPresented: $isCountDownPresented) { // 카운트다운 화면 표시
+					CountDownView(isPresented: $isCountDownPresented)
 				}
-				.font(.custom("SOYO Maple Bold", size: 30))
-				.bold()
-				
-				Spacer()
-				
+				.fullScreenCover(isPresented: $isGameViewPresented) { // 게임 화면 표시
+					ContentView(timeRemaining: $selectedTime)
+				}
 			}
-			.navigationBarBackButtonHidden(true)
+			.onChange(of: isCountDownPresented) { newValue, _ in
+				if !newValue {
+					isGameViewPresented = true // 게임 화면으로 전환
+				}
+			}
+			.font(.custom("SOYO Maple Bold", size: 30))
+			.bold()
+			
+			Spacer()
+			
 		}
+		.navigationBarBackButtonHidden(true)
 	}
 }
 
