@@ -9,8 +9,8 @@ import SwiftUI
 import AVKit
 
 class SettingViewModel: ObservableObject {
-    @Published var isEffect: Bool = false
-    @Published var backVol: Float = 0.0
+    @Published var isEffect: Bool = true
+    @Published var backVol: Float = 50.0
 }
 
 

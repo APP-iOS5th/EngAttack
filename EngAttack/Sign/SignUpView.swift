@@ -36,7 +36,7 @@ struct SignUpView: View {
                             .keyboardType(.emailAddress)
                             .font(.system(size: 17, weight: .thin))
                             .textInputAutocapitalization(.never)
-                            .foregroundStyle(.primary)
+                            .foregroundStyle(.black)
                             .frame(height: 44)
                             .padding(.horizontal, 12)
                             .background(Color.white)
@@ -53,7 +53,7 @@ struct SignUpView: View {
                             .keyboardType(.emailAddress)
                             .font(.system(size: 17, weight: .thin))
                             .textInputAutocapitalization(.never)
-                            .foregroundStyle(.primary)
+                            .foregroundStyle(.black)
                             .frame(height: 44)
                             .padding(.horizontal, 12)
                             .background(Color.white)
@@ -69,7 +69,7 @@ struct SignUpView: View {
                         
                         SecureField("", text: $password)
                             .font(.system(size: 17, weight: .thin))
-                            .foregroundStyle(.primary)
+                            .foregroundStyle(.black)
                             .frame(height: 44)
                             .padding(.horizontal, 12)
                             .background(Color.white)
@@ -81,6 +81,7 @@ struct SignUpView: View {
                         Button {
                             Task {
                                 do {
+                                    viewModels.name = name
                                     viewModels.email = email
                                     viewModels.password = password
                                     try await viewModels.signUp()
@@ -88,7 +89,7 @@ struct SignUpView: View {
                                     guard let userID = Auth.auth().currentUser?.uid else { return }
                                     try await db.collection("USER").document(userID).setData(["email": viewModels.email, "name": viewModels.name])
                                     try await db.collection("BookMark").document(userID).setData(["List": FieldValue.arrayUnion([["word":"", "description" : ""]])])
-                                    try await db.collection("Rank").document(userID).setData(["List": FieldValue.arrayUnion([["name":name, "score": 0]])])
+                                    try await db.collection("Rank").document(userID).setData(["List": FieldValue.arrayUnion([["name":viewModels.name, "score": 0]])])
                                     SignIn.toggle()
                                     return
                                 } catch {

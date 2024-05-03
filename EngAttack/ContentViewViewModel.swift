@@ -44,7 +44,7 @@ class ContentViewViewModel: ObservableObject {
 		self.currentWord = wordManager.pickRandomWord()
 	}
 	
-	func submitButton() {
+    func submitButton(_ result: @escaping (Bool) -> Void) {
 		let word = userInput.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
 		let word2 = currentWord.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
 		// 입력한 단어가 비어있는 경우
@@ -58,6 +58,16 @@ class ContentViewViewModel: ObservableObject {
 			return
 		}
         
+        guard word.count != 1 else {
+            gameTimer?.invalidate()
+            self.alertTitle = "2글자 이상 입력해주세요"
+            self.isCorrect = false
+            self.showAlert = true
+            self.userInput = ""
+            
+            return
+        }
+		
 		// 입력한 단어가 이전에 사용된 단어인 경우,
 		guard !usedWords.contains(word) else {
 			gameTimer?.invalidate()
@@ -100,7 +110,8 @@ class ContentViewViewModel: ObservableObject {
 					self.score += 1
 					self.isCorrect = true
 					self.userInput = ""
-					
+                    
+                    result(self.isCorrect)
 				}
 			} else {
 				DispatchQueue.main.async { [self] in
@@ -108,7 +119,8 @@ class ContentViewViewModel: ObservableObject {
 					alertTitle = "잘못된 단어입니다"
 					isCorrect = false
 					showAlert = true
-					
+                    
+                    result(self.isCorrect)
 				}
 			}
 		}
