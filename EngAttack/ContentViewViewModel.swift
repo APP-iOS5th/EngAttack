@@ -8,28 +8,26 @@
 import SwiftUI
 
 
-
 class ContentViewViewModel: ObservableObject {
-    let starterWords = ["apple", "banana", "cherry", "date", "elderberry"]
-    @Published var currentWord = ""
-    @Published var userInput = ""
-    @Published var score = 0
-    @Published var alertTitle = ""
-    @Published var showAlert = false
-    @Published var usedWords = Set<String>()
-    @Published var bookmarkedWords = Set<String>()
-    @Published var isDarkMode: Bool {
-        didSet {
-            UserDefaults.standard.set(isDarkMode, forKey: "darkModeKey")
-        }
-    }
+	let starterWords = ["apple", "banana", "cherry", "date", "elderberry"]
+	@Published var currentWord = ""
+	@Published var userInput = ""
+	@Published var score = 0
+	@Published var alertTitle = ""
+	@Published var showAlert = false
+	@Published var usedWords = Set<String>()
+	@Published var bookmarkedWords = Set<String>()
+	@Published var isDarkMode: Bool {
+		didSet {
+			UserDefaults.standard.set(isDarkMode, forKey: "darkModeKey")
+		}
+	}
 	@Published var timeRemaining = 10.0
 	@Published var timerIsActive = false
 	@Published var isLoading: Bool = true
 	@Published var gameStarted = false
 	@Published var countdown: Int = 3
-	@Published var timerEnded = false
-	
+	@Published var isCorrect: Bool = false
 	var countdownTimer: Timer?
 	var gameTimer: Timer?
 	let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
@@ -37,7 +35,7 @@ class ContentViewViewModel: ObservableObject {
 	
 	
 	init() {
-        self.isDarkMode = UserDefaults.standard.bool(forKey: "darkModeKey")
+		self.isDarkMode = UserDefaults.standard.bool(forKey: "darkModeKey")
 		pickRandomWord()
 	}
 	
@@ -45,14 +43,14 @@ class ContentViewViewModel: ObservableObject {
 		self.currentWord = wordManager.pickRandomWord()
 	}
 	
-	
 	func submitButton() {
 		let word = userInput.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
 		let word2 = currentWord.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
 		// 입력한 단어가 비어있는 경우
 		guard word.count > 0 else {
-			self.gameTimer?.invalidate()
+			gameTimer?.invalidate()
 			self.alertTitle = "입력된 단어가 없습니다"
+			self.isCorrect = false
 			self.showAlert = true
 			self.userInput = ""
 			
@@ -61,28 +59,34 @@ class ContentViewViewModel: ObservableObject {
 		
 		// 입력한 단어가 이전에 사용된 단어인 경우,
 		guard !usedWords.contains(word) else {
-			self.gameTimer?.invalidate()
+			gameTimer?.invalidate()
 			self.alertTitle = "이미 사용된 단어입니다"
+			self.isCorrect = false
 			self.showAlert = true
 			self.userInput = ""
+			
 			return
 		}
 		
 		// 입력한 단어가 현재의 단어와 동일한 경우
 		guard word != currentWord else {
-			self.gameTimer?.invalidate()
+			gameTimer?.invalidate()
 			self.alertTitle = "현재 단어와 동일합니다"
+			self.isCorrect = false
 			self.showAlert = true
 			self.userInput = ""
+			
 			return
 		}
 		
 		// 단어의 끝 알파벳과 입력한 단어의 첫 알파벳이 일치하는지 검사
 		guard let lastChar = word2.last, let firstChar = word.first, lastChar == firstChar else {
-			self.gameTimer?.invalidate()
+			gameTimer?.invalidate()
 			self.alertTitle = "단어의 첫 글자가 이전 단어의 마지막 글자와 일치하지 않습니다."
+			self.isCorrect = false
 			self.showAlert = true
 			self.userInput = ""
+			
 			return
 		}
 		
@@ -93,33 +97,36 @@ class ContentViewViewModel: ObservableObject {
 					self.usedWords.insert(word)
 					self.currentWord = word
 					self.score += 1
+					self.isCorrect = true
 					self.userInput = ""
+					
 				}
 			} else {
 				DispatchQueue.main.async { [self] in
 					gameTimer?.invalidate()
 					alertTitle = "잘못된 단어입니다"
+					isCorrect = false
 					showAlert = true
+					
 				}
 			}
 		}
 		
+		self.isCorrect = true
 		self.userInput = "" // 입력 초기화
+		startTimer()
 	}
-	
-	
-	
-	
-	
 	
 	func gameDuration(selectedTime: Double) {
-			timeRemaining = selectedTime
+		timeRemaining = selectedTime
 	}
-    
+	
 	
 	// 타이머 기능
 	func startTimer() {
+		
 		timerIsActive = true
+		
 		gameTimer?.invalidate() // 기존 타이머가 있다면 취소
 		gameTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [weak self] _ in
 			DispatchQueue.main.async {
@@ -136,19 +143,33 @@ class ContentViewViewModel: ObservableObject {
 	}
 	// 타이머 종료
 	func stopTimer() {
-		
+		gameTimer?.invalidate()
 		gameTimer = nil
+		timerIsActive = false
 	}
 	
 	// 타이머 제한시간 만료, 타이머 재시작
 	func timerExpired() {
 		DispatchQueue.main.async {
-			self.timerEnded = true 
+			self.alertTitle = "제한 시간 초과"
 			self.showAlert = true
 			// 타이머를 정지합니다.
 			self.timerIsActive = false
-			self.userInput = "" // 입력 초기화
 		}
+	}
+	
+	// 게임 종료 알람
+	func gameEndAlert() -> Alert {
+		return Alert(
+			title: Text("제한 시간 초과"),
+			message: Text("당신의 점수는 \(score)점 입니다."),
+			primaryButton: .default(Text("다시시작"), action: {
+				self.resetGame()
+			}),
+			secondaryButton: .cancel(Text("그만하기"), action: {
+				
+			})
+		)
 	}
 	
 	// 북마크 기능
@@ -186,6 +207,7 @@ class ContentViewViewModel: ObservableObject {
 		self.resetGame()
 		gameStarted = true
 	}
+	
 	
 	// 게임 종료
 	func stopGame() {
