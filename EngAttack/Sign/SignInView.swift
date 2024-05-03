@@ -11,6 +11,7 @@ import FirebaseAuth
 
 struct SignInView: View {
     @EnvironmentObject  var viewModel : SignViewModel
+    @EnvironmentObject var setViewModel: SettingViewModel
     @State private var correctLogin = false
     @State private var email = ""
     @State private var password = ""
@@ -84,9 +85,12 @@ struct SignInView: View {
             }
         }.navigationBarBackButtonHidden(true)
         NavigationLink(destination: TabViewSetting()
-            .environmentObject(ContentViewViewModel()), isActive: $loginActive){
+            .environmentObject(SettingViewModel())
+            .environmentObject(ContentViewViewModel())
+            , isActive: $loginActive){
                 EmptyView()
             }
+            
 
     }
     

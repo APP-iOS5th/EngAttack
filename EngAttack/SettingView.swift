@@ -64,7 +64,6 @@ struct SettingView: View {
                 }
             }
         }
-        //.preferredColorScheme(viewModel.isDarkMode ? .dark : .light)
         .font(.system(size: 20))
         
     }
