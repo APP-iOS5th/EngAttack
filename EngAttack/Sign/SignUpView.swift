@@ -11,7 +11,7 @@ import FirebaseAuth
 
 struct SignUpView: View {
     @StateObject  var viewModels : SignViewModel
-
+    
     @State private var  name = ""
     @State private var  email = ""
     @State private var  password = ""
@@ -25,117 +25,104 @@ struct SignUpView: View {
     
     
     var body: some View {
-        VStack {
-            NavigationStack {
-                VStack(spacing: 28) {
-                    VStack(alignment: .leading, spacing: 11) {
-                        Text("이름")
-                            .font(.system(size: 13, weight: .light))
-                            .foregroundStyle(.secondary)
-                            .frame(height: 15, alignment: .leading)
+        NavigationStack {
+            Form {
+                Section(header: Text("이름")
+                    .font(.system(size: 15))
+                    .foregroundStyle(.black)
+                    .bold()) {
                         TextField("", text: $name)
                             .keyboardType(.emailAddress)
-                            .font(.system(size: 17, weight: .thin))
+                            .font(.system(size: 17))
                             .textInputAutocapitalization(.never)
                             .foregroundStyle(.black)
-                            .frame(height: 44)
-                            .padding(.horizontal, 12)
-                            .background(Color.white)
-                            .cornerRadius(4.0)
                             .focused($focusedField, equals: .name)
                             .onSubmit { focusedField = .id }
                     }
-                    VStack(alignment: .leading, spacing: 11) {
-                        Text("이메일")
-                            .font(.system(size: 13, weight: .light))
-                            .foregroundStyle(.secondary)
-                            .frame(height: 15, alignment: .leading)
+                
+                Section(header: Text("이메일")
+                    .font(.system(size: 15))
+                    .foregroundStyle(.black)
+                    .bold()) {
                         TextField("", text: $email)
                             .keyboardType(.emailAddress)
-                            .font(.system(size: 17, weight: .thin))
+                            .font(.system(size: 17))
                             .textInputAutocapitalization(.never)
                             .foregroundStyle(.black)
-                            .frame(height: 44)
-                            .padding(.horizontal, 12)
-                            .background(Color.white)
-                            .cornerRadius(4.0)
                             .focused($focusedField, equals: .id)
                             .onSubmit { focusedField = .password }
                     }
-                    VStack(alignment: .leading, spacing: 11) {
-                        Text("비밀번호")
-                            .font(.system(size: 13, weight: .light))
-                            .foregroundStyle(.secondary)
-                            .frame(height: 15, alignment: .leading)
-                        
+                
+                Section(header: Text("비밀번호")
+                    .font(.system(size: 15))
+                    .foregroundStyle(.black)
+                    .bold()) {
                         SecureField("", text: $password)
-                            .font(.system(size: 17, weight: .thin))
+                            .font(.system(size: 17))
                             .foregroundStyle(.black)
-                            .frame(height: 44)
-                            .padding(.horizontal, 12)
-                            .background(Color.white)
-                            .cornerRadius(4.0)
                             .focused($focusedField, equals: .password)
                             .onSubmit { focusedField = nil }
                     }
-                    VStack(alignment: .center, spacing: 20) {
-                        Button {
-                            Task {
-                                do {
-                                    viewModels.name = name
-                                    viewModels.email = email
-                                    viewModels.password = password
-                                    try await viewModels.signUp()
-                                    let db = Firestore.firestore()
-                                    guard let userID = Auth.auth().currentUser?.uid else { return }
-                                    try await db.collection("USER").document(userID).setData(["email": viewModels.email, "name": viewModels.name])
-                                    try await db.collection("BookMark").document(userID).setData(["List": FieldValue.arrayUnion([["word":"", "description" : ""]])])
-                                    try await db.collection("Rank").document(userID).setData(["List": FieldValue.arrayUnion([["name":viewModels.name, "score": 0]])])
-                                    SignIn.toggle()
-                                    return
-                                } catch {
-                                    isValidEmails = isValidEmail(email: email)
-                                    isValidPasswords = isValidPassword(pwd: password)
-                                    emailCheck = emailCheck(email: email)
-                                    
-                                    if !isValidEmails || !isValidPasswords || !emailCheck || name.isEmpty {
-                                        isError = true
-                                        if !isValidEmails && isValidPasswords {
-                                            messageString = "이메일 형식을 확인해주세요"
-                                        }
-                                        else if !isValidPasswords && isValidEmails  {
-                                            messageString = "비밀번호가 대,소문자 8자리이상이 아닙니다"
-                                        }
-                                        else if !isValidEmails && !isValidPasswords  {
-                                            messageString = "이메일,비밀번호를 확인해주세요"
-                                        }
-                                        else if !emailCheck {
-                                            messageString = "이미가입된 이메일입니다."
-                                        }
-                                        else {
-                                            messageString = "이름을 확인해주세요."
-                                        }
+                
+                Section {
+                    Button {
+                        Task {
+                            do {
+                                viewModels.name = name
+                                viewModels.email = email
+                                viewModels.password = password
+                                try await viewModels.signUp()
+                                let db = Firestore.firestore()
+                                guard let userID = Auth.auth().currentUser?.uid else { return }
+                                try await db.collection("USER").document(userID).setData(["email": viewModels.email, "name": viewModels.name])
+                                try await db.collection("BookMark").document(userID).setData(["List": FieldValue.arrayUnion([["word":"", "description" : ""]])])
+                                try await db.collection("Rank").document(userID).setData(["List": FieldValue.arrayUnion([["name":viewModels.name, "score": 0]])])
+                                SignIn.toggle()
+                                return
+                            } catch {
+                                isValidEmails = isValidEmail(email: email)
+                                isValidPasswords = isValidPassword(pwd: password)
+                                emailCheck = emailCheck(email: email)
+                                
+                                if !isValidEmails || !isValidPasswords || !emailCheck || name.isEmpty {
+                                    isError = true
+                                    if !isValidEmails && isValidPasswords {
+                                        messageString = "이메일 형식을 확인해주세요"
+                                    }
+                                    else if !isValidPasswords && isValidEmails  {
+                                        messageString = "비밀번호가 대,소문자 8자리이상이 아닙니다"
+                                    }
+                                    else if !isValidEmails && !isValidPasswords  {
+                                        messageString = "이메일,비밀번호를 확인해주세요"
+                                    }
+                                    else if !emailCheck {
+                                        messageString = "이미 가입된 이메일입니다."
+                                    }
+                                    else {
+                                        messageString = "이름을 확인해주세요."
                                     }
                                 }
                             }
-                        } label: {
-                            Text("회원 가입")
                         }
-                        .alert(isPresented: $isError) {
-                            Alert(title: Text("경고"), message: Text(messageString), dismissButton: .default(Text("확인")))
-                        }
-                        Button("홈으로") {
-                            SignIn.toggle()
-                        }
+                    } label: {
+                        Text("회원 가입")
+                            .frame(width: 100, height: 35)
                     }
+                    .alert(isPresented: $isError) {
+                        Alert(title: Text("경고"), message: Text(messageString), dismissButton: .default(Text("확인")))
+                    }
+                    .padding(.horizontal, 100)
+                    .buttonStyle(.borderedProminent)
                 }
+                .listRowBackground(Color.clear)
             }
-                .padding()
-        }.navigationBarBackButtonHidden(true)
-        NavigationLink(destination: SignInView(signViewModel: viewModels), isActive: $SignIn){
-            EmptyView()
+            .navigationTitle("회원가입")
+            .navigationBarTitleDisplayMode(.inline)
+            
+            NavigationLink(destination: SignInView(signViewModel: viewModels), isActive: $SignIn) {
+                EmptyView()
+            }
         }
-        
     }
 }
 
