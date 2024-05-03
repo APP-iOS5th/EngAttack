@@ -71,6 +71,9 @@ struct WordBookmarkView: View {
                 }
             }
         }
+        .onDisappear {
+            firebaseWords = []
+        }
     }
     
     func deleteBookMark(word: String, description: String) {
