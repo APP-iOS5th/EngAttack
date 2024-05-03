@@ -27,6 +27,7 @@ class ContentViewViewModel: ObservableObject {
 	@Published var isLoading: Bool = true
 	@Published var gameStarted = false
 	@Published var countdown: Int = 3
+    
 	var countdownTimer: Timer?
 	var gameTimer: Timer?
 	let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
@@ -106,8 +107,10 @@ class ContentViewViewModel: ObservableObject {
 	// 타이머 기능
 	func startTimer() {
         
+        
 		timerIsActive = true
-		
+        
+        
 		gameTimer?.invalidate() // 기존 타이머가 있다면 취소
 		gameTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [weak self] _ in
 			DispatchQueue.main.async {

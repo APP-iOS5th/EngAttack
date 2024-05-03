@@ -19,12 +19,13 @@ struct ContentView: View {
 					.padding()
 				
                 ProgressView(value: max(0, min(viewModel.timeRemaining, 60.0)), total: timeRemaining)
-					.padding()
+                    .padding()
 				
 				Text(viewModel.currentWord)
 					.padding()
 				
 				TextField("Enter next word", text: $viewModel.userInput, onCommit: { viewModel.submitButton()
+                    viewModel.timeRemaining = timeRemaining
 				})
 				.textFieldStyle(RoundedBorderTextFieldStyle())
 				.padding()
@@ -42,7 +43,7 @@ struct ContentView: View {
 				.padding()
 				
 				.alert(isPresented: $viewModel.showAlert) {
-					Alert(title: Text("Game Over"),
+                    Alert(title: Text(viewModel.alertTitle),
 						 message: Text("당신의 점수는 \(viewModel.score)점 입니다."),
 						 primaryButton: .default(Text("다시하기"), action: {
 						viewModel.resetGame()

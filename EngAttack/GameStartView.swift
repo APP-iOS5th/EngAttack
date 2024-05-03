@@ -13,6 +13,7 @@ struct GameStartView: View {
     var times: [Double] = [3, 5, 7, 10, 15, 20, 30, 60]
     @State var selectedTime: Double = 3
     
+    
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var backButton : some View {
