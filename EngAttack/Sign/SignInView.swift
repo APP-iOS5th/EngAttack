@@ -11,7 +11,8 @@ import FirebaseAuth
 
 struct SignInView: View {
     @EnvironmentObject var contentViewModel: ContentViewViewModel
-    @EnvironmentObject  var viewModel : SignViewModel
+    
+    @StateObject  var signViewModel : SignViewModel
     @EnvironmentObject var setViewModel: SettingViewModel
     @State private var correctLogin = false
     @State private var email = ""
@@ -59,12 +60,12 @@ struct SignInView: View {
             Button {
                 Task {
                     do {
-                        viewModel.email = email
-                        viewModel.password = password
-                        try await viewModel.signIn()
+                        signViewModel.email = email
+                        signViewModel.password = password
+                        try await signViewModel.signIn()
                         guard let userID = Auth.auth().currentUser?.uid else { return }
-                        viewModel.uid = userID
-                        viewModel.Signstate = .signedIn
+                        signViewModel.uid = userID
+                        signViewModel.Signstate = .signedIn
                         loginActive = true
                             return
                     } catch {
@@ -81,13 +82,13 @@ struct SignInView: View {
             .disabled( !checkEmailForm(email:email) )
             .buttonStyle(.borderedProminent)
             .padding()
-            NavigationLink(destination: SignUpView()){
+            NavigationLink(destination: SignUpView(viewModels: signViewModel)){
                 Text("회원 가입")
             }
         }.navigationBarBackButtonHidden(true)
         .preferredColorScheme(contentViewModel.isDarkMode ? .dark : .light)
         
-        NavigationLink(destination: TabViewSetting()
+        NavigationLink(destination: TabViewSetting(signViewModel: signViewModel)
             .environmentObject(SettingViewModel())
             .environmentObject(ContentViewViewModel())
             , isActive: $loginActive){

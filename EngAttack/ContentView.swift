@@ -18,7 +18,7 @@ struct ContentView: View {
 	@EnvironmentObject var viewModel: ContentViewViewModel
 	@EnvironmentObject var setViewModel: SettingViewModel
 
-    @EnvironmentObject var viewModels: SignViewModel
+    @StateObject var viewModels: SignViewModel = SignViewModel()
 
     @State private var isShowRecommendWordList: Bool = false
 
@@ -78,7 +78,7 @@ struct ContentView: View {
 					Alert(title: Text(viewModel.alertTitle),
 						  message: Text("당신의 점수는 \(viewModel.score)점 입니다."),
 						  primaryButton: .default(Text("그만하기"), action: {
-                        addRank(name: "테스트", score: viewModel.score)
+                        addRank(name: viewModels.name, score: viewModel.score)
 						viewModel.resetGame()
 						viewModel.userInput = ""
 					}),
@@ -86,6 +86,7 @@ struct ContentView: View {
 //						viewModel.resetGame()
 //						viewModel.stopTimer()
 //						viewModel.userInput = ""
+                        addRank(name: viewModels.name, score: viewModel.score)
                         isShowRecommendWordList = true
 					}))
 				}
