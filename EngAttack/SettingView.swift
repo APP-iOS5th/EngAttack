@@ -94,4 +94,5 @@ struct SettingView: View {
     SettingView()
         .environmentObject(ContentViewViewModel())
         .environmentObject(SettingViewModel())
+        .environmentObject(SignViewModel())
 }
