@@ -112,9 +112,11 @@ struct ContentView: View {
 			viewModel.pickRandomWord()
 			viewModel.timeRemaining = timeRemaining
 			viewModel.startTimer()
+            SoundSetting.instance.playSound(sound: .background)
 		}
 		.onDisappear {
 			viewModel.stopTimer()
+            SoundSetting.instance.stopMusic()
 		}
 	}
 }
