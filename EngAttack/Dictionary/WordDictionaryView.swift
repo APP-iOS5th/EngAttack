@@ -7,6 +7,10 @@
 
 import SwiftUI
 import SwiftData
+import FirebaseFirestoreSwift
+import FirebaseFirestore
+import FirebaseAuth
+import Firebase
 
 @Model
 class TempModel {
@@ -18,6 +22,26 @@ class TempModel {
     }
 }
 
+struct BookMark: Codable, Hashable {
+    var word: String
+    var description: String
+    
+    
+    var addBookMarkNumber: [String:Any] {
+        return [
+            "word": self.word,
+            "description" : self.description
+        ]
+    }
+    
+    var deleteBookMarkNumber: [String:Any] {
+        return [
+            "word": self.word,
+            "description" : self.description
+        ]
+    }
+}
+
 struct WordDictionaryView: View {
     
     @Query private var storedWords: [TempModel]
@@ -26,12 +50,41 @@ struct WordDictionaryView: View {
     @StateObject private var viewModel: WordDictionaryViewModel = WordDictionaryViewModel()
     @State private var searchString: String = ""
     
+    func addBookmark(word : String ,description :String) {
+        let db = Firestore.firestore()
+        let bookmark = BookMark(word: word, description: description)
+        guard let userID = Auth.auth().currentUser?.uid else { return }
+        Task {
+            do {
+                db.collection("BookMark").document(userID).updateData(["List": FieldValue.arrayUnion([bookmark.addBookMarkNumber])])
+            } catch let error {
+                print("\(error)")
+            }
+        }
+    }
+    
+    func deleteBookMark(word: String, description: String) {
+        let db = Firestore.firestore()
+        let bookMark = BookMark(word: word, description: description)
+        guard let userID = Auth.auth().currentUser?.uid else { return }
+        Task {
+            do {
+                db.collection("BookMark").document(userID).updateData([
+                    "List" : FieldValue.arrayRemove([bookMark.deleteBookMarkNumber])])
+            } catch let error {
+                print("\(error)")
+            }
+        }
+        
+    }
     var body: some View {
         NavigationStack {
             VStack {
                 List {
                     ForEach(viewModel.getWords(), id: \.0) { word in
                         let alreadExistWord: [TempModel] = storedWords.filter{ $0.word == "\(word.0)--\(word.1)" }
+                        let temp: String = "\(word.0)--\(word.1)"
+                        let result = temp.components(separatedBy: "--")
                         HStack {
                             Text(word.0)
                                 .frame(alignment: .leading)
@@ -41,8 +94,10 @@ struct WordDictionaryView: View {
                             Spacer()
                             Button {
                                 if alreadExistWord.count > 0 {
+                                    deleteBookMark(word: result[0], description: result[1])
                                     modelContext.delete(alreadExistWord[0])
                                 } else {
+                                    addBookmark(word: result[0], description: result[1])
                                     let newWord: TempModel = TempModel(word: "\(word.0)--\(word.1)")
                                     modelContext.insert(newWord)
                                 }
