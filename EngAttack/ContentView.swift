@@ -112,25 +112,28 @@ struct ContentView: View {
 			viewModel.pickRandomWord()
 			viewModel.timeRemaining = timeRemaining
 			viewModel.startTimer()
+            SoundSetting.instance.playSound(sound: .background)
 		}
 		.onDisappear {
 			viewModel.stopTimer()
+            SoundSetting.instance.stopMusic()
 		}
 	}
 }
 
+
 // 진행바 스타일
 struct DarkBlueShadowProgressViewStyle: ProgressViewStyle {
-	func makeBody(configuration: Configuration) -> some View {
-		ProgressView(configuration)
-			.scaleEffect(x: 1, y: 3, anchor: .center)
-			.shadow(color: Color(red: 0, green: 0, blue: 0.2),
-					radius: 4.0, x: 1.0, y: 2.0)
-	}
+    func makeBody(configuration: Configuration) -> some View {
+        ProgressView(configuration)
+            .scaleEffect(x: 1, y: 3, anchor: .center)
+            .shadow(color: Color(red: 0, green: 0, blue: 0.2),
+                    radius: 4.0, x: 1.0, y: 2.0)
+    }
 }
 
 #Preview {
-	ContentView(timeRemaining: .constant(5))
-		.environmentObject(ContentViewViewModel())
-		.environmentObject(SettingViewModel())
+    ContentView(timeRemaining: .constant(5))
+        .environmentObject(ContentViewViewModel())
+        .environmentObject(SettingViewModel())
 }
