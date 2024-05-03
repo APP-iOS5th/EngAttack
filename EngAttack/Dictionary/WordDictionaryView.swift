@@ -22,25 +22,7 @@ class TempModel {
     }
 }
 
-struct BookMark: Codable, Hashable {
-    var word: String
-    var description: String
-    
-    
-    var addBookMarkNumber: [String:Any] {
-        return [
-            "word": self.word,
-            "description" : self.description
-        ]
-    }
-    
-    var deleteBookMarkNumber: [String:Any] {
-        return [
-            "word": self.word,
-            "description" : self.description
-        ]
-    }
-}
+
 
 struct WordDictionaryView: View {
     
@@ -50,33 +32,7 @@ struct WordDictionaryView: View {
     @StateObject private var viewModel: WordDictionaryViewModel = WordDictionaryViewModel()
     @State private var searchString: String = ""
     
-    func addBookmark(word : String ,description :String) {
-        let db = Firestore.firestore()
-        let bookmark = BookMark(word: word, description: description)
-        guard let userID = Auth.auth().currentUser?.uid else { return }
-        Task {
-            do {
-                db.collection("BookMark").document(userID).updateData(["List": FieldValue.arrayUnion([bookmark.addBookMarkNumber])])
-            } catch let error {
-                print("\(error)")
-            }
-        }
-    }
     
-    func deleteBookMark(word: String, description: String) {
-        let db = Firestore.firestore()
-        let bookMark = BookMark(word: word, description: description)
-        guard let userID = Auth.auth().currentUser?.uid else { return }
-        Task {
-            do {
-                db.collection("BookMark").document(userID).updateData([
-                    "List" : FieldValue.arrayRemove([bookMark.deleteBookMarkNumber])])
-            } catch let error {
-                print("\(error)")
-            }
-        }
-        
-    }
     var body: some View {
         NavigationStack {
             VStack {
@@ -130,12 +86,32 @@ struct WordDictionaryView: View {
         .modelContainer(for: TempModel.self)
 }
 
+
+extension WordDictionaryView {
+    func addBookmark(word : String ,description :String) {
+        let db = Firestore.firestore()
+        let bookmark = BookMark(word: word, description: description)
+        guard let userID = Auth.auth().currentUser?.uid else { return }
+        db.collection("BookMark").document(userID).updateData(["List": FieldValue.arrayUnion([bookmark.addBookMarkNumber])])
+        
+    }
+    
+    func deleteBookMark(word: String, description: String) {
+        let db = Firestore.firestore()
+        let bookMark = BookMark(word: word, description: description)
+        guard let userID = Auth.auth().currentUser?.uid else { return }
+        db.collection("BookMark").document(userID).updateData([
+            "List" : FieldValue.arrayRemove([bookMark.deleteBookMarkNumber])])
+        
+        
+    }
+}
 /*
  MARK: - TODO
-    1. 영어 단어 검색, 사전에 있는 단어면 뜻과 같이 출력 ✅
-    2. 출력된 단어 List에 북마크로 추가할 수 있는 버튼 ✅
-    3. 버튼을 누르면 북마크에 추가 ✅
-    4. 이미 북마크에 있는 단어면 별도로 표시 ✅
-    5. ViewModel로 이동할 기능들 정리
-    6. Return되는 단어 개수를 늘릴 순 없나..?
+ 1. 영어 단어 검색, 사전에 있는 단어면 뜻과 같이 출력 ✅
+ 2. 출력된 단어 List에 북마크로 추가할 수 있는 버튼 ✅
+ 3. 버튼을 누르면 북마크에 추가 ✅
+ 4. 이미 북마크에 있는 단어면 별도로 표시 ✅
+ 5. ViewModel로 이동할 기능들 정리
+ 6. Return되는 단어 개수를 늘릴 순 없나..?
  */
