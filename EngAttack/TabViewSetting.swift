@@ -75,6 +75,7 @@ struct TabViewSetting: View {
 					Text("마이페이지")
 				}
 				.tag("마이페이지")
+                .environmentObject(SignViewModel())
 		}
 	}
 }

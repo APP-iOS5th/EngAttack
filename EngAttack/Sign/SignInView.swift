@@ -10,6 +10,7 @@ import FirebaseAuth
 
 
 struct SignInView: View {
+    @EnvironmentObject var contentViewModel: ContentViewViewModel
     @EnvironmentObject  var viewModel : SignViewModel
     @EnvironmentObject var setViewModel: SettingViewModel
     @State private var correctLogin = false
@@ -84,6 +85,8 @@ struct SignInView: View {
                 Text("회원 가입")
             }
         }.navigationBarBackButtonHidden(true)
+        .preferredColorScheme(contentViewModel.isDarkMode ? .dark : .light)
+        
         NavigationLink(destination: TabViewSetting()
             .environmentObject(SettingViewModel())
             .environmentObject(ContentViewViewModel())

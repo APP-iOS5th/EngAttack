@@ -38,9 +38,9 @@ struct WordDictionaryView: View {
             VStack {
                 List {
                     ForEach(viewModel.getWords(), id: \.0) { word in
-                        let alreadExistWord: [TempModel] = storedWords.filter{ $0.word == "\(word.0)--\(word.1)" }
                         let temp: String = "\(word.0)--\(word.1)"
                         let result = temp.components(separatedBy: "--")
+                        let bookmarkedWords: [TempModel] = storedWords.filter{ $0.word == "\(word.0)--\(word.1)" }
                         HStack {
                             Text(word.0)
                                 .frame(alignment: .leading)
@@ -49,16 +49,13 @@ struct WordDictionaryView: View {
                                 .frame(alignment: .leading)
                             Spacer()
                             Button {
-                                if alreadExistWord.count > 0 {
-                                    deleteBookMark(word: result[0], description: result[1])
-                                    modelContext.delete(alreadExistWord[0])
+                                if bookmarkedWords.count > 0 {
+                                    modelContext.delete(bookmarkedWords[0])
                                 } else {
-                                    addBookmark(word: result[0], description: result[1])
-                                    let newWord: TempModel = TempModel(word: "\(word.0)--\(word.1)")
-                                    modelContext.insert(newWord)
+                                    modelContext.insert(TempModel(word: "\(word.0)--\(word.1)"))
                                 }
                             } label: {
-                                Image(systemName: alreadExistWord.count > 0 ? "bookmark.circle.fill" : "bookmark.circle")
+                                Image(systemName: bookmarkedWords.count > 0 ? "bookmark.circle.fill" : "bookmark.circle")
                                     .resizable()
                                     .scaledToFit()
                                     .frame(width: 25)
@@ -77,6 +74,10 @@ struct WordDictionaryView: View {
             } else {
                 viewModel.saveSearchResult(words: [])
             }
+        }
+        .onDisappear {
+            searchString = ""
+            viewModel.saveSearchResult(words: [])
         }
     }
 }
