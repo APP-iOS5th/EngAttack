@@ -9,7 +9,10 @@ import SwiftUI
 
 struct ContentView: View {
 	@EnvironmentObject var viewModel: ContentViewViewModel
+    @EnvironmentObject var setViewModel: SettingViewModel
+    
     @Binding var timeRemaining: Double
+    let effectVol = 0.3
 	
 	var body: some View {
 		NavigationStack {
@@ -25,7 +28,16 @@ struct ContentView: View {
 					.padding()
 				
 				TextField("Enter next word", text: $viewModel.userInput, onCommit: { viewModel.submitButton()
-                    viewModel.timeRemaining = timeRemaining
+                    if viewModel.isCorrect {
+                        // correct sound
+                        SoundSetting.instance.setVolume(setViewModel.isEffect ? Float(effectVol) : 0)
+                        SoundSetting.instance.playSound(sound: .correct)
+                    }
+                    else {
+                        // fail sound
+                        SoundSetting.instance.setVolume(setViewModel.isEffect ? Float(effectVol) : 0)
+                        SoundSetting.instance.playSound(sound: .error)
+                    }
 				})
 				.textFieldStyle(RoundedBorderTextFieldStyle())
 				.padding()
@@ -70,4 +82,5 @@ struct ContentView: View {
 #Preview {
     ContentView(timeRemaining: .constant(30))
 		.environmentObject(ContentViewViewModel())
+        .environmentObject(SettingViewModel())
 }
