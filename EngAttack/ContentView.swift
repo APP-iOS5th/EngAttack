@@ -102,12 +102,6 @@ extension ContentView {
         let db = Firestore.firestore()
         guard let userID = Auth.auth().currentUser?.uid else { return }
         let rank = Rank(name: "비어있음", score: viewModel.score)
-        Task {
-            do {
                 db.collection("Rank").document(userID).updateData(["List": FieldValue.arrayUnion([rank.addRank])])
-            } catch let error {
-                print("\(error)")
-            }
-        }
     }
 }
