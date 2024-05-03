@@ -76,7 +76,7 @@ class WordDictionaryViewModel: ObservableObject {
     
     func recommendWordList(alphabet: String, wordList: [String], complete: @escaping (_ recommendList: [(String, String)]) -> Void) {
         let exceptWordList: String = wordList.joined(separator: ", ")
-        let apiKey = "sk-proj-pYqGwzAxZw6595TIUc1LT3BlbkFJXuza2CmcEAOE69QZLeox"
+        let apiKey = "YourAPIKey"
         let requestText = "\(alphabet.lowercased())로 시작하는 5글자 이상의 소문자 영어단어 (\"단어:한글뜻\") 형태로 앞에 \(exceptWordList) 제외하고 무작위로 20개정도 알려줘"
         let endpoint = "https://api.openai.com/v1/chat/completions"
         let requestData: [String: Any] = [
