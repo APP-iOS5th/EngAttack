@@ -10,7 +10,7 @@
 		AF05DFF22BE28C7D005625E0 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF62BD442BE0DDF700A88EDE /* SettingView.swift */; };
 		AF05DFF32BE28C7D005625E0 /* WordInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD37DF002BE0D7E700F7CB39 /* WordInfo.swift */; };
 		AF05DFF42BE28C7D005625E0 /* WordManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD37DF012BE0D7E700F7CB39 /* WordManager.swift */; };
-		AF2ECB1C2BE5062C009DA64F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AF2ECB1B2BE5062C009DA64F /* GoogleService-Info.plist */; };
+		AF2ECB202BE52100009DA64F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AF2ECB1F2BE520FF009DA64F /* GoogleService-Info.plist */; };
 		AF9552DB2BE1D09F0019A124 /* correct.wav in Resources */ = {isa = PBXBuildFile; fileRef = AF9552D82BE1D09B0019A124 /* correct.wav */; };
 		AF9552DC2BE1D09F0019A124 /* error.wav in Resources */ = {isa = PBXBuildFile; fileRef = AF9552D92BE1D09B0019A124 /* error.wav */; };
 		AF9552DD2BE1D09F0019A124 /* background.wav in Resources */ = {isa = PBXBuildFile; fileRef = AF9552DA2BE1D09F0019A124 /* background.wav */; };
@@ -47,7 +47,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		AF2ECB1B2BE5062C009DA64F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		AF2ECB1F2BE520FF009DA64F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Desktop/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AF62BD442BE0DDF700A88EDE /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		AF9552D82BE1D09B0019A124 /* correct.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = correct.wav; sourceTree = "<group>"; };
 		AF9552D92BE1D09B0019A124 /* error.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = error.wav; sourceTree = "<group>"; };
@@ -128,7 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				AFBC3A332BE0D5E700CE7542 /* Assets.xcassets */,
-				AF2ECB1B2BE5062C009DA64F /* GoogleService-Info.plist */,
+				AF2ECB1F2BE520FF009DA64F /* GoogleService-Info.plist */,
 				AF9552D72BE1D08E0019A124 /* Sounds */,
 				F7A23E552BE1DB7E00A044BD /* TabViewSetting.swift */,
 				F7F07C842BE0DF96009A75A9 /* GameStartView.swift */,
@@ -286,7 +286,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F7A23E5D2BE1DF8500A044BD /* SOYO Maple Regular.otf in Resources */,
-				AF2ECB1C2BE5062C009DA64F /* GoogleService-Info.plist in Resources */,
+				AF2ECB202BE52100009DA64F /* GoogleService-Info.plist in Resources */,
 				F7A23E5C2BE1DF8500A044BD /* SOYO Maple Bold.otf in Resources */,
 				AFBC3A372BE0D5E700CE7542 /* Preview Assets.xcassets in Resources */,
 				AF9552DD2BE1D09F0019A124 /* background.wav in Resources */,
