@@ -28,6 +28,7 @@ struct ContentView: View {
 					.padding()
 				
 				TextField("Enter next word", text: $viewModel.userInput, onCommit: { viewModel.submitButton()
+                    viewModel.timeRemaining = timeRemaining
                     if viewModel.isCorrect {
                         // correct sound
                         SoundSetting.instance.setVolume(setViewModel.isEffect ? Float(effectVol) : 0)

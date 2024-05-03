@@ -17,7 +17,6 @@
 		AFB5BF0E2BE3DC530005932D /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = AFB5BF0D2BE3DC530005932D /* FirebaseFirestore */; };
 		AFB5BF102BE3DC530005932D /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = AFB5BF0F2BE3DC530005932D /* FirebaseFirestoreSwift */; };
 		AFB5BF122BE3DCCD0005932D /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = AFB5BF112BE3DCCD0005932D /* FirebaseAuth */; };
-		AFB5BF142BE3DD850005932D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AFB5BF132BE3DD840005932D /* GoogleService-Info.plist */; };
 		AFBC3A342BE0D5E700CE7542 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFBC3A332BE0D5E700CE7542 /* Assets.xcassets */; };
 		AFBC3A372BE0D5E700CE7542 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFBC3A362BE0D5E700CE7542 /* Preview Assets.xcassets */; };
 		BFD6A8E02BE207E10009BFE2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD6A8DF2BE207E10009BFE2 /* ContentView.swift */; };
@@ -34,7 +33,7 @@
 		CDC208842BE3AFA200105E63 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC2087E2BE3AFA200105E63 /* SignUpView.swift */; };
 		CDC208852BE3AFA200105E63 /* SignViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC2087F2BE3AFA200105E63 /* SignViewModel.swift */; };
 		CDC208872BE3AFC500105E63 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC208862BE3AFC500105E63 /* RootView.swift */; };
-		CDC2088B2BE3BEB800105E63 /* CountDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC2088A2BE3BEB800105E63 /* CountDownView.swift */; };
+		F7A022AD2BE4691D00F3FCD5 /* CountDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7A022AC2BE4691D00F3FCD5 /* CountDownView.swift */; };
 		F7A23E562BE1DB7E00A044BD /* TabViewSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7A23E552BE1DB7E00A044BD /* TabViewSetting.swift */; };
 		F7A23E582BE1DE1200A044BD /* RankingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7A23E572BE1DE1200A044BD /* RankingView.swift */; };
 		F7A23E5C2BE1DF8500A044BD /* SOYO Maple Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = F7A23E592BE1DF8500A044BD /* SOYO Maple Bold.otf */; };
@@ -49,7 +48,6 @@
 		AF9552D92BE1D09B0019A124 /* error.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = error.wav; sourceTree = "<group>"; };
 		AF9552DA2BE1D09F0019A124 /* background.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = background.wav; sourceTree = "<group>"; };
 		AFB5BF0A2BE3D7A80005932D /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
-		AFB5BF132BE3DD840005932D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AFBC3A2C2BE0D5E500CE7542 /* EngAttack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EngAttack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFBC3A332BE0D5E700CE7542 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AFBC3A362BE0D5E700CE7542 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -69,7 +67,7 @@
 		CDC2087E2BE3AFA200105E63 /* SignUpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		CDC2087F2BE3AFA200105E63 /* SignViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignViewModel.swift; sourceTree = "<group>"; };
 		CDC208862BE3AFC500105E63 /* RootView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
-		CDC2088A2BE3BEB800105E63 /* CountDownView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountDownView.swift; sourceTree = "<group>"; };
+		F7A022AC2BE4691D00F3FCD5 /* CountDownView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountDownView.swift; sourceTree = "<group>"; };
 		F7A23E552BE1DB7E00A044BD /* TabViewSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewSetting.swift; sourceTree = "<group>"; };
 		F7A23E572BE1DE1200A044BD /* RankingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingView.swift; sourceTree = "<group>"; };
 		F7A23E592BE1DF8500A044BD /* SOYO Maple Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SOYO Maple Bold.otf"; sourceTree = "<group>"; };
@@ -122,7 +120,6 @@
 			isa = PBXGroup;
 			children = (
 				AFBC3A332BE0D5E700CE7542 /* Assets.xcassets */,
-				AFB5BF132BE3DD840005932D /* GoogleService-Info.plist */,
 				AF9552D72BE1D08E0019A124 /* Sounds */,
 				F7A23E552BE1DB7E00A044BD /* TabViewSetting.swift */,
 				F7A23E572BE1DE1200A044BD /* RankingView.swift */,
@@ -130,7 +127,7 @@
 				CD37DEF82BE0D7E000F7CB39 /* ContentViewViewModel.swift */,
 				BFD6A8DF2BE207E10009BFE2 /* ContentView.swift */,
 				CDC208862BE3AFC500105E63 /* RootView.swift */,
-				F7A022AA2BE4666A00F3FCD5 /* CountDownView.swift */,
+				F7A022AC2BE4691D00F3FCD5 /* CountDownView.swift */,
 				BF755ADD2BE1D792007DD8AE /* Launch Screen.swift */,
 				BF36CBE32BE118E90089D070 /* EngAttackApp.swift */,
 				AF62BD442BE0DDF700A88EDE /* SettingView.swift */,
@@ -269,7 +266,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F7A23E5D2BE1DF8500A044BD /* SOYO Maple Regular.otf in Resources */,
-				AFB5BF142BE3DD850005932D /* GoogleService-Info.plist in Resources */,
 				F7A23E5C2BE1DF8500A044BD /* SOYO Maple Bold.otf in Resources */,
 				AFBC3A372BE0D5E700CE7542 /* Preview Assets.xcassets in Resources */,
 				AF9552DD2BE1D09F0019A124 /* background.wav in Resources */,
@@ -287,6 +283,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF05DFF22BE28C7D005625E0 /* SettingView.swift in Sources */,
+				F7A022AD2BE4691D00F3FCD5 /* CountDownView.swift in Sources */,
 				AF05DFF32BE28C7D005625E0 /* WordInfo.swift in Sources */,
 				AF05DFF42BE28C7D005625E0 /* WordManager.swift in Sources */,
 				CDC208812BE3AFA200105E63 /* AuthenticationManager.swift in Sources */,
@@ -297,7 +294,6 @@
 				CDC208872BE3AFC500105E63 /* RootView.swift in Sources */,
 				CDC208852BE3AFA200105E63 /* SignViewModel.swift in Sources */,
 				BFD6A8E22BE209E10009BFE2 /* EngAttackApp.swift in Sources */,
-				F7A022AB2BE4666A00F3FCD5 /* CountDownView.swift in Sources */,
 				CDC208822BE3AFA200105E63 /* Field.swift in Sources */,
 				CDA4363D2BE28E9B0047E2C0 /* WordBookmarkView.swift in Sources */,
 				F7A23E582BE1DE1200A044BD /* RankingView.swift in Sources */,
