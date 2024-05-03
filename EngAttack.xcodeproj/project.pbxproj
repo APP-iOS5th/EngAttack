@@ -10,6 +10,7 @@
 		AF05DFF22BE28C7D005625E0 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF62BD442BE0DDF700A88EDE /* SettingView.swift */; };
 		AF05DFF32BE28C7D005625E0 /* WordInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD37DF002BE0D7E700F7CB39 /* WordInfo.swift */; };
 		AF05DFF42BE28C7D005625E0 /* WordManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD37DF012BE0D7E700F7CB39 /* WordManager.swift */; };
+		AF2ECB1C2BE5062C009DA64F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AF2ECB1B2BE5062C009DA64F /* GoogleService-Info.plist */; };
 		AF9552DB2BE1D09F0019A124 /* correct.wav in Resources */ = {isa = PBXBuildFile; fileRef = AF9552D82BE1D09B0019A124 /* correct.wav */; };
 		AF9552DC2BE1D09F0019A124 /* error.wav in Resources */ = {isa = PBXBuildFile; fileRef = AF9552D92BE1D09B0019A124 /* error.wav */; };
 		AF9552DD2BE1D09F0019A124 /* background.wav in Resources */ = {isa = PBXBuildFile; fileRef = AF9552DA2BE1D09F0019A124 /* background.wav */; };
@@ -36,7 +37,6 @@
 		CDC2088B2BE3BEB800105E63 /* CountDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC2088A2BE3BEB800105E63 /* CountDownView.swift */; };
 		D8BE454C2BE496FD00C9BD40 /* BookMark.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8BE454B2BE496FD00C9BD40 /* BookMark.swift */; };
 		D8BE45512BE4977600C9BD40 /* Rank.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8BE45502BE4977600C9BD40 /* Rank.swift */; };
-		D8BE45592BE4B39E00C9BD40 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D8BE45582BE4B39E00C9BD40 /* GoogleService-Info.plist */; };
 		D8BE455B2BE4BD2B00C9BD40 /* SignInState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8BE455A2BE4BD2B00C9BD40 /* SignInState.swift */; };
 		F7A23E562BE1DB7E00A044BD /* TabViewSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7A23E552BE1DB7E00A044BD /* TabViewSetting.swift */; };
 		F7A23E582BE1DE1200A044BD /* RankingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7A23E572BE1DE1200A044BD /* RankingView.swift */; };
@@ -47,6 +47,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AF2ECB1B2BE5062C009DA64F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AF62BD442BE0DDF700A88EDE /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		AF9552D82BE1D09B0019A124 /* correct.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = correct.wav; sourceTree = "<group>"; };
 		AF9552D92BE1D09B0019A124 /* error.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = error.wav; sourceTree = "<group>"; };
@@ -74,7 +75,6 @@
 		CDC2088A2BE3BEB800105E63 /* CountDownView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountDownView.swift; sourceTree = "<group>"; };
 		D8BE454B2BE496FD00C9BD40 /* BookMark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMark.swift; sourceTree = "<group>"; };
 		D8BE45502BE4977600C9BD40 /* Rank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rank.swift; sourceTree = "<group>"; };
-		D8BE45582BE4B39E00C9BD40 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D8BE455A2BE4BD2B00C9BD40 /* SignInState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInState.swift; sourceTree = "<group>"; };
 		F7A23E552BE1DB7E00A044BD /* TabViewSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewSetting.swift; sourceTree = "<group>"; };
 		F7A23E572BE1DE1200A044BD /* RankingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingView.swift; sourceTree = "<group>"; };
@@ -128,6 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				AFBC3A332BE0D5E700CE7542 /* Assets.xcassets */,
+				AF2ECB1B2BE5062C009DA64F /* GoogleService-Info.plist */,
 				AF9552D72BE1D08E0019A124 /* Sounds */,
 				F7A23E552BE1DB7E00A044BD /* TabViewSetting.swift */,
 				F7F07C842BE0DF96009A75A9 /* GameStartView.swift */,
@@ -139,7 +140,6 @@
 				BF36CBE32BE118E90089D070 /* EngAttackApp.swift */,
 				AF62BD442BE0DDF700A88EDE /* SettingView.swift */,
 				AFB5BF0A2BE3D7A80005932D /* SettingViewModel.swift */,
-				D8BE45582BE4B39E00C9BD40 /* GoogleService-Info.plist */,
 				D8BE454F2BE4976400C9BD40 /* Rank */,
 				CDC208802BE3AFA200105E63 /* Sign */,
 				BF0C51612BE325D700A10946 /* Dictionary */,
@@ -286,7 +286,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F7A23E5D2BE1DF8500A044BD /* SOYO Maple Regular.otf in Resources */,
-				D8BE45592BE4B39E00C9BD40 /* GoogleService-Info.plist in Resources */,
+				AF2ECB1C2BE5062C009DA64F /* GoogleService-Info.plist in Resources */,
 				F7A23E5C2BE1DF8500A044BD /* SOYO Maple Bold.otf in Resources */,
 				AFBC3A372BE0D5E700CE7542 /* Preview Assets.xcassets in Resources */,
 				AF9552DD2BE1D09F0019A124 /* background.wav in Resources */,
