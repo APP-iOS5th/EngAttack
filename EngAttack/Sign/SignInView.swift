@@ -18,7 +18,7 @@ struct SignInView: View {
     @State private var email = ""
     @State private var password = ""
     @State private var loginActive = false
-    @State private var isSignUpActive = false
+    @State  var isSignUpActive = false
     @FocusState private var focusedField: Field?
     
     var body: some View {
@@ -26,28 +26,28 @@ struct SignInView: View {
             Form {
                 Section(header: Text("아이디")
                     .font(.system(size: 15))
-                    .foregroundStyle(.black)
+                    .foregroundStyle(contentViewModel.isDarkMode ? .white : .black)
                     .bold()) {
                         TextField("", text: $email)
                             .keyboardType(.emailAddress)
                             .font(.system(size: 17))
                             .textInputAutocapitalization(.never)
-                            .foregroundStyle(.black)
+                            .foregroundStyle(contentViewModel.isDarkMode ? .white : .black)
                             .focused($focusedField, equals: .id)
                             .onSubmit { focusedField = .password }
-                }
+                    }
                 
                 Section(header: Text("패스워드")
                     .font(.system(size: 15))
-                    .foregroundStyle(.black)
+                    .foregroundStyle(contentViewModel.isDarkMode ? .white : .black)
                     .bold()) {
                         SecureField("", text: $password)
                             .textInputAutocapitalization(.never)
                             .font(.system(size: 17))
-                            .foregroundStyle(.black)
+                            .foregroundStyle(contentViewModel.isDarkMode ? .white : .black)
                             .focused($focusedField, equals: .password)
                             .onSubmit { focusedField = nil }
-                }
+                    }
                 
                 Section {
                     Button {
@@ -60,7 +60,7 @@ struct SignInView: View {
                                 signViewModel.uid = userID
                                 signViewModel.Signstate = .signedIn
                                 loginActive = true
-                                    return
+                                return
                             } catch {
                                 correctLogin = true
                             }
@@ -82,7 +82,8 @@ struct SignInView: View {
                         Text("회원 가입")
                     }
                     .sheet(isPresented: $isSignUpActive) {
-                        SignUpView(viewModels: signViewModel)
+                       // SignUpView(viewModels: SignViewModel(), isSignUpActive: $isSignUpActive)
+                        SignUpView(viewModels: SignViewModel(), isSignUpActive: $isSignUpActive)
                     }
                     .padding(.leading, 120)
                 }
@@ -97,9 +98,9 @@ struct SignInView: View {
         NavigationLink(destination: TabViewSetting(signViewModel: signViewModel)
             .environmentObject(SettingViewModel())
             .environmentObject(ContentViewViewModel())
-            , isActive: $loginActive) {
-                EmptyView()
-            }
+                       , isActive: $loginActive) {
+            EmptyView()
+        }
     }
 }
 
