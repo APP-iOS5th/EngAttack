@@ -25,7 +25,7 @@ struct RootView: View {
             }
         }
         .onAppear {
-            if signViewModel.currentUser != nil  {
+            if signViewModel.currentUser != nil && signViewModel.uid != "" {
                 signViewModel.Signstate = .signedIn
                 print("테스트")
             }
