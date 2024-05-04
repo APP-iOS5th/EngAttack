@@ -16,7 +16,7 @@ struct DictionaryView: View {
     @State var recommendWordList: [(String, String)] = []
     @State var tempWord: [String] = []
     var lastWord: String
-    private let viewModel = WordDictionaryViewModel()
+    private let dictionaryViewModel = WordDictionaryViewModel()
     private let bookMarkViewMdoel = WorkBookmarkViewModel()
     
     var body: some View {
@@ -41,7 +41,7 @@ struct DictionaryView: View {
             }
         }
         .onAppear {
-            viewModel.recommendWordList(alphabet: lastWord, wordList: []) { recommendList in
+            dictionaryViewModel.recommendWordList(alphabet: lastWord, wordList: []) { recommendList in
                 self.recommendWordList = recommendList
             }
         }

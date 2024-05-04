@@ -18,7 +18,7 @@ struct SignInView: View {
     @State private var email = ""
     @State private var password = ""
     @State private var loginActive = false
-    @State  var isSignUpActive = false
+    @State private var isSignUpActive = false
     @FocusState private var focusedField: Field?
     
     var body: some View {
@@ -35,7 +35,7 @@ struct SignInView: View {
                             .foregroundStyle(contentViewModel.isDarkMode ? .white : .black)
                             .focused($focusedField, equals: .id)
                             .onSubmit { focusedField = .password }
-                    }
+                }
                 
                 Section(header: Text("패스워드")
                     .font(.system(size: 15))
@@ -47,7 +47,7 @@ struct SignInView: View {
                             .foregroundStyle(contentViewModel.isDarkMode ? .white : .black)
                             .focused($focusedField, equals: .password)
                             .onSubmit { focusedField = nil }
-                    }
+                }
                 
                 Section {
                     Button {
@@ -60,7 +60,7 @@ struct SignInView: View {
                                 signViewModel.uid = userID
                                 signViewModel.Signstate = .signedIn
                                 loginActive = true
-                                return
+                                    return
                             } catch {
                                 correctLogin = true
                             }
@@ -72,7 +72,7 @@ struct SignInView: View {
                     .alert(isPresented: $correctLogin) {
                         Alert(title: Text("주의"), message: Text("이메일 또는 비밀번호가 맞지않습니다."), dismissButton: .default(Text("확인")))
                     }
-                    .disabled( !checkEmailForm(email:email) )
+                    .disabled( !isValidEmail(email:email) )
                     .padding(.horizontal, 100)
                     .buttonStyle(.borderedProminent)
                     
@@ -82,8 +82,7 @@ struct SignInView: View {
                         Text("회원 가입")
                     }
                     .sheet(isPresented: $isSignUpActive) {
-                       // SignUpView(viewModels: SignViewModel(), isSignUpActive: $isSignUpActive)
-                        SignUpView(viewModels: SignViewModel(), isSignUpActive: $isSignUpActive)
+                        SignUpView(signViewModel: signViewModel, isSignUpActive: $isSignUpActive)
                     }
                     .padding(.leading, 120)
                 }
@@ -98,15 +97,16 @@ struct SignInView: View {
         NavigationLink(destination: TabViewSetting(signViewModel: signViewModel)
             .environmentObject(SettingViewModel())
             .environmentObject(ContentViewViewModel())
-                       , isActive: $loginActive) {
-            EmptyView()
-        }
+            , isActive: $loginActive) {
+                EmptyView()
+            }
     }
 }
 
 extension SignInView {
     
-    private func checkEmailForm(email: String) -> Bool {
+    //아이디 형식검사
+    func isValidEmail(email: String) -> Bool {
         let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}"
         return NSPredicate(format: "SELF MATCHES %@", emailRegex).evaluate(with: email)
     }

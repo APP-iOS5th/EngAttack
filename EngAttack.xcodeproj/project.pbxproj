@@ -39,6 +39,7 @@
 		D8BE45512BE4977600C9BD40 /* Rank.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8BE45502BE4977600C9BD40 /* Rank.swift */; };
 		D8BE455B2BE4BD2B00C9BD40 /* SignInState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8BE455A2BE4BD2B00C9BD40 /* SignInState.swift */; };
 		D8FEE2F82BE538D5001FC45C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D8FEE2F72BE538D5001FC45C /* GoogleService-Info.plist */; };
+		D8FEE2FB2BE5BF1D001FC45C /* ProfileSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FEE2FA2BE5BF1D001FC45C /* ProfileSettingView.swift */; };
 		F7A23E562BE1DB7E00A044BD /* TabViewSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7A23E552BE1DB7E00A044BD /* TabViewSetting.swift */; };
 		F7A23E582BE1DE1200A044BD /* RankingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7A23E572BE1DE1200A044BD /* RankingView.swift */; };
 		F7A23E5C2BE1DF8500A044BD /* SOYO Maple Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = F7A23E592BE1DF8500A044BD /* SOYO Maple Bold.otf */; };
@@ -79,6 +80,7 @@
 		D8BE455A2BE4BD2B00C9BD40 /* SignInState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInState.swift; sourceTree = "<group>"; };
 		D8FEE2F72BE538D5001FC45C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D8FEE2F92BE538DA001FC45C /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D8FEE2FA2BE5BF1D001FC45C /* ProfileSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingView.swift; sourceTree = "<group>"; };
 		F7A23E552BE1DB7E00A044BD /* TabViewSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewSetting.swift; sourceTree = "<group>"; };
 		F7A23E572BE1DE1200A044BD /* RankingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingView.swift; sourceTree = "<group>"; };
 		F7A23E592BE1DF8500A044BD /* SOYO Maple Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SOYO Maple Bold.otf"; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 		AFBC3A232BE0D5E400CE7542 = {
 			isa = PBXGroup;
 			children = (
+				D8FEE2FA2BE5BF1D001FC45C /* ProfileSettingView.swift */,
 				D8FEE2F72BE538D5001FC45C /* GoogleService-Info.plist */,
 				AFBC3A2E2BE0D5E500CE7542 /* EngAttack */,
 				AFBC3A2D2BE0D5E500CE7542 /* Products */,
@@ -317,6 +320,7 @@
 				CDA4363E2BE28E9B0047E2C0 /* WordDictionaryViewModel.swift in Sources */,
 				AFB5BF0B2BE3D7A80005932D /* SettingViewModel.swift in Sources */,
 				BFD6A8E02BE207E10009BFE2 /* ContentView.swift in Sources */,
+				D8FEE2FB2BE5BF1D001FC45C /* ProfileSettingView.swift in Sources */,
 				CDC208872BE3AFC500105E63 /* RootView.swift in Sources */,
 				CDC208852BE3AFA200105E63 /* SignViewModel.swift in Sources */,
 				D8BE45512BE4977600C9BD40 /* Rank.swift in Sources */,

@@ -29,7 +29,7 @@ struct WordDictionaryView: View {
     @Query private var storedWords: [TempModel]
     @Environment(\.modelContext) var modelContext
     
-    @StateObject private var viewModel: WordDictionaryViewModel = WordDictionaryViewModel()
+    @StateObject private var dictionaryViewModel: WordDictionaryViewModel = WordDictionaryViewModel()
     @State private var searchString: String = ""
     
     private let bookMarkViewModel = WorkBookmarkViewModel()
@@ -38,7 +38,7 @@ struct WordDictionaryView: View {
         NavigationStack {
             VStack {
                 List {
-                    ForEach(viewModel.getWords(), id: \.0) { word in
+                    ForEach(dictionaryViewModel.getWords(), id: \.0) { word in
                         let temp: String = "\(word.0)--\(word.1)"
                         let result = temp.components(separatedBy: "--")
                         let bookmarkedWords: [TempModel] = storedWords.filter{ $0.word == "\(word.0)--\(word.1)" }
@@ -73,14 +73,14 @@ struct WordDictionaryView: View {
         .searchable(text: $searchString, prompt: "Search Word")
         .onSubmit(of: .search) {
             if !searchString.isEmpty {
-                viewModel.searchString(searchWord: searchString.lowercased())
+                dictionaryViewModel.searchString(searchWord: searchString.lowercased())
             } else {
-                viewModel.saveSearchResult(words: [])
+                dictionaryViewModel.saveSearchResult(words: [])
             }
         }
         .onDisappear {
             searchString = ""
-            viewModel.saveSearchResult(words: [])
+            dictionaryViewModel.saveSearchResult(words: [])
         }
     }
 }

@@ -15,10 +15,10 @@ import SwiftData
 
 
 struct ContentView: View {
-	@EnvironmentObject var viewModel: ContentViewViewModel
+	@EnvironmentObject var contentViewModel: ContentViewViewModel
 	@EnvironmentObject var setViewModel: SettingViewModel
 
-    @StateObject var viewModels: SignViewModel = SignViewModel()
+    @StateObject var singViewModel: SignViewModel = SignViewModel()
 
     @State private var isShowRecommendWordList: Bool = false
 
@@ -29,26 +29,26 @@ struct ContentView: View {
 	var body: some View {
 		NavigationStack {
 			VStack() {
-				Text("Score: \(viewModel.score)")
+				Text("Score: \(contentViewModel.score)")
 					.padding(.bottom)
 					.bold()
 				
-				Text("남은 시간: \(String(format: "%.1f", viewModel.timeRemaining))초")
+				Text("남은 시간: \(String(format: "%.1f", contentViewModel.timeRemaining))초")
 					.font(.custom("SOYO Maple Bold", size: 30))
 					.padding()
 				
-				ProgressView(value: max(0, min(viewModel.timeRemaining, 60.0)), total: timeRemaining)
+				ProgressView(value: max(0, min(contentViewModel.timeRemaining, 60.0)), total: timeRemaining)
 					.progressViewStyle(DarkBlueShadowProgressViewStyle())
 					.padding()
 				
-				Text(viewModel.currentWord)
+				Text(contentViewModel.currentWord)
 					.font(.title)
 					.bold()
 					.padding()
 				
-				TextField("Enter the word", text: $viewModel.userInput, onCommit: { 
-                    viewModel.timeRemaining = timeRemaining
-                    viewModel.submitButton { result in
+				TextField("Enter the word", text: $contentViewModel.userInput, onCommit: {
+                    contentViewModel.timeRemaining = timeRemaining
+                    contentViewModel.submitButton { result in
                         if result {
                             // correct sound
                             SoundSetting.instance.setVolume(setViewModel.isEffect ? Float(effectVol) : 0)
@@ -74,36 +74,36 @@ struct ContentView: View {
 				}
 				.padding()
 				
-				.alert(isPresented: $viewModel.showAlert) {
-					Alert(title: Text(viewModel.alertTitle),
-						  message: Text("당신의 점수는 \(viewModel.score)점 입니다."),
+				.alert(isPresented: $contentViewModel.showAlert) {
+					Alert(title: Text(contentViewModel.alertTitle),
+						  message: Text("당신의 점수는 \(contentViewModel.score)점 입니다."),
 						  primaryButton: .default(Text("그만하기"), action: {
-                        addRank(viewModels.name, viewModel.score)
-						viewModel.resetGame()
-						viewModel.userInput = ""
+                        addRank(singViewModel.name, contentViewModel.score)
+                        contentViewModel.resetGame()
+                        contentViewModel.userInput = ""
 					}),
 						 secondaryButton: .destructive(Text("추천 단어 보기"), action: {
 //						viewModel.resetGame()
 //						viewModel.stopTimer()
 //						viewModel.userInput = ""
-                        addRank(viewModels.name, viewModel.score)
+                        addRank(singViewModel.name, contentViewModel.score)
                         isShowRecommendWordList = true
 					}))
 				}
 			}
 			.onAppear {
-				viewModel.pickRandomWord()
-				viewModel.timeRemaining = timeRemaining
-				viewModel.startTimer()
+                contentViewModel.pickRandomWord()
+                contentViewModel.timeRemaining = timeRemaining
+                contentViewModel.startTimer()
                 SoundSetting.instance.playSound(sound: .background)
 			}
 			.onDisappear {
-                addRank(viewModels.name, viewModel.score)
-				viewModel.stopTimer()
+                addRank(singViewModel.name, contentViewModel.score)
+                contentViewModel.stopTimer()
                 SoundSetting.instance.stopMusic()
 			}
             .sheet(isPresented: $isShowRecommendWordList, content: {
-                DictionaryView(lastWord: String(viewModel.currentWord.last!))
+                DictionaryView(lastWord: String(contentViewModel.currentWord.last!))
                     .modelContainer(for: TempModel.self)
             })
             .toolbar {
@@ -141,7 +141,7 @@ extension ContentView {
     func addRank(_: String, _ : Int) {
         let db = Firestore.firestore()
         guard let userID = Auth.auth().currentUser?.uid else { return }
-        let rank = Rank(name: viewModels.name, score: viewModel.score)
+        let rank = Rank(name: singViewModel.name, score: contentViewModel.score)
                 db.collection("Rank").document(userID).updateData(["List": FieldValue.arrayUnion([rank.addRank])])
     }
 }

@@ -11,22 +11,22 @@ import FirebaseCore
 import FirebaseAuth
 
 struct RootView: View {
-    @StateObject var viewModel : SignViewModel = SignViewModel()
+    @StateObject var signViewModel : SignViewModel = SignViewModel()
     var body: some View {
         VStack {
-            if viewModel.Signstate == .signedIn {
-                TabViewSetting(signViewModel: viewModel)
+            if signViewModel.Signstate == .signedIn {
+                TabViewSetting(signViewModel: signViewModel)
                     .environmentObject(ContentViewViewModel())
                     .environmentObject(SettingViewModel())
                     .modelContainer(for: TempModel.self)
             } else {
-                SignInView(signViewModel: viewModel)
+                SignInView(signViewModel: signViewModel)
                     .environmentObject(ContentViewViewModel())
             }
         }
         .onAppear {
-            if viewModel.currentUser != nil  {
-                viewModel.Signstate = .signedIn
+            if signViewModel.currentUser != nil  {
+                signViewModel.Signstate = .signedIn
                 print("테스트")
             }
         }

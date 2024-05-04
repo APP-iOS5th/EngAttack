@@ -10,27 +10,27 @@ import SwiftData
 
 struct TabViewSetting: View {
 
-	@EnvironmentObject var viewModel: ContentViewViewModel
+	@EnvironmentObject var contentviewModel: ContentViewViewModel
     @StateObject var signViewModel: SignViewModel = SignViewModel()
 	@State private var selection: String = "끝말잇기"
 	
 	var body: some View {
 		VStack {
-			if viewModel.isLoading {
+			if contentviewModel.isLoading {
                 ContentView(timeRemaining: .constant(30)).launchScreenView
 					.onAppear {
 						DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
 							withAnimation {
-								viewModel.isLoading = false
+                                contentviewModel.isLoading = false
 							}
 						}
 					}
-			} else if !viewModel.gameStarted {
+			} else if !contentviewModel.gameStarted {
 				NavigationStack {
 					GameStartView()
 						.onAppear {
 							withAnimation {
-								viewModel.gameStarted = true
+								contentviewModel.gameStarted = true
 							}
 						}
 				}
@@ -38,7 +38,7 @@ struct TabViewSetting: View {
 				mainTabView
 			}
 		}
-        .preferredColorScheme(viewModel.isDarkMode ? .dark : .light)
+        .preferredColorScheme(contentviewModel.isDarkMode ? .dark : .light)
     }
 	
 	var mainTabView: some View {
