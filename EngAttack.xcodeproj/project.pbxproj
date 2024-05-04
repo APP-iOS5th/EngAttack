@@ -116,7 +116,6 @@
 		AFBC3A232BE0D5E400CE7542 = {
 			isa = PBXGroup;
 			children = (
-				D8FEE2FA2BE5BF1D001FC45C /* ProfileSettingView.swift */,
 				D8FEE2F72BE538D5001FC45C /* GoogleService-Info.plist */,
 				AFBC3A2E2BE0D5E500CE7542 /* EngAttack */,
 				AFBC3A2D2BE0D5E500CE7542 /* Products */,
@@ -146,6 +145,7 @@
 				BF755ADD2BE1D792007DD8AE /* Launch Screen.swift */,
 				BF36CBE32BE118E90089D070 /* EngAttackApp.swift */,
 				AF62BD442BE0DDF700A88EDE /* SettingView.swift */,
+				D8FEE2FA2BE5BF1D001FC45C /* ProfileSettingView.swift */,
 				AFB5BF0A2BE3D7A80005932D /* SettingViewModel.swift */,
 				D8BE454F2BE4976400C9BD40 /* Rank */,
 				CDC208802BE3AFA200105E63 /* Sign */,
