@@ -15,6 +15,7 @@ struct SettingView: View {
     @StateObject var signViewModel : SignViewModel = SignViewModel()
     @State var settingsSound = false
     @State var isprofileLoad = false
+    @State var isUnregister = false
     //@State var backVolume = 0.0
     let effectVol = 0.3
     
@@ -82,6 +83,17 @@ struct SettingView: View {
                 }
                 Section {
                     Button {
+                        isUnregister.toggle()
+                    } label: {
+                        HStack {
+                            Text(contentsViewModel.isKR ? "Unregister" : "회원탈퇴")
+                                .foregroundStyle(.red)
+                                .padding(.leading, 5)
+                                .font(.system(size: 21))
+                        }
+                        .frame(height: 25)
+                    }
+                    Button {
                         Task {
                             do{
                                 try await signViewModel.signOut()
@@ -105,6 +117,16 @@ struct SettingView: View {
                     }
                 }
             }
+        }
+        .alert(isPresented: $isUnregister) {
+            Alert(title: Text(contentsViewModel.isKR ? "Warning" : "경고"),
+                  message: Text(contentsViewModel.isKR ? "Do you really want to cancel your membership?" : "정말로 회원탈퇴 하시겠습니까?"),
+                  primaryButton: .default(Text(contentsViewModel.isKR ?  "Cancel" : "취소하기"), action: {
+   
+            }),
+                 secondaryButton: .destructive(Text(contentsViewModel.isKR ?  "Delete" : "삭제"), action: {
+
+            }))
         }
         .font(.system(size: 20))
         
