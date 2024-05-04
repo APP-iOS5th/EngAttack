@@ -77,7 +77,6 @@ struct SignUpView: View {
                                 try await db.collection("USER").document(userID).setData(["email": signViewModel.email, "name": name])
                                 try await db.collection("BookMark").document(userID).setData(["List": FieldValue.arrayUnion([["word":"", "description" : ""]])])
                                 try await db.collection("Rank").document(userID).setData(["List": FieldValue.arrayUnion([["name":name, "score": 0]])])
-                                isSignUpActive.toggle()
                                 isDone.toggle()
                                 return
                             } catch {
@@ -105,13 +104,14 @@ struct SignUpView: View {
                     } label: {
                         Text(contentViewModel.isKR ? "Sign up" : "회원가입")
                             .frame(width: 100, height: 35)
-                            
+                        
                     }
                     .alert(isPresented: $isError) {
                         Alert(title: Text(contentViewModel.isKR ? "Error" : "경고"), message: Text(messageString), dismissButton: .default(Text(contentViewModel.isKR ? "Done" : "확인")))
                     }
                     .alert(isPresented: $isDone) {
-                        Alert(title: Text(contentViewModel.isKR ? "Notification" : "알림"), message: Text("회원가입이 완료되었습니다"), dismissButton: .default(Text(contentViewModel.isKR ? "Done" : "확인")))
+                        Alert(title: Text(contentViewModel.isKR ? "Notification" : "알림"), message: Text("회원가입이 완료되었습니다"), dismissButton: .default(Text(contentViewModel.isKR ? "Done" : "확인"), action: { isSignUpActive.toggle()
+                        }))
                     }
                     .disabled(name.isEmpty)
                     .padding(.horizontal, 100)
@@ -122,7 +122,7 @@ struct SignUpView: View {
             .navigationTitle(contentViewModel.isKR ? "Sign up" : "회원가입")
             .navigationBarTitleDisplayMode(.inline)
             
-
+            
         }
     }
 }
