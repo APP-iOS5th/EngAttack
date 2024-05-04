@@ -27,7 +27,7 @@ struct SignUpView: View {
     var body: some View {
         NavigationStack {
             Form {
-                Section(header: Text("이름")
+                Section(header: Text(contentViewModel.isKR ? "Name" : "이름")
                     .font(.system(size: 15))
                     .foregroundStyle(contentViewModel.isDarkMode ? .white : .black)
                     .bold()) {
@@ -40,7 +40,7 @@ struct SignUpView: View {
                             .onSubmit { focusedField = .id }
                     }
                 
-                Section(header: Text("이메일")
+                Section(header: Text(contentViewModel.isKR ? "Email" : "이메일")
                     .font(.system(size: 15))
                     .foregroundStyle(contentViewModel.isDarkMode ? .white : .black)
                     .bold()) {
@@ -53,7 +53,7 @@ struct SignUpView: View {
                             .onSubmit { focusedField = .password }
                     }
                 
-                Section(header: Text("비밀번호")
+                Section(header: Text(contentViewModel.isKR ? "Password" : "패스워드")
                     .font(.system(size: 15))
                     .foregroundStyle(contentViewModel.isDarkMode ? .white : .black)
                     .bold()) {
@@ -87,27 +87,27 @@ struct SignUpView: View {
                                 if !isValidEmails || !isValidPasswords || !emailCheck  {
                                     isError = true
                                     if !isValidEmails && isValidPasswords   {
-                                        messageString = "이메일 형식을 확인해주세요"
+                                        messageString = contentViewModel.isKR ? "Please check the email form" : "이메일 양식을 확인해주세요"
                                     }
                                     else if !isValidPasswords && isValidEmails   {
-                                        messageString = "비밀번호가 대,소문자 8자리이상이 아닙니다"
+                                        messageString = contentViewModel.isKR ? "The password must be at least 8 uppercase characters long" : "패스워드는 대소문자 8자리 이상이어야 합니다"
                                     }
                                     else if !isValidEmails && !isValidPasswords {
-                                        messageString = "이메일,비밀번호를 확인해주세요"
+                                        messageString = contentViewModel.isKR ? "Please check the e-mail form and password of 8 characters or more" : "이메일양식, 패스워드8자 이상을 확인해주세요"
                                     }
                                     else if !emailCheck {
-                                        messageString = "이미 가입된 이메일입니다."
+                                        messageString = contentViewModel.isKR ? "This Email is already sign up" : "이미 가입된 이메일 입니다"
                                     }
                                 }
                             }
                         }
                     } label: {
-                        Text("회원 가입")
+                        Text(contentViewModel.isKR ? "Sign up" : "회원가입")
                             .frame(width: 100, height: 35)
                             
                     }
                     .alert(isPresented: $isError) {
-                        Alert(title: Text("경고"), message: Text(messageString), dismissButton: .default(Text("확인")))
+                        Alert(title: Text(contentViewModel.isKR ? "Error" : "경고"), message: Text(messageString), dismissButton: .default(Text(contentViewModel.isKR ? "Done" : "확인")))
                     }
                     .disabled(name.isEmpty)
                     .padding(.horizontal, 100)
@@ -115,7 +115,7 @@ struct SignUpView: View {
                 }
                 .listRowBackground(Color.clear)
             }
-            .navigationTitle("회원가입")
+            .navigationTitle(contentViewModel.isKR ? "Sign up" : "회원가입")
             .navigationBarTitleDisplayMode(.inline)
             
 

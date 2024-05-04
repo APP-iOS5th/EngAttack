@@ -19,7 +19,10 @@ struct WordBookmarkView: View {
     
     @State var firebaseWords: [(String, String, Bool)] = []
     private let bookMarkViewModel = WorkBookmarkViewModel()
+    @EnvironmentObject var contentViewModel : ContentViewViewModel
+  
     
+   
     var body: some View {
         NavigationStack {
             VStack {
@@ -29,7 +32,7 @@ struct WordBookmarkView: View {
                             let word = firebaseWords[index]
                             Text(word.2 ? word.0 : word.1)
                             Spacer()
-                            Button(word.2 ? "뜻 보기" : "단어 보기") {
+                            Button(word.2 ? contentViewModel.isKR ? "Desc" : "뜻보기" : contentViewModel.isKR ? "Word" : "단어보기") {
                                 firebaseWords[index].2.toggle()
                             }
                         }
@@ -42,7 +45,7 @@ struct WordBookmarkView: View {
                     })
                 }
             }
-            .navigationTitle("Word Book Mark")
+            .navigationTitle(contentViewModel.isKR ? "Word Book Mark" : "단어 북마크")
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     EditButton()

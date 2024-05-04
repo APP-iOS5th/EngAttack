@@ -24,7 +24,7 @@ struct SignInView: View {
     var body: some View {
         NavigationStack {
             Form {
-                Section(header: Text("아이디")
+                Section(header: Text(contentViewModel.isKR ? "Email" : "이메일")
                     .font(.system(size: 15))
                     .foregroundStyle(contentViewModel.isDarkMode ? .white : .black)
                     .bold()) {
@@ -37,7 +37,7 @@ struct SignInView: View {
                             .onSubmit { focusedField = .password }
                 }
                 
-                Section(header: Text("패스워드")
+                Section(header: Text(contentViewModel.isKR ? "Password" : "패스워드")
                     .font(.system(size: 15))
                     .foregroundStyle(contentViewModel.isDarkMode ? .white : .black)
                     .bold()) {
@@ -66,11 +66,11 @@ struct SignInView: View {
                             }
                         }
                     } label: {
-                        Text("로그인")
+                        Text(contentViewModel.isKR ? "Login" : "로그인")
                             .frame(width: 100, height: 35)
                     }
                     .alert(isPresented: $correctLogin) {
-                        Alert(title: Text("주의"), message: Text("이메일 또는 비밀번호가 맞지않습니다."), dismissButton: .default(Text("확인")))
+                        Alert(title: Text(contentViewModel.isKR ? "Error" : "에러"), message: Text(contentViewModel.isKR ? "Email or Password not correct!" : "이메일 또는 비밀번호가 맞지않습니다."), dismissButton: .default(Text(contentViewModel.isKR ? "Done" : "확인")))
                     }
                     .disabled( !isValidEmail(email:email) )
                     .padding(.horizontal, 100)
@@ -79,7 +79,7 @@ struct SignInView: View {
                     Button {
                         self.isSignUpActive = true
                     } label: {
-                        Text("회원 가입")
+                        Text(contentViewModel.isKR ? "Sign Up" : "회원 가입")
                     }
                     .sheet(isPresented: $isSignUpActive) {
                         SignUpView(signViewModel: signViewModel, isSignUpActive: $isSignUpActive)
@@ -89,7 +89,7 @@ struct SignInView: View {
                 .listRowBackground(Color.clear)
                 
             }
-            .navigationTitle("로그인")
+            .navigationTitle(contentViewModel.isKR ? "Login" : "로그인")
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarBackButtonHidden(true)
             .preferredColorScheme(contentViewModel.isDarkMode ? .dark : .light)

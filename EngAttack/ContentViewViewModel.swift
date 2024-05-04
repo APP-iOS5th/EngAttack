@@ -22,6 +22,11 @@ class ContentViewViewModel: ObservableObject {
 			UserDefaults.standard.set(isDarkMode, forKey: "darkModeKey")
 		}
 	}
+    @Published var isKR : Bool  {
+        didSet {
+            UserDefaults.standard.set(isKR, forKey: "isKR")
+        }
+    }
 	@Published var timeRemaining = 1.0
 	@Published var timerIsActive = false
 	@Published var isLoading: Bool = true
@@ -37,6 +42,7 @@ class ContentViewViewModel: ObservableObject {
 	
 	init() {
 		self.isDarkMode = UserDefaults.standard.bool(forKey: "darkModeKey")
+        self.isKR = UserDefaults.standard.bool(forKey: "isKR")
 		pickRandomWord()
 	}
 	
@@ -50,7 +56,7 @@ class ContentViewViewModel: ObservableObject {
 		// 입력한 단어가 비어있는 경우
 		guard word.count > 0 else {
 			gameTimer?.invalidate()
-			self.alertTitle = "입력된 단어가 없습니다"
+            self.alertTitle = isKR ?  "No input word" : "입력된 단어가 없습니다"
 			self.isCorrect = false
 			self.showAlert = true
 			self.userInput = ""
@@ -60,7 +66,7 @@ class ContentViewViewModel: ObservableObject {
         
         guard word.count != 1 else {
             gameTimer?.invalidate()
-            self.alertTitle = "2글자 이상 입력해주세요"
+            self.alertTitle = isKR ? "Please enter at least 2 characters" : "2글자 이상 입력해주세요"
             self.isCorrect = false
             self.showAlert = true
             self.userInput = ""
@@ -71,7 +77,7 @@ class ContentViewViewModel: ObservableObject {
 		// 입력한 단어가 이전에 사용된 단어인 경우,
 		guard !usedWords.contains(word) else {
 			gameTimer?.invalidate()
-			self.alertTitle = "이미 사용된 단어입니다"
+			self.alertTitle = isKR ? "It's a word that's already been used" : "이미 사용된 단어입니다"
 			self.isCorrect = false
 			self.showAlert = true
 			self.userInput = ""
@@ -82,18 +88,18 @@ class ContentViewViewModel: ObservableObject {
 		// 입력한 단어가 현재의 단어와 동일한 경우
 		guard word != currentWord else {
 			gameTimer?.invalidate()
-			self.alertTitle = "현재 단어와 동일합니다"
+			self.alertTitle = isKR ? "It's same word" : "제시된 단어와 같은 단어입니다"
 			self.isCorrect = false
 			self.showAlert = true
 			self.userInput = ""
 			
 			return
 		}
-		
+        
 		// 단어의 끝 알파벳과 입력한 단어의 첫 알파벳이 일치하는지 검사
 		guard let lastChar = word2.last, let firstChar = word.first, lastChar == firstChar else {
 			gameTimer?.invalidate()
-			self.alertTitle = "단어의 첫 글자가 이전 단어의 마지막 글자와 일치하지 않습니다."
+			self.alertTitle = isKR ? "The first letter of the word does not match the last letter of the previous word." : "단어의 첫 글자가 이전 단어의 마지막 글자와 일치하지 않습니다."
 			self.isCorrect = false
 			self.showAlert = true
 			self.userInput = ""
@@ -116,7 +122,7 @@ class ContentViewViewModel: ObservableObject {
 			} else {
 				DispatchQueue.main.async { [self] in
 					gameTimer?.invalidate()
-					alertTitle = "잘못된 단어입니다"
+					alertTitle = isKR ? "That's the wrong word" : "잘못된 단어입니다."
 					isCorrect = false
 					showAlert = true
                     
@@ -164,22 +170,23 @@ class ContentViewViewModel: ObservableObject {
 	// 타이머 제한시간 만료, 타이머 재시작
 	func timerExpired() {
 		DispatchQueue.main.async {
-			self.alertTitle = "제한 시간 초과"
+            self.alertTitle = self.isKR ? "Time out" : "제한 시간 초과"
 			self.showAlert = true
 			// 타이머를 정지합니다.
 			self.timerIsActive = false
 		}
 	}
-	
+    
 	// 게임 종료 알람
 	func gameEndAlert() -> Alert {
+        var isKRs = isKR
 		return Alert(
-			title: Text("제한 시간 초과"),
-			message: Text("당신의 점수는 \(score)점 입니다."),
-			primaryButton: .default(Text("다시시작"), action: {
+			title: Text(isKRs ? "Time out" : "제한 시간 초과"),
+			message: Text(isKRs ? "Your score is \(score)" : "당신의 점수는 \(score)점 입니다."),
+            primaryButton: .default(Text(isKRs ? "Regame" : "다시하기"), action: {
 				self.resetGame()
 			}),
-			secondaryButton: .cancel(Text("그만하기"), action: {
+			secondaryButton: .cancel(Text(isKRs ? "Stop" : "그만하기"), action: {
 				
 			})
 		)
