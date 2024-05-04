@@ -10,7 +10,7 @@ import FirebaseFirestore
 import FirebaseAuth
 
 struct SignUpView: View {
-    @StateObject  var viewModels : SignViewModel
+    @StateObject  var signViewModel : SignViewModel
     @EnvironmentObject var contentViewModel: ContentViewViewModel
     @State private var  name = ""
     @State private var  email = ""
@@ -68,38 +68,35 @@ struct SignUpView: View {
                     Button {
                         Task {
                             do {
-                                viewModels.name = name
-                                viewModels.email = email
-                                viewModels.password = password
-                                try await viewModels.signUp()
+                                signViewModel.name = name
+                                signViewModel.email = email
+                                signViewModel.password = password
+                                try await signViewModel .signUp()
                                 let db = Firestore.firestore()
                                 guard let userID = Auth.auth().currentUser?.uid else { return }
-                                try await db.collection("USER").document(userID).setData(["email": viewModels.email, "name": viewModels.name])
+                                try await db.collection("USER").document(userID).setData(["email": signViewModel.email, "name": signViewModel.name])
                                 try await db.collection("BookMark").document(userID).setData(["List": FieldValue.arrayUnion([["word":"", "description" : ""]])])
-                                try await db.collection("Rank").document(userID).setData(["List": FieldValue.arrayUnion([["name":viewModels.name, "score": 0]])])
+                                try await db.collection("Rank").document(userID).setData(["List": FieldValue.arrayUnion([["name":signViewModel.name, "score": 0]])])
                                 isSignUpActive.toggle()
                                 return
                             } catch {
-                                isValidEmails = isValidEmail(email: email)
-                                isValidPasswords = isValidPassword(pwd: password)
-                                emailCheck = emailCheck(email: email)
+                                isValidEmails = isValidEmail(email: signViewModel.email)
+                                isValidPasswords = isValidPassword(pwd: signViewModel.password)
+                                emailCheck = emailCheck(email: signViewModel.email)
                                 
-                                if !isValidEmails || !isValidPasswords || !emailCheck || name.isEmpty {
+                                if !isValidEmails || !isValidPasswords || !emailCheck  {
                                     isError = true
-                                    if !isValidEmails && isValidPasswords {
+                                    if !isValidEmails && isValidPasswords   {
                                         messageString = "이메일 형식을 확인해주세요"
                                     }
-                                    else if !isValidPasswords && isValidEmails  {
+                                    else if !isValidPasswords && isValidEmails   {
                                         messageString = "비밀번호가 대,소문자 8자리이상이 아닙니다"
                                     }
-                                    else if !isValidEmails && !isValidPasswords  {
+                                    else if !isValidEmails && !isValidPasswords {
                                         messageString = "이메일,비밀번호를 확인해주세요"
                                     }
                                     else if !emailCheck {
                                         messageString = "이미 가입된 이메일입니다."
-                                    }
-                                    else {
-                                        messageString = "이름을 확인해주세요."
                                     }
                                 }
                             }
@@ -112,7 +109,7 @@ struct SignUpView: View {
                     .alert(isPresented: $isError) {
                         Alert(title: Text("경고"), message: Text(messageString), dismissButton: .default(Text("확인")))
                     }
-                    .disabled( !isValidEmail(email: email) )
+                    .disabled(name.isEmpty)
                     .padding(.horizontal, 100)
                     .buttonStyle(.borderedProminent)
                 }

@@ -7,19 +7,19 @@
 
 import SwiftUI
 struct BookmarksView: View {
-  @ObservedObject var viewModel: ContentViewViewModel
+  @ObservedObject var contentViewModel: ContentViewViewModel
   
   
   var body: some View {
 	List {
-	  ForEach(Array(viewModel.bookmarkedWords).sorted(), id: \.self) { word in
+	  ForEach(Array(contentViewModel.bookmarkedWords).sorted(), id: \.self) { word in
 		Text(word)
 	  }
 	  .onDelete(perform: deleteItems)
 	}
 	.navigationTitle("북마크한 단어들")
 	.navigationBarItems(trailing: Button(action: {
-	  viewModel.bookmarkedWords.removeAll()
+        contentViewModel.bookmarkedWords.removeAll()
 	}) {
 	  Text("모두 지우기")
 	})
@@ -27,8 +27,8 @@ struct BookmarksView: View {
   
   func deleteItems(at offsets: IndexSet) {
 	for index in offsets {
-	  let word = Array(viewModel.bookmarkedWords).sorted()[index]
-	  viewModel.bookmarkedWords.remove(word)
+	  let word = Array(contentViewModel.bookmarkedWords).sorted()[index]
+        contentViewModel.bookmarkedWords.remove(word)
 	}
   }
 }

@@ -66,7 +66,7 @@ struct GameStartView: View {
 					CountDownView(isPresented: $isCountDownPresented)
 				}
 				.fullScreenCover(isPresented: $isGameViewPresented) { // 게임 화면 표시
-                    ContentView(viewModels: signViewModel, timeRemaining: $selectedTime)
+                    ContentView(timeRemaining: $selectedTime)
 				}
 			}
 			.onChange(of: isCountDownPresented) { newValue, _ in

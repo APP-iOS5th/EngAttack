@@ -10,7 +10,7 @@ import AVKit
 import FirebaseAuth
 
 struct SettingView: View {
-    @EnvironmentObject var viewModel: ContentViewViewModel
+    @EnvironmentObject var contentsViewModel: ContentViewViewModel
     @EnvironmentObject var setViewModel: SettingViewModel
     @StateObject var signViewModel : SignViewModel = SignViewModel()
     @State var settingsSound = false
@@ -27,15 +27,14 @@ struct SettingView: View {
                 // MARK: 마이페이지
                 Section(header: Text("마이페이지").font(.system(size: 18))) {
                     Button {
-                        // TODO: 회원정보 수정 페이지 이동
-                        print("mypage view")
+                        
                     } label: {
                         HStack {
                             Image(systemName: "person.circle")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                             Text(signViewModel.name)
-                                .foregroundStyle(viewModel.isDarkMode ? .white : .black)
+                                .foregroundStyle(contentsViewModel.isDarkMode ? .white : .black)
                                 .padding(.leading, 5)
                                 .fontWeight(.semibold)
                                 .font(.system(size: 21))
@@ -45,8 +44,8 @@ struct SettingView: View {
                 }
                 // MARK: 환경 설정
                 Section(header: Text("환경설정").font(.system(size: 18))) {
-                    Toggle(isOn: $viewModel.isDarkMode) {
-                        Text(viewModel.isDarkMode ? "라이트모드" : "다크모드")
+                    Toggle(isOn: $contentsViewModel.isDarkMode) {
+                        Text(contentsViewModel.isDarkMode ? "라이트모드" : "다크모드")
                     }
                     DisclosureGroup("음향", isExpanded: $settingsSound) {
                         Toggle(isOn: $setViewModel.isEffect) {
@@ -69,6 +68,8 @@ struct SettingView: View {
                             do{
                                 try await signViewModel.signOut()
                                 signViewModel.Signstate = .signedOut
+                                signViewModel.uid = ""
+                                signViewModel.name = ""
                                 print(signViewModel.Signstate)
                                 return
                             } catch let error {
