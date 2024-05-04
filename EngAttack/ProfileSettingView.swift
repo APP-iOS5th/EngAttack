@@ -105,13 +105,16 @@ struct ProfileSettingView: View {
                         if pwdisShowing  {
                             Text(contentViewModel.isKR ? "Show password" : "패스워드 보기" )
                                 .frame(width: 150, height: 35)
+                                .foregroundStyle(.primary)
                         }
                         else {
                             Text(contentViewModel.isKR ? "Hide password" : "패스워드 가리기")
                                 .frame(width: 150, height: 35)
+                                .foregroundStyle(.primary)
                         }
 
                     }
+                    .accentColor(pwdisShowing ? .blue : .gray)
                     .padding(.horizontal, 100)
                     .buttonStyle(.borderedProminent)
                     Button {
