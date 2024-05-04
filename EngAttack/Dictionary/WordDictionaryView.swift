@@ -30,6 +30,7 @@ struct WordDictionaryView: View {
     @Environment(\.modelContext) var modelContext
     
     @StateObject private var dictionaryViewModel: WordDictionaryViewModel = WordDictionaryViewModel()
+    @EnvironmentObject var contentViewModel : ContentViewViewModel
     @State private var searchString: String = ""
     
     private let bookMarkViewModel = WorkBookmarkViewModel()
@@ -68,9 +69,9 @@ struct WordDictionaryView: View {
                     }
                 }
             }
-            .navigationTitle("Word Dictionary")
+            .navigationTitle(contentViewModel.isKR ? "Word Dictionary" : "단어 사전")
         }
-        .searchable(text: $searchString, prompt: "Search Word")
+        .searchable(text: $searchString, prompt: contentViewModel.isKR ? "Search Word" : "단어 검색")
         .onSubmit(of: .search) {
             if !searchString.isEmpty {
                 dictionaryViewModel.searchString(searchWord: searchString.lowercased())

@@ -29,11 +29,12 @@ struct ContentView: View {
 	var body: some View {
 		NavigationStack {
 			VStack() {
-				Text("Score: \(contentViewModel.score)")
+                
+				Text(contentViewModel.isKR ? "Score: \(contentViewModel.score)" : "스코어: \(contentViewModel.score)")
 					.padding(.bottom)
 					.bold()
-				
-				Text("남은 시간: \(String(format: "%.1f", contentViewModel.timeRemaining))초")
+                
+				Text(contentViewModel.isKR ? "Time: \(String(format: "%.1f", contentViewModel.timeRemaining))s" : "남은 시간: \(String(format: "%.1f", contentViewModel.timeRemaining))초")
 					.font(.custom("SOYO Maple Bold", size: 30))
 					.padding()
 				
@@ -46,7 +47,7 @@ struct ContentView: View {
 					.bold()
 					.padding()
 				
-				TextField("Enter the word", text: $contentViewModel.userInput, onCommit: {
+                TextField(contentViewModel.isKR ? "Enter the word" : "단어를 입력하세요", text: $contentViewModel.userInput, onCommit: {
                     contentViewModel.timeRemaining = timeRemaining
                     contentViewModel.submitButton { result in
                         if result {
@@ -70,19 +71,19 @@ struct ContentView: View {
 				.padding()
 				
                 NavigationLink(destination: WordBookmarkView().modelContainer(for: TempModel.self)) {
-					Text("북마크 보기")
+					Text(contentViewModel.isKR ? "Bookmark" : "북마크 보기")
 				}
 				.padding()
 				
 				.alert(isPresented: $contentViewModel.showAlert) {
 					Alert(title: Text(contentViewModel.alertTitle),
-						  message: Text("당신의 점수는 \(contentViewModel.score)점 입니다."),
-						  primaryButton: .default(Text("그만하기"), action: {
+                          message: Text(contentViewModel.isKR ? "Your score is \(contentViewModel.score)" : "당신의 점수는 \(contentViewModel.score)점 입니다."),
+                          primaryButton: .default(Text(contentViewModel.isKR ? "Stop" : "그만하기"), action: {
                         addRank(singViewModel.name, contentViewModel.score)
                         contentViewModel.resetGame()
                         contentViewModel.userInput = ""
 					}),
-						 secondaryButton: .destructive(Text("추천 단어 보기"), action: {
+						 secondaryButton: .destructive(Text(contentViewModel.isKR ? "Recomended word" : "추천 단어 보기"), action: {
 //						viewModel.resetGame()
 //						viewModel.stopTimer()
 //						viewModel.userInput = ""
@@ -111,7 +112,7 @@ struct ContentView: View {
                     Button {
                         
                     } label: {
-                        Text("< 뒤로")
+                        Text(contentViewModel.isKR ? "< Back" : "< 뒤로")
                     }
                 }
             }
