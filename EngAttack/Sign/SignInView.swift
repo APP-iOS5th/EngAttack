@@ -7,6 +7,7 @@
 
 import SwiftUI
 import FirebaseAuth
+import FirebaseFirestore
 
 
 struct SignInView: View {
@@ -59,6 +60,7 @@ struct SignInView: View {
                                 guard let userID = Auth.auth().currentUser?.uid else { return }
                                 signViewModel.uid = userID
                                 signViewModel.Signstate = .signedIn
+                                loadName(userID: userID)
                                 loginActive = true
                                     return
                             } catch {
@@ -110,4 +112,27 @@ extension SignInView {
         let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}"
         return NSPredicate(format: "SELF MATCHES %@", emailRegex).evaluate(with: email)
     }
+    
+    func loadName(userID :String)   {
+         var names = ""
+         let db = Firestore.firestore()
+         db.collection("USER").document(userID).getDocument { (doc, error) in
+             guard error == nil else {
+                 print("error", error ?? "")
+                 return
+             }
+             if let doc = doc, doc.exists {
+                 let data = doc.data()
+                 if let data = data {
+                     let name = data["name"] as? String ?? ""
+                     if signViewModel.name == "" {
+                         signViewModel.name = name
+                         return
+                     }
+                     
+                 }
+             }
+         }
+         
+     }
 }

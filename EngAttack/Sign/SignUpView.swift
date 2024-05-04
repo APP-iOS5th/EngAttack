@@ -68,15 +68,14 @@ struct SignUpView: View {
                     Button {
                         Task {
                             do {
-                                signViewModel.name = name
                                 signViewModel.email = email
                                 signViewModel.password = password
                                 try await signViewModel .signUp()
                                 let db = Firestore.firestore()
                                 guard let userID = Auth.auth().currentUser?.uid else { return }
-                                try await db.collection("USER").document(userID).setData(["email": signViewModel.email, "name": signViewModel.name])
+                                try await db.collection("USER").document(userID).setData(["email": signViewModel.email, "name": name])
                                 try await db.collection("BookMark").document(userID).setData(["List": FieldValue.arrayUnion([["word":"", "description" : ""]])])
-                                try await db.collection("Rank").document(userID).setData(["List": FieldValue.arrayUnion([["name":signViewModel.name, "score": 0]])])
+                                try await db.collection("Rank").document(userID).setData(["List": FieldValue.arrayUnion([["name":name, "score": 0]])])
                                 isSignUpActive.toggle()
                                 return
                             } catch {

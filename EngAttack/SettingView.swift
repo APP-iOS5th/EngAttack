@@ -26,7 +26,7 @@ struct SettingView: View {
                 .bold()
             Form {
                 // MARK: 마이페이지
-                Section(header: Text(contentsViewModel.isKR ? "Mypage" : "마이 페이지").font(.system(size: 18))) {
+                Section(header: Text(contentsViewModel.isKR ? "Mypage" : "마이페이지").font(.system(size: 18))) {
                     Button {
                         self.isprofileLoad = true
                     } label: {
@@ -36,9 +36,10 @@ struct SettingView: View {
                                 .aspectRatio(contentMode: .fit)
                             Text(signViewModel.name)
                                 .foregroundStyle(contentsViewModel.isDarkMode ? .white : .black)
-                                .padding(.leading, 5)
+                                .padding(.leading, 20)
                                 .fontWeight(.semibold)
-                                .font(.system(size: 21))
+                                .font(.system(size: 25))
+
                         }
                         .frame(height: 70)
                         .sheet(isPresented: $isprofileLoad) {
