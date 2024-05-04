@@ -79,7 +79,6 @@ struct ContentView: View {
 					Alert(title: Text(contentViewModel.alertTitle),
                           message: Text(contentViewModel.isKR ? "Your score is \(contentViewModel.score)" : "당신의 점수는 \(contentViewModel.score)점 입니다."),
                           primaryButton: .default(Text(contentViewModel.isKR ? "Stop" : "그만하기"), action: {
-                        addRank(singViewModel.name, contentViewModel.score)
                         contentViewModel.resetGame()
                         contentViewModel.userInput = ""
 					}),
@@ -87,7 +86,7 @@ struct ContentView: View {
 //						viewModel.resetGame()
 //						viewModel.stopTimer()
 //						viewModel.userInput = ""
-                        addRank(singViewModel.name, contentViewModel.score)
+                       
                         isShowRecommendWordList = true
 					}))
 				}
@@ -99,7 +98,7 @@ struct ContentView: View {
                 SoundSetting.instance.playSound(sound: .background)
 			}
 			.onDisappear {
-                addRank(singViewModel.name, contentViewModel.score)
+                addRank(names:singViewModel.name, scores:contentViewModel.score)
                 contentViewModel.stopTimer()
                 SoundSetting.instance.stopMusic()
 			}
@@ -139,10 +138,10 @@ struct DarkBlueShadowProgressViewStyle: ProgressViewStyle {
 
 
 extension ContentView {
-    func addRank(_: String, _ : Int) {
+    func addRank(names : String, scores: Int) {
         let db = Firestore.firestore()
         guard let userID = Auth.auth().currentUser?.uid else { return }
-        let rank = Rank(name: singViewModel.name, score: contentViewModel.score)
+        let rank = Rank(name: names, score: scores)
                 db.collection("Rank").document(userID).updateData(["List": FieldValue.arrayUnion([rank.addRank])])
     }
 }

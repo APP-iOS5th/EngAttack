@@ -45,7 +45,7 @@ struct WordBookmarkView: View {
                     })
                 }
             }
-            .navigationTitle(contentViewModel.isKR ? "Word Book Mark" : "단어 북마크")
+            .navigationTitle(contentViewModel.isKR ? "BookMark Word" : "북마크 단어")
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     EditButton()
