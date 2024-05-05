@@ -9,13 +9,14 @@ import SwiftUI
 
 struct ProfileSettingView: View {
     @EnvironmentObject var contentViewModel : ContentViewViewModel
+    @StateObject var signViewModel : SignViewModel
     @State var showImagePicker = false
     @State var selectedUIImage: UIImage?
     @State var image: Image?
     @FocusState private var focusedField: Field?
     @Binding var isprofileLoad : Bool
-    @State private var name : String = ""
-    @State private var email : String = ""
+    @Binding  var name :  String
+    @Binding  var email : String
     @State private var password : String = ""
     @State private var pwdisShowing = false
     

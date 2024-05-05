@@ -21,6 +21,7 @@ import FirebaseAuth
 final class SignViewModel : ObservableObject {
     @AppStorage("uid") var uid = ""
    @AppStorage("name") var name = ""
+    @AppStorage("emails") var emails = ""
     @Published var email = ""
     @Published var password = ""
     @Published var Signstate :SignInState = .signedOut

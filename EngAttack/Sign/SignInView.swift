@@ -124,8 +124,9 @@ extension SignInView {
              if let doc = doc, doc.exists {
                  let data = doc.data()
                  if let data = data {
+                     let email = data["email"] as? String ?? ""
                      let name = data["name"] as? String ?? ""
-                     if signViewModel.name == "" {
+                         signViewModel.emails = email
                          signViewModel.name = name
                          return
                      }
@@ -134,5 +135,4 @@ extension SignInView {
              }
          }
          
-     }
 }

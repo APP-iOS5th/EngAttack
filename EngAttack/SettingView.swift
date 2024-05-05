@@ -15,7 +15,10 @@ struct SettingView: View {
     @StateObject var signViewModel : SignViewModel = SignViewModel()
     @State var settingsSound = false
     @State var isprofileLoad = false
+    @State var isLogout = false
     @State var isUnregister = false
+    @State var name : String = ""
+    @State var email : String = ""
     //@State var backVolume = 0.0
     let effectVol = 0.3
     
@@ -29,6 +32,8 @@ struct SettingView: View {
                 // MARK: 마이페이지
                 Section(header: Text(contentsViewModel.isKR ? "Mypage" : "마이페이지").font(.system(size: 18))) {
                     Button {
+                        name = signViewModel.name
+                        email = signViewModel.emails
                         self.isprofileLoad = true
                     } label: {
                         HStack {
@@ -44,7 +49,7 @@ struct SettingView: View {
                         }
                         .frame(height: 70)
                         .sheet(isPresented: $isprofileLoad) {
-                            ProfileSettingView(isprofileLoad: $isprofileLoad)
+                            ProfileSettingView(signViewModel: SignViewModel(), isprofileLoad: $isprofileLoad, name: $name, email: $email)
                         }
                     }
                 }
@@ -93,19 +98,18 @@ struct SettingView: View {
                         }
                         .frame(height: 25)
                     }
+                    .alert(isPresented: $isUnregister) {
+                        Alert(title: Text(contentsViewModel.isKR ? "Warning" : "경고"),
+                              message: Text(contentsViewModel.isKR ? "Do you really want to cancel your membership?" : "정말로 회원탈퇴 하시겠습니까?"),
+                              primaryButton: .default(Text(contentsViewModel.isKR ?  "Cancel" : "취소하기"), action: {
+               
+                        }),
+                             secondaryButton: .destructive(Text(contentsViewModel.isKR ?  "Delete" : "삭제"), action: {
+
+                        }))
+                    }
                     Button {
-                        Task {
-                            do{
-                                try await signViewModel.signOut()
-                                signViewModel.Signstate = .signedOut
-                                signViewModel.uid = ""
-                                signViewModel.name = ""
-                                print(signViewModel.Signstate)
-                                return
-                            } catch let error {
-                                print(error)
-                            }
-                        }
+                        isLogout.toggle()
                     } label: {
                         HStack {
                             Text(contentsViewModel.isKR ? "Logout" : "로그아웃")
@@ -118,14 +122,25 @@ struct SettingView: View {
                 }
             }
         }
-        .alert(isPresented: $isUnregister) {
+        
+        .alert(isPresented: $isLogout) {
             Alert(title: Text(contentsViewModel.isKR ? "Warning" : "경고"),
-                  message: Text(contentsViewModel.isKR ? "Do you really want to cancel your membership?" : "정말로 회원탈퇴 하시겠습니까?"),
+                  message: Text(contentsViewModel.isKR ? "Do you really want to Sign Out?" : "정말로 로그아웃 하시겠습니까?"),
                   primaryButton: .default(Text(contentsViewModel.isKR ?  "Cancel" : "취소하기"), action: {
-   
+                isLogout = false
             }),
-                 secondaryButton: .destructive(Text(contentsViewModel.isKR ?  "Delete" : "삭제"), action: {
-
+                 secondaryButton: .destructive(Text(contentsViewModel.isKR ?  "Logout" : "로그아웃"), action: {
+                Task {
+                    do{
+                        try await signViewModel.signOut()
+                        signViewModel.Signstate = .signedOut
+                        signViewModel.uid = ""
+                        signViewModel.name = ""
+                        return
+                    } catch let error {
+                        print(error)
+                    }
+                }
             }))
         }
         .font(.system(size: 20))

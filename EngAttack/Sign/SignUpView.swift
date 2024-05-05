@@ -20,6 +20,7 @@ struct SignUpView: View {
     @State private var emailCheck: Bool = false
     @State private var isError: Bool = false
     @Binding  var isSignUpActive : Bool
+    @State  var isAlert : Bool = false
     @State  var isDone : Bool = false
     @State private var messageString: String = ""
     @FocusState private var focusedField: Field?
@@ -77,8 +78,10 @@ struct SignUpView: View {
                                 try await db.collection("USER").document(userID).setData(["email": signViewModel.email, "name": name])
                                 try await db.collection("BookMark").document(userID).setData(["List": FieldValue.arrayUnion([["word":"", "description" : ""]])])
                                 try await db.collection("Rank").document(userID).setData(["List": FieldValue.arrayUnion([["name":name, "score": 0]])])
-                                isSignUpActive.toggle()
-                                isDone.toggle()
+                                messageString = contentViewModel.isKR ? "Sign up is Complete" : "회원가입이 완료되었습니다"
+                                isAlert = true
+                                isDone = true
+                               
                                 return
                             } catch {
                                 isValidEmails = isValidEmail(email: signViewModel.email)
@@ -86,7 +89,8 @@ struct SignUpView: View {
                                 emailCheck = emailCheck(email: signViewModel.email)
                                 
                                 if !isValidEmails || !isValidPasswords || !emailCheck  {
-                                    isError = true
+                                    isAlert = true
+                                   isError = true
                                     if !isValidEmails && isValidPasswords   {
                                         messageString = contentViewModel.isKR ? "Please check the email form" : "이메일 양식을 확인해주세요"
                                     }
@@ -107,12 +111,19 @@ struct SignUpView: View {
                             .frame(width: 100, height: 35)
                             
                     }
-                    .alert(isPresented: $isError) {
-                        Alert(title: Text(contentViewModel.isKR ? "Error" : "경고"), message: Text(messageString), dismissButton: .default(Text(contentViewModel.isKR ? "Done" : "확인")))
+                    .alert(isPresented: $isAlert) {
+                        Alert(title: Text(contentViewModel.isKR ? "Notification" : "알림"), message: Text(messageString), dismissButton: .default(Text(contentViewModel.isKR ? "Done" : "확인"), action: {
+                            if isError  {
+                                isAlert = false
+                                isError = false
+                                isDone  = false
+                            }
+                            else if isDone {
+                                isSignUpActive.toggle()
+                            }
+                        }))
                     }
-                    .alert(isPresented: $isDone) {
-                        Alert(title: Text(contentViewModel.isKR ? "Notification" : "알림"), message: Text("회원가입이 완료되었습니다"), dismissButton: .default(Text(contentViewModel.isKR ? "Done" : "확인")))
-                    }
+ 
                     .disabled(name.isEmpty)
                     .padding(.horizontal, 100)
                     .buttonStyle(.borderedProminent)
