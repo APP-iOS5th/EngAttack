@@ -69,10 +69,10 @@ struct SettingView: View {
                     DisclosureGroup(contentsViewModel.isKR ? "Sound" : "음향", isExpanded: $settingsSound) {
                         Toggle(isOn: $setViewModel.isEffect) {
                             if contentsViewModel.isKR  {
-                                Text(setViewModel.isEffect ? "Effect OFF" : "Effect ON")
+                                Text(setViewModel.isEffect ? "Effect ON" : "Effect OFF")
                             }
                             else {
-                                Text(setViewModel.isEffect ? "효과음 OFF" : "효과음 ON")
+                                Text(setViewModel.isEffect ? "효과음 ON" : "효과음 OFF")
                             }
                         }
                         HStack {
@@ -125,7 +125,7 @@ struct SettingView: View {
         
         .alert(isPresented: $isLogout) {
             Alert(title: Text(contentsViewModel.isKR ? "Warning" : "경고"),
-                  message: Text(contentsViewModel.isKR ? "Do you really want to Sign Out?" : "정말로 로그아웃 하시겠습니까?"),
+                  message: Text(contentsViewModel.isKR ? "Do you really want to sign out?" : "정말로 로그아웃 하시겠습니까?"),
                   primaryButton: .default(Text(contentsViewModel.isKR ?  "Cancel" : "취소하기"), action: {
                 isLogout = false
             }),
