@@ -10,29 +10,36 @@ import PhotosUI
 
 struct ProfileSettingView: View {
     @EnvironmentObject var contentViewModel : ContentViewViewModel
+    @StateObject var signViewModel : SignViewModel
+    @StateObject var profileViewModel = ProfileViewModel()
     @State var showImagePicker = false
     @State var selectedUIImage: PhotosPickerItem? = nil
-    @State var image: Image?
+    @State var image: Data?
     @FocusState private var focusedField: Field?
-    @Binding var isprofileLoad : Bool
-    @State private var name : String = ""
-    @State private var email : String = ""
+    @Binding  var name : String
+    @Binding  var email : String
+    @State private var messageString: String = ""
     @State private var password : String = ""
     @State private var pwdisShowing = false
-    @StateObject var profileViewModel = ProfileViewModel()
- 
- 
+    @State private var isValidPasswords: Bool = false
+    @State private var isError: Bool = false
+    @Binding  var isUpdateDone : Bool
+    @State  var isAlert : Bool = false
+    @State  var isDone : Bool = false
+   
+    
+    
     
     var body: some View {
         NavigationStack {
             Form {
                 Section {
                     PhotosPicker(selection:$selectedUIImage, matching: .images, photoLibrary: .shared()) {
-                            Image(systemName: "person.circle")
-                                .resizable()
-                                .foregroundColor(.blue)
-                                .frame(width: 100, height: 100)
-
+                        Image(systemName: "person.circle")
+                            .resizable()
+                            .foregroundColor(.blue)
+                            .frame(width: 100, height: 100)
+                        
                     }
                     .padding(.leading ,100)
                     .onChange(of: selectedUIImage, perform: { newValue in
@@ -45,26 +52,17 @@ struct ProfileSettingView: View {
                     .font(.system(size: 15))
                     .foregroundStyle(contentViewModel.isDarkMode ? .white : .black)
                     .bold()) {
-                        TextField("", text: $name)
-                            .keyboardType(.emailAddress)
+                        Text(name)
                             .font(.system(size: 17))
-                            .textInputAutocapitalization(.never)
                             .foregroundStyle(contentViewModel.isDarkMode ? .white : .black)
-                            .focused($focusedField, equals: .name)
-                            .onSubmit { focusedField = .id }
                     }
-                
                 Section(header: Text(contentViewModel.isKR ? "Email" : "이메일")
                     .font(.system(size: 15))
                     .foregroundStyle(contentViewModel.isDarkMode ? .white : .black)
                     .bold()) {
-                        TextField("", text: $email)
-                            .keyboardType(.emailAddress)
+                        Text(email)
                             .font(.system(size: 17))
-                            .textInputAutocapitalization(.never)
                             .foregroundStyle(contentViewModel.isDarkMode ? .white : .black)
-                            .focused($focusedField, equals: .id)
-                            .onSubmit { focusedField = .password }
                     }
                 
                 Section(header: Text(contentViewModel.isKR ? "Password" : "비밀번호")
@@ -99,19 +97,45 @@ struct ProfileSettingView: View {
                                 .frame(width: 150, height: 35)
                                 .foregroundStyle(.primary)
                         }
-
+                        
                     }
                     .accentColor(pwdisShowing ? .blue : .gray)
                     .padding(.horizontal, 100)
                     .buttonStyle(.borderedProminent)
                     Button {
-                        
-                        
-                    } label: {
-                        Text(contentViewModel.isKR ? "Submit" : "변경하기")
+                        Task {
+                            do {
+                                try await signViewModel.updatePassword(password: password)
+                                isAlert = true
+                                isDone = true
+                                messageString = contentViewModel.isKR ? "Your password change has been completed" : "비밀번호 변경이 완료되었습니다."
+                                return
+                            } catch {
+                                isValidPasswords = isValidPassword(pwd: password)
+                                if !isValidPasswords   {
+                                    isAlert = true
+                                    isError = true
+                                    messageString = contentViewModel.isKR ? "The password must be at least 8 uppercase characters long" : "패스워드는 대소문자 8자리 이상이어야 합니다"
+                                }
+                            }
+                        }
+                    }label: {
+                        Text(contentViewModel.isKR ? "Update" : "수정하기")
                             .frame(width: 100, height: 35)
-                        
                     }
+                    .alert(isPresented: $isAlert) {
+                        Alert(title: Text(contentViewModel.isKR ? "Notification" : "알림"), message: Text(messageString), dismissButton: .default(Text(contentViewModel.isKR ? "Done" : "확인"), action: {
+                            if isError  {
+                                isAlert = false
+                                isError = false
+                                isDone  = false
+                            }
+                            else if isDone {
+                                isUpdateDone = false
+                            }
+                        }))
+                    }
+
                     .disabled(name.isEmpty)
                     .padding(.horizontal, 100)
                     .buttonStyle(.borderedProminent)
@@ -121,6 +145,15 @@ struct ProfileSettingView: View {
         }
     }
     
+}
+
+extension ProfileSettingView {
+    
+    //비밀번호 형식 검사 -> 소문자, 대문자, 숫자 8자리 이상
+    func isValidPassword(pwd: String) -> Bool {
+        let passwordRegex = "^[a-zA-Z0-9]{8,}$"
+        return NSPredicate(format: "SELF MATCHES %@", passwordRegex).evaluate(with: pwd)
+    }
 }
 
 

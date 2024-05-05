@@ -54,11 +54,11 @@ struct SignInView: View {
                     Button {
                         Task {
                             do {
-                                signViewModel.email = email
-                                signViewModel.password = password
-                                try await signViewModel.signIn()
+                                try await signViewModel.signIn(email: email, password: password)
                                 guard let userID = Auth.auth().currentUser?.uid else { return }
                                 signViewModel.uid = userID
+                                signViewModel.email = email
+                                signViewModel.password = password
                                 signViewModel.Signstate = .signedIn
                                 loadName(userID: userID)
                                 loginActive = true

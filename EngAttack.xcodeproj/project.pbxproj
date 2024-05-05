@@ -34,7 +34,6 @@
 		CDC2088B2BE3BEB800105E63 /* CountDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC2088A2BE3BEB800105E63 /* CountDownView.swift */; };
 		D875BD092BE7DDD200B254CD /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D875BD082BE7DDD200B254CD /* StorageManager.swift */; };
 		D875BD0C2BE7E00D00B254CD /* ProfoleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D875BD0B2BE7E00D00B254CD /* ProfoleViewModel.swift */; };
-		D875BD0E2BE7E84300B254CD /* DBUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D875BD0D2BE7E84300B254CD /* DBUser.swift */; };
 		D875BD102BE7ED1000B254CD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D875BD0F2BE7ED1000B254CD /* GoogleService-Info.plist */; };
 		D8BE454C2BE496FD00C9BD40 /* BookMark.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8BE454B2BE496FD00C9BD40 /* BookMark.swift */; };
 		D8BE455B2BE4BD2B00C9BD40 /* SignInState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8BE455A2BE4BD2B00C9BD40 /* SignInState.swift */; };
@@ -81,7 +80,6 @@
 		CDC2088A2BE3BEB800105E63 /* CountDownView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountDownView.swift; sourceTree = "<group>"; };
 		D875BD082BE7DDD200B254CD /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		D875BD0B2BE7E00D00B254CD /* ProfoleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfoleViewModel.swift; sourceTree = "<group>"; };
-		D875BD0D2BE7E84300B254CD /* DBUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBUser.swift; sourceTree = "<group>"; };
 		D875BD0F2BE7ED1000B254CD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D8BE454B2BE496FD00C9BD40 /* BookMark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMark.swift; sourceTree = "<group>"; };
 		D8BE455A2BE4BD2B00C9BD40 /* SignInState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInState.swift; sourceTree = "<group>"; };
@@ -143,7 +141,6 @@
 				AF9552D72BE1D08E0019A124 /* Sounds */,
 				F7A23E552BE1DB7E00A044BD /* TabViewSetting.swift */,
 				D875BD0F2BE7ED1000B254CD /* GoogleService-Info.plist */,
-				D875BD0D2BE7E84300B254CD /* DBUser.swift */,
 				F7F07C842BE0DF96009A75A9 /* GameStartView.swift */,
 				CD37DEF82BE0D7E000F7CB39 /* ContentViewViewModel.swift */,
 				CDC2088A2BE3BEB800105E63 /* CountDownView.swift */,
@@ -352,7 +349,6 @@
 				F7A23E582BE1DE1200A044BD /* RankingView.swift in Sources */,
 				D8BE454C2BE496FD00C9BD40 /* BookMark.swift in Sources */,
 				CDA4363C2BE28E9B0047E2C0 /* WordDictionaryView.swift in Sources */,
-				D875BD0E2BE7E84300B254CD /* DBUser.swift in Sources */,
 				F7A23E562BE1DB7E00A044BD /* TabViewSetting.swift in Sources */,
 				CDC208832BE3AFA200105E63 /* SignInView.swift in Sources */,
 				CDC208842BE3AFA200105E63 /* SignUpView.swift in Sources */,

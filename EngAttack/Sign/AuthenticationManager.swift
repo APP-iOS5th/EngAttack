@@ -51,6 +51,13 @@ final class AuthenticationManager {
         try Auth.auth().signOut()
     }
     
+    func updatePassword(passwords: String) async throws  {
+           try await Auth.auth().currentUser?.updatePassword(to: passwords)
+       }
+       
+       func deleteUser() async throws {
+           try await Auth.auth().currentUser?.delete()
+       }
   
     
     
