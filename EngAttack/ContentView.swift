@@ -17,12 +17,8 @@ import SwiftData
 struct ContentView: View {
 	@EnvironmentObject var contentViewModel: ContentViewViewModel
 	@EnvironmentObject var setViewModel: SettingViewModel
-
     @StateObject var singViewModel: SignViewModel = SignViewModel()
-
     @State private var isShowRecommendWordList: Bool = false
-
-	
 	@Binding var timeRemaining: Double
 	let effectVol = 0.3
 	

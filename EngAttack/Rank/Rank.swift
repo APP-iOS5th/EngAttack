@@ -7,8 +7,6 @@
 
 import Foundation
 
-
-
 struct Rank: Codable, Hashable {
     var name: String
     var score: Int

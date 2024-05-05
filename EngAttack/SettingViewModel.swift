@@ -15,11 +15,8 @@ class SettingViewModel: ObservableObject {
 
 
 class SoundSetting: ObservableObject {
-    
     var currentVolume: Float = 0.0
-    
     static let instance = SoundSetting()
-    
     var players: [AVAudioPlayer] = []
     
     enum SoundOption: String {

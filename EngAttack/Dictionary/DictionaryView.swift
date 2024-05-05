@@ -12,7 +12,6 @@ struct DictionaryView: View {
     
     @Query private var storedWords: [TempModel]
     @Environment(\.modelContext) var modelContext
-    
     @State var recommendWordList: [(String, String)] = []
     @State var tempWord: [String] = []
     var lastWord: String

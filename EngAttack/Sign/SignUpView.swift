@@ -15,16 +15,16 @@ struct SignUpView: View {
     @State private var  name = ""
     @State private var  email = ""
     @State private var  password = ""
+    @State private var messageString: String = ""
     @State private var isValidEmails: Bool = false
     @State private var isValidPasswords: Bool = false
     @State private var emailCheck: Bool = false
     @State private var isError: Bool = false
-    @Binding  var isSignUpActive : Bool
     @State  var isAlert : Bool = false
     @State  var isDone : Bool = false
-    @State private var messageString: String = ""
+    @Binding  var isSignUpActive : Bool
     @FocusState private var focusedField: Field?
-    
+   
     
     var body: some View {
         NavigationStack {
@@ -55,7 +55,7 @@ struct SignUpView: View {
                             .onSubmit { focusedField = .password }
                     }
                 
-                Section(header: Text(contentViewModel.isKR ? "Password" : "패스워드")
+                Section(header: Text(contentViewModel.isKR ? "Password" : "비밀번호")
                     .font(.system(size: 15))
                     .foregroundStyle(contentViewModel.isDarkMode ? .white : .black)
                     .bold()) {
@@ -70,24 +70,20 @@ struct SignUpView: View {
                     Button {
                         Task {
                             do {
-                                signViewModel.email = email
-                                signViewModel.password = password
-                                try await signViewModel .signUp()
+                                try await signViewModel.signUp(email: email, password: password)
                                 let db = Firestore.firestore()
                                 guard let userID = Auth.auth().currentUser?.uid else { return }
-                                try await db.collection("USER").document(userID).setData(["email": signViewModel.email, "name": name])
+                                try await db.collection("USER").document(userID).setData(["name": name])
                                 try await db.collection("BookMark").document(userID).setData(["List": FieldValue.arrayUnion([["word":"", "description" : ""]])])
                                 try await db.collection("Rank").document(userID).setData(["List": FieldValue.arrayUnion([["name":name, "score": 0]])])
                                 messageString = contentViewModel.isKR ? "Sign up is Complete" : "회원가입이 완료되었습니다"
                                 isAlert = true
                                 isDone = true
-                               
                                 return
                             } catch {
-                                isValidEmails = isValidEmail(email: signViewModel.email)
-                                isValidPasswords = isValidPassword(pwd: signViewModel.password)
-                                emailCheck = emailCheck(email: signViewModel.email)
-                                
+                                isValidEmails = isValidEmail(email: email)
+                                isValidPasswords = isValidPassword(pwd: password)
+                                emailCheck = emailCheck(email: email)
                                 if !isValidEmails || !isValidPasswords || !emailCheck  {
                                     isAlert = true
                                    isError = true

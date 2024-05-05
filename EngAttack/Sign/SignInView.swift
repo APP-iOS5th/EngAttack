@@ -12,16 +12,15 @@ import FirebaseFirestore
 
 struct SignInView: View {
     @EnvironmentObject var contentViewModel: ContentViewViewModel
-    
     @StateObject  var signViewModel : SignViewModel
     @EnvironmentObject var setViewModel: SettingViewModel
     @State private var correctLogin = false
-    @State private var email = ""
-    @State private var password = ""
     @State private var loginActive = false
     @State private var isSignUpActive = false
+    @State private var email = ""
+    @State private var password = ""
     @FocusState private var focusedField: Field?
-    
+
     var body: some View {
         NavigationStack {
             Form {
@@ -36,9 +35,9 @@ struct SignInView: View {
                             .foregroundStyle(contentViewModel.isDarkMode ? .white : .black)
                             .focused($focusedField, equals: .id)
                             .onSubmit { focusedField = .password }
-                }
+                    }
                 
-                Section(header: Text(contentViewModel.isKR ? "Password" : "패스워드")
+                Section(header: Text(contentViewModel.isKR ? "Password" : "비밀번호")
                     .font(.system(size: 15))
                     .foregroundStyle(contentViewModel.isDarkMode ? .white : .black)
                     .bold()) {
@@ -48,21 +47,20 @@ struct SignInView: View {
                             .foregroundStyle(contentViewModel.isDarkMode ? .white : .black)
                             .focused($focusedField, equals: .password)
                             .onSubmit { focusedField = nil }
-                }
+                    }
                 
                 Section {
                     Button {
                         Task {
                             do {
-                                signViewModel.email = email
-                                signViewModel.password = password
-                                try await signViewModel.signIn()
+                                try await signViewModel.signIn(email: email, password: password)
                                 guard let userID = Auth.auth().currentUser?.uid else { return }
+                                signViewModel.email = email
                                 signViewModel.uid = userID
-                                signViewModel.Signstate = .signedIn
                                 loadName(userID: userID)
+                                signViewModel.Signstate = .signedIn
                                 loginActive = true
-                                    return
+                                return
                             } catch {
                                 correctLogin = true
                             }
@@ -99,9 +97,9 @@ struct SignInView: View {
         NavigationLink(destination: TabViewSetting(signViewModel: signViewModel)
             .environmentObject(SettingViewModel())
             .environmentObject(ContentViewViewModel())
-            , isActive: $loginActive) {
-                EmptyView()
-            }
+                       , isActive: $loginActive) {
+            EmptyView()
+        }
     }
 }
 
@@ -113,26 +111,20 @@ extension SignInView {
         return NSPredicate(format: "SELF MATCHES %@", emailRegex).evaluate(with: email)
     }
     
-    func loadName(userID :String)   {
-         var names = ""
-         let db = Firestore.firestore()
-         db.collection("USER").document(userID).getDocument { (doc, error) in
-             guard error == nil else {
-                 print("error", error ?? "")
-                 return
-             }
-             if let doc = doc, doc.exists {
-                 let data = doc.data()
-                 if let data = data {
-                     let email = data["email"] as? String ?? ""
-                     let name = data["name"] as? String ?? ""
-                         signViewModel.emails = email
-                         signViewModel.name = name
-                         return
-                     }
-                     
-                 }
-             }
-         }
-         
+    func loadName(userID : String)   {
+        let db = Firestore.firestore().collection("USER").document(userID)
+        db.getDocument(source: .cache) { (doc, error) in
+            if let doc = doc{
+                let data = doc.data()
+                if let data = data {
+                    let name : String  = data["name"] as? String ?? ""
+                    signViewModel.name = name
+                }
+                else {
+                    print("값없음")
+                }
+            }
+        }
+        
+    }
 }

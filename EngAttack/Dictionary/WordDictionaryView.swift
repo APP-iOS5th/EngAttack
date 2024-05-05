@@ -28,11 +28,9 @@ struct WordDictionaryView: View {
     
     @Query private var storedWords: [TempModel]
     @Environment(\.modelContext) var modelContext
-    
     @StateObject private var dictionaryViewModel: WordDictionaryViewModel = WordDictionaryViewModel()
     @EnvironmentObject var contentViewModel : ContentViewViewModel
     @State private var searchString: String = ""
-    
     private let bookMarkViewModel = WorkBookmarkViewModel()
     
     var body: some View {

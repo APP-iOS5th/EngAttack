@@ -12,6 +12,7 @@ import FirebaseAuth
 
 struct RootView: View {
     @StateObject var signViewModel : SignViewModel = SignViewModel()
+    
     var body: some View {
         VStack {
             if signViewModel.Signstate == .signedIn {
@@ -25,9 +26,9 @@ struct RootView: View {
             }
         }
         .onAppear {
-            if signViewModel.currentUser != nil && signViewModel.uid != "" {
+            if signViewModel.currentUser != nil  {
                 signViewModel.Signstate = .signedIn
-                print("테스트")
+                signViewModel.loadAuthUser()
             }
         }
     }

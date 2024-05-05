@@ -9,11 +9,10 @@ import SwiftUI
 import SwiftData
 
 struct TabViewSetting: View {
-
 	@EnvironmentObject var contentviewModel: ContentViewViewModel
     @StateObject var signViewModel: SignViewModel = SignViewModel()
 	@State private var selection: String = "끝말잇기"
-	
+    
 	var body: some View {
 		VStack {
 			if contentviewModel.isLoading {
@@ -25,7 +24,8 @@ struct TabViewSetting: View {
 							}
 						}
 					}
-			} else if !contentviewModel.gameStarted {
+			}
+             else if !contentviewModel.gameStarted {
 				NavigationStack {
 					GameStartView()
 						.onAppear {

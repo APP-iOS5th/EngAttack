@@ -16,7 +16,6 @@ struct WordBookmarkView: View {
     
     @Query private var storedWords: [TempModel]
     @Environment(\.modelContext) var modelContext
-    
     @State var firebaseWords: [(String, String, Bool)] = []
     private let bookMarkViewModel = WorkBookmarkViewModel()
     @EnvironmentObject var contentViewModel : ContentViewViewModel

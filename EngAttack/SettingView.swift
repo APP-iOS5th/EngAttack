@@ -8,17 +8,19 @@
 import SwiftUI
 import AVKit
 import FirebaseAuth
+import FirebaseFirestore
 
 struct SettingView: View {
     @EnvironmentObject var contentsViewModel: ContentViewViewModel
     @EnvironmentObject var setViewModel: SettingViewModel
     @StateObject var signViewModel : SignViewModel = SignViewModel()
     @State var settingsSound = false
-    @State var isprofileLoad = false
+    @State var isUpdateDone  = false
     @State var isLogout = false
     @State var isUnregister = false
     @State var name : String = ""
     @State var email : String = ""
+    @State var delete : Bool = false
     //@State var backVolume = 0.0
     let effectVol = 0.3
     
@@ -33,14 +35,15 @@ struct SettingView: View {
                 Section(header: Text(contentsViewModel.isKR ? "Mypage" : "마이페이지").font(.system(size: 18))) {
                     Button {
                         name = signViewModel.name
-                        email = signViewModel.emails
-                        self.isprofileLoad = true
+                        email = signViewModel.email
+                        self.isUpdateDone = true
                     } label: {
                         HStack {
                             Image(systemName: "person.circle")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                             Text(signViewModel.name)
+//                            Text("\(signViewModel.currentUser)")
                                 .foregroundStyle(contentsViewModel.isDarkMode ? .white : .black)
                                 .padding(.leading, 20)
                                 .fontWeight(.semibold)
@@ -48,8 +51,8 @@ struct SettingView: View {
 
                         }
                         .frame(height: 70)
-                        .sheet(isPresented: $isprofileLoad) {
-                            ProfileSettingView(signViewModel: SignViewModel(), isprofileLoad: $isprofileLoad, name: $name, email: $email)
+                        .sheet(isPresented: $isUpdateDone) {
+                            ProfileSettingView(signViewModel: SignViewModel(), name: $name, email: $email, isUpdateDone: $isUpdateDone)
                         }
                     }
                 }
@@ -102,10 +105,25 @@ struct SettingView: View {
                         Alert(title: Text(contentsViewModel.isKR ? "Warning" : "경고"),
                               message: Text(contentsViewModel.isKR ? "Do you really want to cancel your membership?" : "정말로 회원탈퇴 하시겠습니까?"),
                               primaryButton: .default(Text(contentsViewModel.isKR ?  "Cancel" : "취소하기"), action: {
-               
+                            isUnregister.toggle()
                         }),
                              secondaryButton: .destructive(Text(contentsViewModel.isKR ?  "Delete" : "삭제"), action: {
-
+                            Task {
+                                do {
+                                    let db = Firestore.firestore()
+                                    guard let userID = Auth.auth().currentUser?.uid else { return }
+                                    try await signViewModel.deleteUser()
+                                    try await db.collection("USER").document(userID).delete()
+                                    try await db.collection("Rank").document(userID).delete()
+                                    try await db.collection("BookMark").document(userID).delete()
+                                    signViewModel.Signstate = .signedOut
+                                    signViewModel.uid = ""
+                                    signViewModel.name = ""
+                                    signViewModel.email = ""
+                                } catch {
+                                    
+                                }
+                            }
                         }))
                     }
                     Button {
@@ -136,6 +154,7 @@ struct SettingView: View {
                         signViewModel.Signstate = .signedOut
                         signViewModel.uid = ""
                         signViewModel.name = ""
+                        signViewModel.email = ""
                         return
                     } catch let error {
                         print(error)
@@ -144,7 +163,6 @@ struct SettingView: View {
             }))
         }
         .font(.system(size: 20))
-        
     }
 }
 
