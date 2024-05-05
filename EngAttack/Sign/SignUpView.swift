@@ -82,9 +82,9 @@ struct SignUpView: View {
                                 messageString = contentViewModel.isKR ? "Sign up is correct" : "회원가입이 완료되었습니다."
                                 return
                             } catch {
-                                isValidEmails = isValidEmail(email: signViewModel.email)
-                                isValidPasswords = isValidPassword(pwd: signViewModel.password)
-                                emailCheck = emailCheck(email: signViewModel.email)
+                                isValidEmails = isValidEmail(email: email)
+                                isValidPasswords = isValidPassword(pwd: password)
+                                emailCheck = emailCheck(email: email)
                                 
                                 if !isValidEmails || !isValidPasswords || !emailCheck  {
                                     if !isValidEmails && isValidPasswords   {
@@ -153,7 +153,6 @@ extension SignUpView {
     //이메일 중복가입 여부확인
     func emailCheck(email: String) -> Bool {
         var result = false
-        
         let userDB = Firestore.firestore().collection("USER")
         let query  =  userDB.whereField("email", isEqualTo: email)
         query.getDocuments() { (qs, err) in

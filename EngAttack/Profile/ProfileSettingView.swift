@@ -6,11 +6,12 @@
 //
 
 import SwiftUI
+import PhotosUI
 
 struct ProfileSettingView: View {
     @EnvironmentObject var contentViewModel : ContentViewViewModel
     @State var showImagePicker = false
-    @State var selectedUIImage: UIImage?
+    @State var selectedUIImage: PhotosPickerItem? = nil
     @State var image: Image?
     @FocusState private var focusedField: Field?
     @Binding var isprofileLoad : Bool
@@ -18,41 +19,27 @@ struct ProfileSettingView: View {
     @State private var email : String = ""
     @State private var password : String = ""
     @State private var pwdisShowing = false
-    
-    func loadImage() {
-        guard let selectedImage = selectedUIImage else { return }
-        image = Image(uiImage: selectedImage)
-    }
+    @StateObject var profileViewModel = ProfileViewModel()
+ 
+ 
     
     var body: some View {
         NavigationStack {
             Form {
                 Section {
-                    Button {
-                        showImagePicker.toggle()
-                    } label: {
-                        if let image = image {
-                            image
-                                .resizable()
-                                .clipShape(Circle())
-                                .frame(width: 100, height: 100)
-                        } else {
+                    PhotosPicker(selection:$selectedUIImage, matching: .images, photoLibrary: .shared()) {
                             Image(systemName: "person.circle")
                                 .resizable()
                                 .foregroundColor(.blue)
                                 .frame(width: 100, height: 100)
+
+                    }
+                    .padding(.leading ,100)
+                    .onChange(of: selectedUIImage, perform: { newValue in
+                        if let newValue {
+                            profileViewModel.saveProfileImage(item:newValue)
                         }
-                        
-                        
-                        
-                    }
-                    .listRowBackground(Color.clear)
-                    .padding(.horizontal, 100)
-                    .sheet(isPresented: $showImagePicker, onDismiss: {
-                        loadImage()
-                    }) {
-                        ImagePicker(image: $selectedUIImage)
-                    }
+                    })
                 }
                 Section(header: Text(contentViewModel.isKR ? "Name" : "이름")
                     .font(.system(size: 15))

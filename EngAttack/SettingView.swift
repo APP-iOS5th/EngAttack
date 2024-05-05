@@ -93,6 +93,16 @@ struct SettingView: View {
                         }
                         .frame(height: 25)
                     }
+                    .alert(isPresented: $isUnregister) {
+                        Alert(title: Text(contentsViewModel.isKR ? "Warning" : "경고"),
+                              message: Text(contentsViewModel.isKR ? "Do you really want to cancel your membership?" : "정말로 회원탈퇴 하시겠습니까?"),
+                              primaryButton: .default(Text(contentsViewModel.isKR ?  "Cancel" : "취소하기"), action: {
+               
+                        }),
+                             secondaryButton: .destructive(Text(contentsViewModel.isKR ?  "Delete" : "삭제"), action: {
+
+                        }))
+                    }
                     Button {
                         Task {
                             do{
@@ -113,21 +123,22 @@ struct SettingView: View {
                                 .padding(.leading, 5)
                                 .font(.system(size: 21))
                         }
+                        .alert(isPresented: $isUnregister) {
+                            Alert(title: Text(contentsViewModel.isKR ? "Warning" : "경고"),
+                                  message: Text(contentsViewModel.isKR ? "Do you really want to cancel your membership?" : "정말로 회원탈퇴 하시겠습니까?"),
+                                  primaryButton: .default(Text(contentsViewModel.isKR ?  "Cancel" : "취소하기"), action: {
+                   
+                            }),
+                                 secondaryButton: .destructive(Text(contentsViewModel.isKR ?  "Delete" : "삭제"), action: {
+
+                            }))
+                        }
                         .frame(height: 25)
                     }
                 }
             }
         }
-        .alert(isPresented: $isUnregister) {
-            Alert(title: Text(contentsViewModel.isKR ? "Warning" : "경고"),
-                  message: Text(contentsViewModel.isKR ? "Do you really want to cancel your membership?" : "정말로 회원탈퇴 하시겠습니까?"),
-                  primaryButton: .default(Text(contentsViewModel.isKR ?  "Cancel" : "취소하기"), action: {
-   
-            }),
-                 secondaryButton: .destructive(Text(contentsViewModel.isKR ?  "Delete" : "삭제"), action: {
 
-            }))
-        }
         .font(.system(size: 20))
         
     }
