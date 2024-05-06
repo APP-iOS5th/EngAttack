@@ -45,25 +45,25 @@ struct ProfileSettingView: View {
                                     image
                                         .resizable()
                                         .clipShape(Circle())
-                                        .frame(width: 100, height: 100)
-                                        .padding(.leading ,100)
+                                        .frame(width: 150, height: 150)
+                                        .padding(.leading ,80)
                                 }
                                 else if phase.error != nil{
                                     ProgressView()
-                                        .padding(.leading, 200)
-                                        .frame(width: 100, height: 100)
+                                        .frame(width: 150, height: 150)
+                                        .padding(.leading, 80)
                                 } else {
                                     ProgressView()
-                                        .padding(.leading, 200)
-                                        .frame(width: 100, height: 100)
+                                        .frame(width: 150, height: 150)
+                                        .padding(.leading, 80)
                                 }
                             }
                         } else {
                             Image(systemName: "person.circle")
                                 .resizable()
                                 .foregroundColor(.blue)
-                                .frame(width: 100, height: 100)
-                                .padding(.leading ,100)
+                                .frame(width: 150, height: 150)
+                                .padding(.leading ,80)
                         }
                     }
                     .onChange(of: selectedUIImage, perform: { newValue in
@@ -84,6 +84,7 @@ struct ProfileSettingView: View {
                     }
                    
                 }
+                .listRowBackground(Color.clear)
                 Section(header: Text(contentViewModel.isKR ? "Name" : "이름")
                     .font(.system(size: 15))
                     .foregroundStyle(contentViewModel.isDarkMode ? .white : .black)
