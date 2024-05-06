@@ -12,9 +12,10 @@ import FirebaseFirestore
 
 struct SignInView: View {
     @EnvironmentObject var contentViewModel: ContentViewViewModel
-    
+    @StateObject var profileViewModel = ProfileViewModel()
     @StateObject  var signViewModel : SignViewModel
     @EnvironmentObject var setViewModel: SettingViewModel
+    
     @State private var correctLogin = false
     @State private var email = ""
     @State private var password = ""
@@ -55,12 +56,12 @@ struct SignInView: View {
                         Task {
                             do {
                                 try await signViewModel.signIn(email: email, password: password)
+                                try await signViewModel.loadName()
                                 guard let userID = Auth.auth().currentUser?.uid else { return }
                                 signViewModel.uid = userID
                                 signViewModel.email = email
                                 signViewModel.password = password
                                 signViewModel.Signstate = .signedIn
-                                loadName(userID: userID)
                                 loginActive = true
                                     return
                             } catch {
@@ -113,26 +114,8 @@ extension SignInView {
         return NSPredicate(format: "SELF MATCHES %@", emailRegex).evaluate(with: email)
     }
     
-    func loadName(userID :String)   {
-         var names = ""
-         let db = Firestore.firestore()
-         db.collection("USER").document(userID).getDocument { (doc, error) in
-             guard error == nil else {
-                 print("error", error ?? "")
-                 return
-             }
-             if let doc = doc, doc.exists {
-                 let data = doc.data()
-                 if let data = data {
-                     let name = data["name"] as? String ?? ""
-                     if signViewModel.name == "" {
-                         signViewModel.name = name
-                         return
-                     }
-                     
-                 }
-             }
-         }
-         
-     }
+
+    
+    
+    
 }

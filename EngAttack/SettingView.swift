@@ -9,17 +9,20 @@ import SwiftUI
 import AVKit
 import FirebaseAuth
 import FirebaseFirestore
+import FirebaseStorage
 
 struct SettingView: View {
     @EnvironmentObject var contentsViewModel: ContentViewViewModel
     @EnvironmentObject var setViewModel: SettingViewModel
-    @StateObject var signViewModel : SignViewModel = SignViewModel()
+    @StateObject var signViewModel : SignViewModel 
     @State var settingsSound = false
     @State var isUpdateDone = false
     @State var isUnregister = false
     @State var isSignOut = false
+    @State var url : URL?
     @State var name  = ""
     @State var email = ""
+    
     //@State var backVolume = 0.0
     let effectVol = 0.3
     
@@ -38,19 +41,43 @@ struct SettingView: View {
                         self.isUpdateDone = true
                     } label: {
                         HStack {
-                            Image(systemName: "person.circle")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
+                            if let url {
+                                AsyncImage(url: url) { phase in
+                                    if let image = phase.image {
+                                        image
+                                            .resizable()
+                                            .clipShape(Circle())
+                                            .frame(width: 80, height: 80)
+                                            .padding(.leading ,3)
+                                    }
+                                    else if phase.error != nil{
+                                        ProgressView()
+                                            .padding(.leading)
+                                            .frame(width: 80, height: 80)
+                                    } else {
+                                        ProgressView()
+                                            .padding(.leading)
+                                            .frame(width: 80, height: 80)
+                                    }
+                                }
+                            } else {
+                                Image(systemName: "person.circle")
+                                    .resizable()
+                                    .foregroundColor(.blue)
+                                    .frame(width: 80, height: 80)
+                                    .padding(.leading ,3)
+                            }
+                            
                             Text(signViewModel.name)
                                 .foregroundStyle(contentsViewModel.isDarkMode ? .white : .black)
                                 .padding(.leading, 20)
                                 .fontWeight(.semibold)
-                                .font(.system(size: 25))
+                                .font(.system(size: 30))
                             
                         }
                         .frame(height: 70)
                         .sheet(isPresented: $isUpdateDone) {
-                            ProfileSettingView(signViewModel: SignViewModel(), name:$name, email: $email, isUpdateDone: $isUpdateDone)
+                            ProfileSettingView(signViewModel: SignViewModel(), url: $url, name:$name, email: $email, isUpdateDone: $isUpdateDone)
                         }
                     }
                 }
@@ -113,6 +140,7 @@ struct SettingView: View {
                                 try await db.collection("USER").document(userID).delete()
                                 try await db.collection("Rank").document(userID).delete()
                                 try await db.collection("BookMark").document(userID).delete()
+                                try await Storage.storage().reference().child("\(userID).jpeg").delete()
                                 signViewModel.uid = ""
                                 signViewModel.name = ""
                                 signViewModel.email = ""
@@ -162,7 +190,7 @@ struct SettingView: View {
 }
 
 #Preview {
-    SettingView()
+    SettingView(signViewModel: SignViewModel())
         .environmentObject(ContentViewViewModel())
         .environmentObject(SettingViewModel())
 }

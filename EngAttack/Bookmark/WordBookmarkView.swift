@@ -62,7 +62,6 @@ struct WordBookmarkView: View {
                     guard let document = doc else { return }
                     if document.exists {
                         guard let words = document.data(), let list = words["List"] as? [[String: Any]] else { return }
-
                         for item in list {
                             guard let word = item["word"] as? String else { continue }
                             guard let description = item["description"] as? String else { continue }

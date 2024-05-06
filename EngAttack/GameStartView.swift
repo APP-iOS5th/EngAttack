@@ -37,7 +37,7 @@ struct GameStartView: View {
 						.foregroundStyle(.green)
 					Picker(contentViewModel.isKR ? "Choose time" : "선택 시간", selection: $selectedTime) {
 						ForEach(times, id: \.self) { time in
-							Text(String(format: "%.0f", Double(time)) + "\(contentViewModel.isKR ? "S" : "초")").tag(time)
+							Text(String(format: "%.0f", Double(time)) + "\(contentViewModel.isKR ? "s" : "초")").tag(time)
 								.foregroundStyle(Color("PickerFontColor"))
 						}
 					}

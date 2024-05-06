@@ -11,7 +11,7 @@ import FirebaseCore
 import FirebaseAuth
 
 struct RootView: View {
-    @StateObject var signViewModel : SignViewModel = SignViewModel()
+    @StateObject var signViewModel:SignViewModel = SignViewModel()
     var body: some View {
         VStack {
             if signViewModel.Signstate == .signedIn {
@@ -22,6 +22,7 @@ struct RootView: View {
             } else {
                 SignInView(signViewModel: signViewModel)
                     .environmentObject(ContentViewViewModel())
+                    .environmentObject(SignViewModel())
             }
         }
         .onAppear {

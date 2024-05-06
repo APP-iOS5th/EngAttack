@@ -98,7 +98,7 @@ struct ContentView: View {
                 SoundSetting.instance.playSound(sound: .background)
 			}
 			.onDisappear {
-                addRank(names:singViewModel.name, scores:contentViewModel.score)
+               // addRank(names:singViewModel.name, scores:contentViewModel.score)
                 contentViewModel.stopTimer()
                 SoundSetting.instance.stopMusic()
 			}

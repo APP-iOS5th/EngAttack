@@ -33,6 +33,39 @@ final class SignViewModel : ObservableObject {
         currentUser = Auth.auth().currentUser
     }
     
+    
+    func loadName() async throws {
+        guard let userID = Auth.auth().currentUser?.uid else { return }
+         let db = Firestore.firestore()
+                try await db.collection("USER").document(userID).getDocument { (doc, error) in
+                    guard error == nil else {
+                        print("error", error ?? "")
+                        return
+                    }
+                    if let doc = doc, doc.exists {
+                        let data = doc.data()
+                        if let data = data {
+                            for i in data  {
+                                let email = data["email"] as? String ?? ""
+                                self.name = data["name"] as? String ?? ""
+                                let photoUrl = data["photoUrl"] as? String ?? ""
+                                if self.name != "" {
+                                    return
+                                }
+                            }
+                        }
+                        else {
+                            return
+                        }
+                    }
+                     if self.name != "" {
+                         return
+                     }
+                }
+   
+        
+     }
+    
     func signIn(email: String, password: String) async throws  {
         try await AuthenticationManager.shared.signInUser(email: email, password: password)
         print("로그인 완료")

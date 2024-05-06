@@ -72,7 +72,7 @@ struct SignUpView: View {
                                 try await signViewModel .signUp(email: email, password: password)
                                 let db = Firestore.firestore()
                                 guard let userID = Auth.auth().currentUser?.uid else { return }
-                                try await db.collection("USER").document(userID).setData(["email": email, "name": name])
+                                try await db.collection("USER").document(userID).setData(["email": email, "name": name, "photoUrl": ""])
                                 try await db.collection("BookMark").document(userID).setData(["List": FieldValue.arrayUnion([["word":"", "description" : ""]])])
                                 try await db.collection("Rank").document(userID).setData(["List": FieldValue.arrayUnion([["name":name, "score": 0]])])
                                 isAlertActive.toggle()
