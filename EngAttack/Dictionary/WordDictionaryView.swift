@@ -28,17 +28,18 @@ struct WordDictionaryView: View {
     
     @Query private var storedWords: [TempModel]
     @Environment(\.modelContext) var modelContext
-    
-    @StateObject private var viewModel: WordDictionaryViewModel = WordDictionaryViewModel()
+    @StateObject private var dictionaryViewModel: WordDictionaryViewModel = WordDictionaryViewModel()
+    @EnvironmentObject var contentViewModel : ContentViewViewModel
     @State private var searchString: String = ""
-    
+    private let bookMarkViewModel = WorkBookmarkViewModel()
     
     var body: some View {
         NavigationStack {
             VStack {
                 List {
-                    ForEach(viewModel.getWords(), id: \.0) { word in
+                    ForEach(dictionaryViewModel.getWords(), id: \.0) { word in
                         let temp: String = "\(word.0)--\(word.1)"
+                        let result = temp.components(separatedBy: "--")
                         let bookmarkedWords: [TempModel] = storedWords.filter{ $0.word == "\(word.0)--\(word.1)" }
                         HStack {
                             Text(word.0)
@@ -49,8 +50,10 @@ struct WordDictionaryView: View {
                             Spacer()
                             Button {
                                 if bookmarkedWords.count > 0 {
+                                    bookMarkViewModel.deleteBookMark(word: result[0], description: result[1])
                                     modelContext.delete(bookmarkedWords[0])
                                 } else {
+                                    bookMarkViewModel.addBookmark(word: result[0], description: result[1])
                                     modelContext.insert(TempModel(word: "\(word.0)--\(word.1)"))
                                 }
                             } label: {
@@ -64,19 +67,19 @@ struct WordDictionaryView: View {
                     }
                 }
             }
-            .navigationTitle("Word Dictionary")
+            .navigationTitle(contentViewModel.isKR ? "Word Dictionary" : "단어 사전")
         }
-        .searchable(text: $searchString, prompt: "Search Word")
+        .searchable(text: $searchString, prompt: contentViewModel.isKR ? "Search Word" : "단어 검색")
         .onSubmit(of: .search) {
             if !searchString.isEmpty {
-                viewModel.searchString(searchWord: searchString.lowercased())
+                dictionaryViewModel.searchString(searchWord: searchString.lowercased())
             } else {
-                viewModel.saveSearchResult(words: [])
+                dictionaryViewModel.saveSearchResult(words: [])
             }
         }
         .onDisappear {
             searchString = ""
-            viewModel.saveSearchResult(words: [])
+            dictionaryViewModel.saveSearchResult(words: [])
         }
     }
 }
@@ -84,27 +87,6 @@ struct WordDictionaryView: View {
 #Preview {
     WordDictionaryView()
         .modelContainer(for: TempModel.self)
-}
-
-
-extension WordDictionaryView {
-    func addBookmark(word : String ,description :String) {
-        let db = Firestore.firestore()
-        let bookmark = BookMark(word: word, description: description)
-        guard let userID = Auth.auth().currentUser?.uid else { return }
-        db.collection("BookMark").document(userID).updateData(["List": FieldValue.arrayUnion([bookmark.addBookMarkNumber])])
-        
-    }
-    
-    func deleteBookMark(word: String, description: String) {
-        let db = Firestore.firestore()
-        let bookMark = BookMark(word: word, description: description)
-        guard let userID = Auth.auth().currentUser?.uid else { return }
-        db.collection("BookMark").document(userID).updateData([
-            "List" : FieldValue.arrayRemove([bookMark.deleteBookMarkNumber])])
-        
-        
-    }
 }
 /*
  MARK: - TODO

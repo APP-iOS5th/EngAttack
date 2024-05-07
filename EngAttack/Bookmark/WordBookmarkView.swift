@@ -7,35 +7,44 @@
 
 import SwiftUI
 import SwiftData
+import FirebaseFirestoreSwift
+import FirebaseFirestore
+import FirebaseAuth
+import Firebase
 
 struct WordBookmarkView: View {
     
     @Query private var storedWords: [TempModel]
     @Environment(\.modelContext) var modelContext
+    @State var firebaseWords: [(String, String, Bool)] = []
+    private let bookMarkViewModel = WorkBookmarkViewModel()
+    @EnvironmentObject var contentViewModel : ContentViewViewModel
+  
     
-    @State private var bookMarkList: [(String, String, Bool)] = []
-    
+   
     var body: some View {
         NavigationStack {
             VStack {
                 List {
-                    ForEach(0..<bookMarkList.count, id: \.self) { index in
+                    ForEach(0..<firebaseWords.count, id: \.self) { index in
                         HStack {
-                            let word = bookMarkList[index]
+                            let word = firebaseWords[index]
                             Text(word.2 ? word.0 : word.1)
                             Spacer()
-                            Button(word.2 ? "뜻 보기" : "단어 보기") {
-                                bookMarkList[index].2.toggle()
+                            Button(word.2 ? contentViewModel.isKR ? "Desc" : "뜻보기" : contentViewModel.isKR ? "Word" : "단어보기") {
+                                firebaseWords[index].2.toggle()
                             }
                         }
                     }
                     .onDelete(perform: { indexSet in
                         guard let index = indexSet.first else { return }
-                        modelContext.delete(storedWords[index])
+                        guard let storedIndex = storedWords.map({ $0.word.components(separatedBy: "--")[0] }).firstIndex(of: firebaseWords[index].0) else { return }
+                        modelContext.delete(storedWords[storedIndex])
+                        bookMarkViewModel.deleteBookMark(word: firebaseWords[index].0, description: firebaseWords[index].1)
                     })
                 }
             }
-            .navigationTitle("Word Book Mark")
+            .navigationTitle(contentViewModel.isKR ? "BookMark Word" : "북마크 단어")
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     EditButton()
@@ -43,15 +52,36 @@ struct WordBookmarkView: View {
             }
         }
         .onAppear {
-            let words = storedWords.map{ $0.word.components(separatedBy: "--") }
-            bookMarkList = words.map{ ($0[0], $0[1], true) }
+            guard let userID = Auth.auth().currentUser?.uid else { return }
+            let db = Firestore.firestore()
+            db.collection("BookMark").document(userID).getDocument { (doc, error) in
+                if let error = error {
+                    print("error > \(error.localizedDescription)")
+                } else {
+                    guard let document = doc else { return }
+                    if document.exists {
+                        guard let words = document.data(), let list = words["List"] as? [[String: Any]] else { return }
+
+                        for item in list {
+                            guard let word = item["word"] as? String else { continue }
+                            guard let description = item["description"] as? String else { continue }
+                            
+                            if !word.isEmpty && !description.isEmpty {
+                                firebaseWords.append((word, description, true))
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .onDisappear {
+            firebaseWords = []
         }
     }
 }
 
 #Preview {
     WordBookmarkView()
-        .modelContainer(for: TempModel.self)
 }
 
 /*

@@ -12,11 +12,11 @@ struct DictionaryView: View {
     
     @Query private var storedWords: [TempModel]
     @Environment(\.modelContext) var modelContext
-    
     @State var recommendWordList: [(String, String)] = []
-    var lastWord: String
-    private let viewModel = WordDictionaryViewModel()
     @State var tempWord: [String] = []
+    var lastWord: String
+    private let dictionaryViewModel = WordDictionaryViewModel()
+    private let bookMarkViewMdoel = WorkBookmarkViewModel()
     
     var body: some View {
         VStack {
@@ -28,6 +28,7 @@ struct DictionaryView: View {
                             Spacer()
                             Button(tempWord.contains("\(word.0)--\(word.1)") ? "저장 완료" : "북마크 저장") {
                                 modelContext.insert(TempModel(word: "\(word.0)--\(word.1)"))
+                                bookMarkViewMdoel.addBookmark(word: word.0, description: word.1)
                                 self.tempWord.append("\(word.0)--\(word.1)")
                             }
                         }
@@ -39,7 +40,7 @@ struct DictionaryView: View {
             }
         }
         .onAppear {
-            viewModel.recommendWordList(alphabet: lastWord, wordList: []) { recommendList in
+            dictionaryViewModel.recommendWordList(alphabet: lastWord, wordList: []) { recommendList in
                 self.recommendWordList = recommendList
             }
         }

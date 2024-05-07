@@ -15,40 +15,37 @@ import SwiftData
 
 
 struct ContentView: View {
-	@EnvironmentObject var viewModel: ContentViewViewModel
+	@EnvironmentObject var contentViewModel: ContentViewViewModel
 	@EnvironmentObject var setViewModel: SettingViewModel
-
-    @EnvironmentObject var viewModels: SignViewModel
-
+    @StateObject var singViewModel: SignViewModel = SignViewModel()
     @State private var isShowRecommendWordList: Bool = false
-
-	
 	@Binding var timeRemaining: Double
 	let effectVol = 0.3
 	
 	var body: some View {
 		NavigationStack {
 			VStack() {
-				Text("Score: \(viewModel.score)")
+                
+				Text(contentViewModel.isKR ? "Score: \(contentViewModel.score)" : "스코어: \(contentViewModel.score)")
 					.padding(.bottom)
 					.bold()
-				
-				Text("남은 시간: \(String(format: "%.1f", viewModel.timeRemaining))초")
+                
+				Text(contentViewModel.isKR ? "Time: \(String(format: "%.1f", contentViewModel.timeRemaining))s" : "남은 시간: \(String(format: "%.1f", contentViewModel.timeRemaining))초")
 					.font(.custom("SOYO Maple Bold", size: 30))
 					.padding()
 				
-				ProgressView(value: max(0, min(viewModel.timeRemaining, 60.0)), total: timeRemaining)
+				ProgressView(value: max(0, min(contentViewModel.timeRemaining, 60.0)), total: timeRemaining)
 					.progressViewStyle(DarkBlueShadowProgressViewStyle())
 					.padding()
 				
-				Text(viewModel.currentWord)
+				Text(contentViewModel.currentWord)
 					.font(.title)
 					.bold()
 					.padding()
 				
-				TextField("Enter the word", text: $viewModel.userInput, onCommit: { 
-                    viewModel.timeRemaining = timeRemaining
-                    viewModel.submitButton { result in
+                TextField(contentViewModel.isKR ? "Enter the word" : "단어를 입력하세요", text: $contentViewModel.userInput, onCommit: {
+                    contentViewModel.timeRemaining = timeRemaining
+                    contentViewModel.submitButton { result in
                         if result {
                             // correct sound
                             SoundSetting.instance.setVolume(setViewModel.isEffect ? Float(effectVol) : 0)
@@ -70,38 +67,39 @@ struct ContentView: View {
 				.padding()
 				
                 NavigationLink(destination: WordBookmarkView().modelContainer(for: TempModel.self)) {
-					Text("북마크 보기")
+					Text(contentViewModel.isKR ? "Bookmark" : "북마크 보기")
 				}
 				.padding()
 				
-				.alert(isPresented: $viewModel.showAlert) {
-					Alert(title: Text(viewModel.alertTitle),
-						  message: Text("당신의 점수는 \(viewModel.score)점 입니다."),
-						  primaryButton: .default(Text("그만하기"), action: {
-                        addRank(name: "테스트", score: viewModel.score)
-						viewModel.resetGame()
-						viewModel.userInput = ""
+				.alert(isPresented: $contentViewModel.showAlert) {
+					Alert(title: Text(contentViewModel.alertTitle),
+                          message: Text(contentViewModel.isKR ? "Your score is \(contentViewModel.score)" : "당신의 점수는 \(contentViewModel.score)점 입니다."),
+                          primaryButton: .default(Text(contentViewModel.isKR ? "Stop" : "그만하기"), action: {
+                        contentViewModel.resetGame()
+                        contentViewModel.userInput = ""
 					}),
-						 secondaryButton: .destructive(Text("추천 단어 보기"), action: {
+						 secondaryButton: .destructive(Text(contentViewModel.isKR ? "Recomended word" : "추천 단어 보기"), action: {
 //						viewModel.resetGame()
 //						viewModel.stopTimer()
 //						viewModel.userInput = ""
+                       
                         isShowRecommendWordList = true
 					}))
 				}
 			}
 			.onAppear {
-				viewModel.pickRandomWord()
-				viewModel.timeRemaining = timeRemaining
-				viewModel.startTimer()
+                contentViewModel.pickRandomWord()
+                contentViewModel.timeRemaining = timeRemaining
+                contentViewModel.startTimer()
                 SoundSetting.instance.playSound(sound: .background)
 			}
 			.onDisappear {
-				viewModel.stopTimer()
+                addRank(names:singViewModel.name, scores:contentViewModel.score)
+                contentViewModel.stopTimer()
                 SoundSetting.instance.stopMusic()
 			}
             .sheet(isPresented: $isShowRecommendWordList, content: {
-                DictionaryView(lastWord: String(viewModel.currentWord.last!))
+                DictionaryView(lastWord: String(contentViewModel.currentWord.last!))
                     .modelContainer(for: TempModel.self)
             })
             .toolbar {
@@ -109,7 +107,7 @@ struct ContentView: View {
                     Button {
                         
                     } label: {
-                        Text("< 뒤로")
+                        Text(contentViewModel.isKR ? "< Back" : "< 뒤로")
                     }
                 }
             }
@@ -136,10 +134,10 @@ struct DarkBlueShadowProgressViewStyle: ProgressViewStyle {
 
 
 extension ContentView {
-    func addRank(name: String, score: Int) {
+    func addRank(names : String, scores: Int) {
         let db = Firestore.firestore()
         guard let userID = Auth.auth().currentUser?.uid else { return }
-        let rank = Rank(name: viewModels.name, score: viewModel.score)
+        let rank = Rank(name: names, score: scores)
                 db.collection("Rank").document(userID).updateData(["List": FieldValue.arrayUnion([rank.addRank])])
     }
 }

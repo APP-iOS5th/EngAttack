@@ -7,27 +7,28 @@
 
 
 import SwiftUI
-
 import FirebaseCore
 import FirebaseAuth
 
 struct RootView: View {
-    @EnvironmentObject var viewModel : SignViewModel
+    @StateObject var signViewModel : SignViewModel = SignViewModel()
+    
     var body: some View {
         VStack {
-            if viewModel.Signstate == .signedIn {
-                TabViewSetting()
+            if signViewModel.Signstate == .signedIn {
+                TabViewSetting(signViewModel: signViewModel)
                     .environmentObject(ContentViewViewModel())
                     .environmentObject(SettingViewModel())
                     .modelContainer(for: TempModel.self)
             } else {
-                SignInView()
+                SignInView(signViewModel: signViewModel)
                     .environmentObject(ContentViewViewModel())
             }
         }
         .onAppear {
-            if viewModel.currentUser != nil  {
-                viewModel.Signstate = .signedIn
+            if signViewModel.currentUser != nil  {
+                signViewModel.Signstate = .signedIn
+                signViewModel.loadAuthUser()
             }
         }
     }

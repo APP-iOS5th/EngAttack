@@ -16,7 +16,6 @@ struct CountDownView: View {
 	var body: some View {
 		ZStack {
 			Color.black.opacity(0.5).edgesIgnoringSafeArea(.all)
-			
 			Text("\(timeLeft)")
 				.font(.system(size: 100, weight: .bold))
 				.foregroundColor(.white)

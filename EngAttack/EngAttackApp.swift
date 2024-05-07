@@ -18,13 +18,13 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     }
 }
 
-@main
-struct EngAttackApp: App {
+@main struct EngAttackApp: App {
     // register app delegate for Firebase setup
+    @EnvironmentObject private var signViewModel : SignViewModel
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     var body: some Scene {
         WindowGroup {
-            RootView()
-        }.environmentObject(SignViewModel())
+            RootView().environmentObject(ContentViewViewModel())
+        }
     }
 }
