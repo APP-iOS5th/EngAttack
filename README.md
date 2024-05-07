@@ -32,3 +32,7 @@
 https://dictionaryapi.dev/
 
 단어의 유효성을 검사하는데 사용
+
+https://api.openai.com/v1/chat/completions
+
+추천단어 목록을 보여주는데 사용
